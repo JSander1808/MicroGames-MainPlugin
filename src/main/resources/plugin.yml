@@ -1,4 +1,4 @@
 name: MainPlugin
 version: '${project.version}'
-main: server.minecraft.Main
+main: server.main.Main
 api-version: 1.19
