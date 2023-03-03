@@ -5,6 +5,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import server.general.commands.LobbyCommand;
+import server.general.commands.WarpCommand;
 import server.lobby.listeners.EntityDamageListener;
 import server.lobby.listeners.InventoryClickListener;
 import server.lobby.listeners.JoinListener;
@@ -19,6 +21,9 @@ public final class Main extends JavaPlugin {
         pluginManager.registerEvents(new EntityDamageListener(),this);
         pluginManager.registerEvents(new InventoryClickListener(),this);
         pluginManager.registerEvents(new PlayerInteractListener(),this);
+
+        getCommand("warp").setExecutor(new WarpCommand());
+        getCommand("lobby").setExecutor(new LobbyCommand());
     }
 
     @Override

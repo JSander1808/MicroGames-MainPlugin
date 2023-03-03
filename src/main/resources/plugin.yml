@@ -2,3 +2,7 @@ name: MainPlugin
 version: '${project.version}'
 main: server.main.Main
 api-version: 1.19
+
+commands:
+   warp:
+   lobby:
