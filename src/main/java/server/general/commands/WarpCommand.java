@@ -21,6 +21,8 @@ public class WarpCommand implements CommandExecutor {
                         Location warpLocation = Bukkit.getWorld(world.getUID()).getSpawnLocation();
                         player.teleport(warpLocation);
                         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP,40,0);
+                        player.setGameMode(GameMode.CREATIVE);
+                        player.setFlying(true);
                     }else{
                         player.sendMessage(ChatColor.RED+"The world don´t exists.");
                     }

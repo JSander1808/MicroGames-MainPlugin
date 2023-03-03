@@ -8,10 +8,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import server.general.commands.LobbyCommand;
 import server.general.commands.PingListener;
 import server.general.commands.WarpCommand;
-import server.lobby.listeners.EntityDamageListener;
-import server.lobby.listeners.InventoryClickListener;
-import server.lobby.listeners.JoinListener;
-import server.lobby.listeners.PlayerInteractListener;
+import server.lobby.general.Initial;
+import server.lobby.listeners.*;
 
 public final class Main extends JavaPlugin {
 
@@ -23,15 +21,20 @@ public final class Main extends JavaPlugin {
         pluginManager.registerEvents(new InventoryClickListener(),this);
         pluginManager.registerEvents(new PlayerInteractListener(),this);
         pluginManager.registerEvents(new PingListener(),this);
+        pluginManager.registerEvents(new QuitListener(),this);
 
         getCommand("warp").setExecutor(new WarpCommand());
         getCommand("lobby").setExecutor(new LobbyCommand());
+
+        new Initial();
     }
 
     @Override
     public void onDisable() {
         for(Player player : Bukkit.getOnlinePlayers()){
-            player.kickPlayer(ChatColor.RED+"Server ist reloading.");
+            if(player.getWorld().getName().equalsIgnoreCase("world")){
+                player.kickPlayer(ChatColor.RED+"Server ist reloading.");
+            }
         }
     }
 }
