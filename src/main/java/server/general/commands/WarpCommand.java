@@ -23,6 +23,7 @@ public class WarpCommand implements CommandExecutor {
                         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP,40,0);
                         player.setGameMode(GameMode.CREATIVE);
                         player.setFlying(true);
+                        player.getInventory().clear();
                     }else{
                         player.sendMessage(ChatColor.RED+"The world don´t exists.");
                     }

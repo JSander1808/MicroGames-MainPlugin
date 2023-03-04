@@ -2,10 +2,13 @@ package server.lobby.general;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.block.data.type.WallSign;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.EntityType;
 
 public class Initial {
 
@@ -24,6 +27,14 @@ public class Initial {
         skywarsServer2Sign.setLine(1,ChatColor.GREEN+"Server 2");
         skywarsServer2Sign.setLine(2,ChatColor.GREEN+"0 / 8");
         skywarsServer2Sign.update();
+
+        Location skywarsHologram = new Location(Bukkit.getWorld("world"),-29,60,-31);
+        ArmorStand armorStand = (ArmorStand) skywarsHologram.getWorld().spawnEntity(skywarsHologram, EntityType.ARMOR_STAND);
+        armorStand.setGravity(false);
+        armorStand.setVisible(false);
+        armorStand.setCanPickupItems(false);
+        armorStand.setCustomName(ChatColor.GOLD+"Skywars");
+        armorStand.setCustomNameVisible(true);
 
         Thread matchmakingThread = new Thread(() -> Matchmaking.MatchmakingHandle());
         matchmakingThread.start();

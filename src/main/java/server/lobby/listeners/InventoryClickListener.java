@@ -19,7 +19,7 @@ public class InventoryClickListener implements Listener {
                             default:
                                 break;
                             case COMPASS:
-                                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP,40,4);
+                                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP,40,2);
                                 new TeleporterMenu(player);
                                 break;
                         }
@@ -32,25 +32,25 @@ public class InventoryClickListener implements Listener {
                             default:
                                 break;
                             case BARRIER:
-                                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP,40,4);
+                                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP,40,2);
                                 player.closeInventory();
                                 break;
                             case COMPASS:
-                                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP,40,4);
+                                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP,40,2);
                                 Location spawnLocation = new Location(Bukkit.getWorld("world"),26.5,63,-24.5);
                                 player.teleport(spawnLocation);
                                 player.setFlying(false);
                                 player.sendMessage(ChatColor.GRAY+"Du wurdest zum Spawn teleportiert");
                                 break;
                             case RED_BED:
-                                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP,40,4);
+                                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP,40,2);
                                 Location bedwarsLocation = new Location(Bukkit.getWorld("world"),-53.5,60,25.5,90,0);
                                 player.teleport(bedwarsLocation);
                                 player.setFlying(false);
                                 player.sendMessage(ChatColor.GRAY+"Du wurdest zu Bedwars teleportiert");
                                 break;
                             case IRON_SWORD:
-                                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP,40,4);
+                                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP,40,2);
                                 Location skywarsLocation = new Location(Bukkit.getWorld("world"),-23.5,62,-24.5,140,0);
                                 player.teleport(skywarsLocation);
                                 player.setFlying(false);

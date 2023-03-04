@@ -33,7 +33,7 @@ public class TeleporterMenu {
         ItemMeta skywarsMeta = skywars.getItemMeta();
         skywarsMeta.setDisplayName(ChatColor.GOLD+"Skywars");
         ArrayList skywarsLore = new ArrayList();
-        skywarsLore.add(ChatColor.RED+"Nicht Erreichbar");
+        skywarsLore.add(ChatColor.GREEN+"Erreichbar");
         skywarsMeta.setLore(skywarsLore);
         skywars.setItemMeta(skywarsMeta);
 

@@ -35,9 +35,14 @@ public class Matchmaking {
                     removePlayerFromMatchmaking(player);
                     skywarsServer1.add(player.getUniqueId());
                     updateSigns();
+                    for(int i = 0;i<skywarsServer1.size();i++){
+                        Bukkit.getPlayer(skywarsServer1.get(i)).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN+"Spielersuche...  "+skywarsServer1.size()+" / 4"));
+                    }
+                    player.sendMessage(ChatColor.GREEN+"Du wurdest der Spielersuche hinzugefügt...");
                 }else{
                     skywarsServer1.remove(player.getUniqueId());
                     updateSigns();
+                    player.sendMessage(ChatColor.RED+"Du wurdest aus der Spielersuche entfernt.");
                 }
             }else{
                 player.sendMessage(ChatColor.RED+"The Server is allready full.");
@@ -48,9 +53,14 @@ public class Matchmaking {
                     removePlayerFromMatchmaking(player);
                     skywarsServer2.add(player.getUniqueId());
                     updateSigns();
+                    for(int i = 0;i<skywarsServer2.size();i++){
+                        Bukkit.getPlayer(skywarsServer2.get(i)).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN+"Spielersuche...  "+skywarsServer2.size()+" / 8"));
+                    }
+                    player.sendMessage(ChatColor.GREEN+"Du wurdest der Spielersuche hinzugefügt...");
                 }else{
                     skywarsServer2.remove(player.getUniqueId());
                     updateSigns();
+                    player.sendMessage(ChatColor.RED+"Du wurdest aus der Spielersuche entfernt.");
                 }
             }else{
                 player.sendMessage(ChatColor.RED+"The Server is allready full.");
@@ -77,18 +87,47 @@ public class Matchmaking {
     }
 
     public static void MatchmakingHandle(){
+        int skywarsServer1Countdown = 60;
+        int skywarsServer2Countdown = 60;
         while(true){
+
+            if(skywarsServer1.size()>=2){
+                skywarsServer1Countdown--;
+            }else{
+                skywarsServer1Countdown=60;
+            }
+            if(skywarsServer1.size()==4 && skywarsServer1Countdown>10) skywarsServer1Countdown=10;
+            if(skywarsServer2.size()>=4){
+                skywarsServer2Countdown--;
+            }else{
+                skywarsServer2Countdown=60;
+            }
+            if(skywarsServer2.size()==8 && skywarsServer2Countdown>10) skywarsServer2Countdown=10;
+
+
+
+
+
+
+
             if(skywarsServer1.size()>=1){
                 for(int i = 0;i<skywarsServer1.size();i++){
-                    Bukkit.getPlayer(skywarsServer1.get(i)).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GOLD+"Skywars  "+ChatColor.GREEN+"Server1  "+skywarsServer1.size()+" / 4"));
+                    if(skywarsServer1Countdown<60){
+                        Bukkit.getPlayer(skywarsServer1.get(i)).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN+"Spielersuche...  "+skywarsServer1.size()+" / 4   "+skywarsServer1Countdown+"s"));
+                    }else{
+                        Bukkit.getPlayer(skywarsServer1.get(i)).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN+"Spielersuche...  "+skywarsServer1.size()+" / 4"));
+                    }
                 }
             }
             if(skywarsServer2.size()>=1){
                 for(int i = 0;i<skywarsServer2.size();i++){
-                    Bukkit.getPlayer(skywarsServer2.get(i)).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GOLD+"Skywars  "+ChatColor.GREEN+"Server2  "+skywarsServer2.size()+" / 8"));
+                    if(skywarsServer2Countdown<60){
+                        Bukkit.getPlayer(skywarsServer2.get(i)).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN+"Spielersuche...  "+skywarsServer2.size()+" / 8   "+skywarsServer2Countdown+"s"));
+                    }else{
+                        Bukkit.getPlayer(skywarsServer2.get(i)).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN+"Spielersuche...  "+skywarsServer2.size()+" / 8"));
+                    }
                 }
             }
-
 
             try {
                 Thread.sleep(1000);
