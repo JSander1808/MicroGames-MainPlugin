@@ -7,6 +7,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.stream.Stream;
 
 public class WarpCommand implements CommandExecutor {
     @Override
@@ -14,9 +18,21 @@ public class WarpCommand implements CommandExecutor {
         if(sender instanceof Player){
             Player player = (Player) sender;
             if(player.isOp()){
-                if(args.length==1){
+                if(args.length==2){
+                    if(args[0].equalsIgnoreCase("unload")){
+                        Bukkit.unloadWorld(args[1],true);
+                    }else{
+                        player.sendMessage(ChatColor.RED+"/warp unload <worldpath>");
+                    }
+                }else if(args.length==1){
                     File file = new File("warp/"+args[0]);
-                    if(file.isDirectory()){
+                    if(args[0].equalsIgnoreCase("show")){
+                        File path = new File("warp\\");
+                        File[] warps =path.listFiles();
+                        for(int i = 0;i<warps.length;i++){
+                            player.sendMessage(ChatColor.GREEN+""+warps[i]);
+                        }
+                    }else if(file.isDirectory()){
                         World world = new WorldCreator("warp/"+args[0]).createWorld();
                         Location warpLocation = Bukkit.getWorld(world.getUID()).getSpawnLocation();
                         player.teleport(warpLocation);
@@ -29,6 +45,8 @@ public class WarpCommand implements CommandExecutor {
                     }
                 }else{
                     player.sendMessage(ChatColor.RED+"/warp <worldname>");
+                    player.sendMessage(ChatColor.RED+"/warp show");
+                    player.sendMessage(ChatColor.RED+"/warp unload <worldpath>");
                 }
             }else{
                 player.sendMessage(ChatColor.RED+"You must have Op to use this command.");

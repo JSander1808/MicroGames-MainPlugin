@@ -2,6 +2,7 @@ package server.lobby.listeners;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.block.data.type.WallSign;
@@ -37,7 +38,15 @@ public class PlayerInteractListener implements Listener {
                             if(sign.getLine(1).equalsIgnoreCase(ChatColor.GREEN+"Server 2")){
                                 Matchmaking.addPlayerToMatchmaking(player, "skywarsServer2");
                             }
+                            if(sign.getLine(1).equalsIgnoreCase(ChatColor.GREEN+"Server 3")){
+                                Matchmaking.addPlayerToMatchmaking(player, "skywarsServer3");
+                            }
+                            if(sign.getLine(1).equalsIgnoreCase(ChatColor.GREEN+"Server 4")){
+                                Matchmaking.addPlayerToMatchmaking(player, "skywarsServer4");
+                            }
                         }
+                    } else if (event.getClickedBlock().getType()==Material.CHEST||event.getClickedBlock().getType()==Material.ENDER_CHEST||event.getClickedBlock().getType()==Material.OAK_DOOR||event.getClickedBlock().getType()==Material.ANVIL||event.getClickedBlock().getType()==Material.FURNACE||event.getClickedBlock().getType()==Material.ENCHANTING_TABLE||event.getClickedBlock().getType()==Material.OAK_TRAPDOOR||event.getClickedBlock().getType()==Material.SPRUCE_TRAPDOOR) {
+                        event.setCancelled(true);
                     }
                 }catch(Exception e){
 

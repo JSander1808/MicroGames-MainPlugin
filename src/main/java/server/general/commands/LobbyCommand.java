@@ -8,6 +8,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import server.lobby.general.Matchmaking;
+
+import java.util.Calendar;
 
 public class LobbyCommand implements CommandExecutor {
     @Override
@@ -20,10 +23,20 @@ public class LobbyCommand implements CommandExecutor {
             player.setHealth(20);
             player.setFoodLevel(20);
             player.setGameMode(GameMode.ADVENTURE);
-            player.setAllowFlight(true);
+            if(player.isOp()){
+                player.setAllowFlight(true);
+            }
             player.setFlying(false);
+            player.getActivePotionEffects().clear();
+            player.setFireTicks(0);
             player.getInventory().clear();
             player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP,40,4);
+            Matchmaking.removePlayerFromMatchmaking(player);
+            Calendar calendar = Calendar.getInstance();
+            int dayOfYear = calendar.get(Calendar.DAY_OF_YEAR);
+            int year = calendar.get(Calendar.YEAR);
+            player.setExp(0.002f*dayOfYear);
+            player.setLevel(year);
 
             ItemStack teleporter = new ItemStack(Material.COMPASS);
             ItemMeta teleporterMeta = teleporter.getItemMeta();
