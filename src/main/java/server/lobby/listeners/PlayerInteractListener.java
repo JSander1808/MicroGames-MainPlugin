@@ -9,6 +9,7 @@ import org.bukkit.block.data.type.WallSign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import server.lobby.general.Matchmaking;
 import server.lobby.menus.TeleporterMenu;
@@ -19,6 +20,11 @@ public class PlayerInteractListener implements Listener {
     public void onInteract(PlayerInteractEvent event){
         Player player = event.getPlayer();
         if(player.getWorld().getName().equalsIgnoreCase("world")){
+            if(event.getAction()== Action.PHYSICAL){
+                if(event.getClickedBlock().getType().equals(Material.FARMLAND)){
+                    event.setCancelled(true);
+                }
+            }
             if(event.getClickedBlock() == null){
                 if(event.getItem()!=null){
                     switch(event.getItem().getType()){

@@ -73,7 +73,8 @@ public class Initial {
         skywarsServers.add(new SkywarsServer(4,new File("preServer/Skywars/skywars2")));
         skywarsServers.add(new SkywarsServer(4,new File("preServer/Skywars/skywars3")));
 
-        new SkywarsHologram(new Location(Bukkit.getWorld("world"),-29,60,-31));
+        new SkywarsHologram(new Location(Bukkit.getWorld("world"),-29,59.75,-31));
+        //new SkywarsHologram(new Location(Bukkit.getWorld("warp/MainLobby"),20,-58,-3));
 
 
         Matchmaking.MATCHMAKINGPROCESSID = Bukkit.getScheduler().scheduleAsyncRepeatingTask(Main.getPlugin(), ()->{Matchmaking.MatchmakingHandle();},1,20);

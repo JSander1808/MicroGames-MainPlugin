@@ -8,6 +8,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
+import server.games.skywars.SkywarsManager;
 import server.lobby.general.Matchmaking;
 
 import java.util.Calendar;
@@ -17,6 +19,10 @@ public class LobbyCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player){
             Player player = (Player) sender;
+            Matchmaking.removePlayerFromMatchmaking(player);
+            if(player.getWorld().getName().equalsIgnoreCase("GameServer/Skywars/Server1/server/")||player.getWorld().getName().equalsIgnoreCase("GameServer/Skywars/Server2/server/")||player.getWorld().getName().equalsIgnoreCase("GameServer/Skywars/Server3/server/")||player.getWorld().getName().equalsIgnoreCase("GameServer/Skywars/Server4/server/")){
+                SkywarsManager.updateSkywarsLobby(player.getWorld().getName());
+            }
             Location spawnLocation = new Location(Bukkit.getWorld("world"),26.5,63,-24.5);
             player.teleport(spawnLocation);
             player.setMaxHealth(20);
@@ -27,11 +33,13 @@ public class LobbyCommand implements CommandExecutor {
                 player.setAllowFlight(true);
             }
             player.setFlying(false);
-            player.getActivePotionEffects().clear();
+            for(PotionEffect effect : player.getActivePotionEffects()){
+                player.removePotionEffect(effect.getType());
+            }
             player.setFireTicks(0);
             player.getInventory().clear();
+            player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
             player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP,40,4);
-            Matchmaking.removePlayerFromMatchmaking(player);
             Calendar calendar = Calendar.getInstance();
             int dayOfYear = calendar.get(Calendar.DAY_OF_YEAR);
             int year = calendar.get(Calendar.YEAR);

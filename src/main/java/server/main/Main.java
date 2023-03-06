@@ -3,13 +3,13 @@ package server.main;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import server.games.skywars.SkywarsEntityDamageListener;
 import server.general.commands.LobbyCommand;
-import server.general.commands.PingListener;
+import server.general.PingListener;
 import server.general.commands.WarpCommand;
+import server.lobby.commands.StartCommand;
 import server.lobby.general.Initial;
 import server.lobby.general.Matchmaking;
 import server.lobby.hologram.skywars.SkywarsHologram;
@@ -31,9 +31,11 @@ public final class Main extends JavaPlugin {
         pluginManager.registerEvents(new QuitListener(),this);
         pluginManager.registerEvents(new SkywarsEntityDamageListener(),this);
         pluginManager.registerEvents(new PlayerDropListener(),this);
+        pluginManager.registerEvents(new ArmorStandMalipulateListener(),this);
 
         getCommand("warp").setExecutor(new WarpCommand());
         getCommand("lobby").setExecutor(new LobbyCommand());
+        getCommand("start").setExecutor(new StartCommand());
 
         new Initial();
     }

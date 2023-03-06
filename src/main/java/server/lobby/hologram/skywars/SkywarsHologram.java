@@ -17,33 +17,33 @@ public class SkywarsHologram {
     public static ArmorStand skywarsScoreArmorStands[] = new ArmorStand[5];
 
     public SkywarsHologram(Location location){
-        Location headlineLocation = new Location(location.getWorld(),location.getBlockX(),location.getBlockY()+1.0,location.getBlockZ());
+        Location headlineLocation = new Location(location.getWorld(),location.getBlockX(),location.getBlockY()+1.25,location.getBlockZ());
         skywarsHeadlineArmorStand = (ArmorStand) location.getWorld().spawnEntity(headlineLocation, EntityType.ARMOR_STAND);
         skywarsHeadlineArmorStand.setGravity(false);
         skywarsHeadlineArmorStand.setVisible(false);
         skywarsHeadlineArmorStand.setCanPickupItems(false);
         skywarsHeadlineArmorStand.setCustomNameVisible(true);
-        skywarsHeadlineArmorStand.setCustomName(ChatColor.GOLD+"Skywars - Bestlist");
+        skywarsHeadlineArmorStand.setCustomName(ChatColor.GOLD+"Skywars - Siege");
 
-        Location score1 = new Location(location.getWorld(),location.getBlockX(),location.getBlockY()+0.8,location.getBlockZ());
+        Location score1 = new Location(location.getWorld(),location.getBlockX(),location.getBlockY()+1,location.getBlockZ());
         skywarsScoreArmorStands[0] = (ArmorStand) location.getWorld().spawnEntity(score1, EntityType.ARMOR_STAND);
         skywarsScoreArmorStands[0].setGravity(false);
         skywarsScoreArmorStands[0].setVisible(false);
         skywarsScoreArmorStands[0].setCanPickupItems(false);
 
-        Location score2 = new Location(location.getWorld(),location.getBlockX(),location.getBlockY()+0.6,location.getBlockZ());
+        Location score2 = new Location(location.getWorld(),location.getBlockX(),location.getBlockY()+0.75,location.getBlockZ());
         skywarsScoreArmorStands[1] = (ArmorStand) location.getWorld().spawnEntity(score2, EntityType.ARMOR_STAND);
         skywarsScoreArmorStands[1].setGravity(false);
         skywarsScoreArmorStands[1].setVisible(false);
         skywarsScoreArmorStands[1].setCanPickupItems(false);
 
-        Location score3 = new Location(location.getWorld(),location.getBlockX(),location.getBlockY()+0.4,location.getBlockZ());
+        Location score3 = new Location(location.getWorld(),location.getBlockX(),location.getBlockY()+0.5,location.getBlockZ());
         skywarsScoreArmorStands[2] = (ArmorStand) location.getWorld().spawnEntity(score3, EntityType.ARMOR_STAND);
         skywarsScoreArmorStands[2].setGravity(false);
         skywarsScoreArmorStands[2].setVisible(false);
         skywarsScoreArmorStands[2].setCanPickupItems(false);
 
-        Location score4 = new Location(location.getWorld(),location.getBlockX(),location.getBlockY()+0.2,location.getBlockZ());
+        Location score4 = new Location(location.getWorld(),location.getBlockX(),location.getBlockY()+0.25,location.getBlockZ());
         skywarsScoreArmorStands[3] = (ArmorStand) location.getWorld().spawnEntity(score4, EntityType.ARMOR_STAND);
         skywarsScoreArmorStands[3].setGravity(false);
         skywarsScoreArmorStands[3].setVisible(false);
@@ -63,47 +63,100 @@ public class SkywarsHologram {
             for(int i = 0;i<5;i++){
                 skywarsScoreArmorStands[i].setCustomNameVisible(false);
             }
-            File[] scoresRaw = new File("gamestats/skywars/").listFiles();
-            ArrayList<File> scores = new ArrayList<File>();
-            for(int i = 0;i<scoresRaw.length;i++){
-                scores.add(scoresRaw[i]);
+            File[] filesRaw = new File("gamestats/skywars/").listFiles();
+            ArrayList<File> files = new ArrayList<File>();
+            for(int i = 0;i<filesRaw.length;i++){
+                files.add(filesRaw[i]);
             }
-            Collections.sort(scores);
-            Collections.reverse(scores);
-            if(scores.size()<=5){
-                for(int i = 0;i< scores.size();i++){
-                    File tempFile = scores.get(i);
-                    String playerName = tempFile.getName().split("[.]]")[0];
-                    int score = 0;
-                    try {
-                        BufferedReader reader = new BufferedReader(new FileReader(tempFile));
-                        score = Integer.valueOf(reader.readLine());
-                    } catch (FileNotFoundException e) {
-                        throw new RuntimeException(e);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
+            int highestScore = 0;
+            for(int i = 0;i< files.size();i++){
+                try {
+                    BufferedReader reader = new BufferedReader(new FileReader(files.get(i)));
+                    int score = Integer.valueOf(reader.readLine());
+
+                    if(highestScore<score){
+                        highestScore=score;
                     }
-                    skywarsScoreArmorStands[i].setCustomNameVisible(true);
-                    skywarsScoreArmorStands[i].setCustomName(ChatColor.GOLD+playerName+": "+ChatColor.GREEN+score);
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            int loops = files.size();
+            if(files.size()<=5){
+                for(int i = 0;i< loops;i++){
+                    int secondHighestScore = 0;
+                    for(int j = 0;j< files.size();j++){
+                        try {
+                            BufferedReader reader = new BufferedReader(new FileReader(files.get(j)));
+                            int score = Integer.valueOf(reader.readLine());
+                            if(secondHighestScore<=score && highestScore>=score){
+                                secondHighestScore=score;
+                            }
+                        } catch (FileNotFoundException e) {
+                            throw new RuntimeException(e);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    for(int j = 0;j< files.size();j++){
+                        try {
+                            BufferedReader reader = new BufferedReader(new FileReader(files.get(j)));
+                            int score = Integer.valueOf(reader.readLine());
+                            if(score==secondHighestScore){
+                                if(score!=0){
+                                    String name = files.get(j).getName().replaceFirst("[.][^.]+$", "");
+                                    skywarsScoreArmorStands[i].setCustomNameVisible(true);
+                                    skywarsScoreArmorStands[i].setCustomName(ChatColor.GOLD+name+": "+ChatColor.GREEN+score);
+                                    files.remove(j);
+                                    break;
+                                }
+                            }
+                        } catch (FileNotFoundException e) {
+                            throw new RuntimeException(e);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    highestScore=secondHighestScore;
                 }
             }else{
-                for(int i = 0;i<5;i++){
-                    File tempFile = scores.get(i);
-                    String playerName = tempFile.getName().split(".")[0];
-                    int score = 0;
-                    try {
-                        BufferedReader reader = new BufferedReader(new FileReader(tempFile));
-                        score = Integer.valueOf(reader.readLine());
-                    } catch (FileNotFoundException e) {
-                        throw new RuntimeException(e);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
+                for(int i = 1;i<5;i++){
+                    int secondHighestScore = 0;
+                    for(int j = 0;j< files.size();j++){
+                        try {
+                            BufferedReader reader = new BufferedReader(new FileReader(files.get(i)));
+                            int score = Integer.valueOf(reader.readLine());
+                            if(secondHighestScore<=score && highestScore>=score){
+                                secondHighestScore=score;
+                            }
+                        } catch (FileNotFoundException e) {
+                            throw new RuntimeException(e);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
-                    skywarsScoreArmorStands[i].setCustomNameVisible(true);
-                    skywarsScoreArmorStands[i].setCustomName(ChatColor.GOLD+playerName+": "+ChatColor.GREEN+score);
+                    for(int j = 0;j< files.size();j++){
+                        try {
+                            BufferedReader reader = new BufferedReader(new FileReader(files.get(j)));
+                            int score = Integer.valueOf(reader.readLine());
+                            if(score==secondHighestScore){
+                                String name = files.get(j).getName().replaceFirst("[.][^.]+$", "");
+                                skywarsScoreArmorStands[i].setCustomNameVisible(true);
+                                skywarsScoreArmorStands[i].setCustomName(ChatColor.GOLD+name+": "+ChatColor.GREEN+score);
+                                files.remove(j);
+                                break;
+                            }
+                        } catch (FileNotFoundException e) {
+                            throw new RuntimeException(e);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
                 }
             }
-        },0,20);
+        },0,10*20);
     }
 
     public static void removeSkywarsHologram(){

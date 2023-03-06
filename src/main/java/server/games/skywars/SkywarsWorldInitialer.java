@@ -129,6 +129,7 @@ public class SkywarsWorldInitialer {
                     world.getPlayers().get(i).sendMessage(ChatColor.GREEN+"GO");
                     world.getPlayers().get(i).setHealth(20);
                     world.getPlayers().get(i).setFoodLevel(20);
+                    new SkywarsScoreboardManager(world.getName(), players);
                 }
                 Bukkit.getScheduler().cancelTask(TaskID);
             }
@@ -202,6 +203,7 @@ public class SkywarsWorldInitialer {
                     world.getPlayers().get(i).sendMessage(ChatColor.GREEN+"GO");
                     world.getPlayers().get(i).setHealth(20);
                     world.getPlayers().get(i).setFoodLevel(20);
+                    new SkywarsScoreboardManager(world.getName(), players);
                 }
                 Bukkit.getScheduler().cancelTask(TaskID);
             }
@@ -277,6 +279,7 @@ public class SkywarsWorldInitialer {
                     world.getPlayers().get(i).sendMessage(ChatColor.GREEN+"GO");
                     world.getPlayers().get(i).setHealth(20);
                     world.getPlayers().get(i).setFoodLevel(20);
+                    new SkywarsScoreboardManager(world.getName(), players);
                 }
                 Bukkit.getScheduler().cancelTask(TaskID);
             }
@@ -339,7 +342,7 @@ public class SkywarsWorldInitialer {
         ItemStack steaks = new ItemStack(Material.BEEF);
         steaks.setAmount(8);
         itemPool.add(steaks);
-        ItemStack brickBlocks = new ItemStack(Material.BRICK);
+        ItemStack brickBlocks = new ItemStack(Material.BRICKS);
         brickBlocks.setAmount(64);
         itemPool.add(brickBlocks);
         itemPool.add(new ItemStack(Material.FLINT_AND_STEEL));

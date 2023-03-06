@@ -1,4 +1,4 @@
-package server.general.commands;
+package server.general;
 
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
@@ -9,6 +9,6 @@ public class PingListener implements Listener {
 
     @EventHandler
     public void onPing(ServerListPingEvent event){
-        event.setMotd(ChatColor.GOLD+"MircroGames  "+ChatColor.GREEN+"+1.19.3");
+        event.setMotd(ChatColor.GREEN+"-----------------"+ChatColor.GOLD+"MicroGames"+ChatColor.GREEN+"-----------------       "+ChatColor.BLUE+"Skywars Update                         "+ChatColor.RED+"[+1.19.3]");
     }
 }
