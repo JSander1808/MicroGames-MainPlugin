@@ -37,21 +37,21 @@ public class InventoryClickListener implements Listener {
                                 break;
                             case COMPASS:
                                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP,40,2);
-                                Location spawnLocation = new Location(Bukkit.getWorld("world"),26.5,63,-24.5);
+                                Location spawnLocation = new Location(Bukkit.getWorld("world"),8.5,-58,8.5,180,0);
                                 player.teleport(spawnLocation);
                                 player.setFlying(false);
                                 player.sendMessage(ChatColor.GRAY+"Du wurdest zum Spawn teleportiert");
                                 break;
                             case RED_BED:
                                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP,40,2);
-                                Location bedwarsLocation = new Location(Bukkit.getWorld("world"),-53.5,60,25.5,90,0);
+                                Location bedwarsLocation = new Location(Bukkit.getWorld("world"),-9.5,-38,65.5,-90,0);
                                 player.teleport(bedwarsLocation);
                                 player.setFlying(false);
                                 player.sendMessage(ChatColor.GRAY+"Du wurdest zu Bedwars teleportiert");
                                 break;
                             case IRON_SWORD:
                                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP,40,2);
-                                Location skywarsLocation = new Location(Bukkit.getWorld("world"),-23.5,62,-24.5,140,0);
+                                Location skywarsLocation = new Location(Bukkit.getWorld("world"),59.5,-43,-13.5,0,0);
                                 player.teleport(skywarsLocation);
                                 player.setFlying(false);
                                 player.sendMessage(ChatColor.GRAY+"Du wurdest zu Skywars teleportiert");

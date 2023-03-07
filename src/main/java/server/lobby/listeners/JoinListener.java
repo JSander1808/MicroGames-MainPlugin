@@ -9,6 +9,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
+import server.general.InitPlayerStats;
 
 import java.io.*;
 import java.util.Calendar;
@@ -19,7 +20,8 @@ public class JoinListener implements Listener {
     public void onJoin(PlayerJoinEvent event){
         Player player = event.getPlayer();
         event.setJoinMessage(ChatColor.GOLD+player.getName()+ChatColor.GREEN+" ist dem Server beigetreten. ");
-        Location spawnLocation = new Location(Bukkit.getWorld("world"),26.5,63,-24.5);
+        Location spawnLocation = new Location(Bukkit.getWorld("world"),8.5,-58,8.5,180,0);
+
         player.teleport(spawnLocation);
         player.getInventory().clear();
         player.setMaxHealth(20);
@@ -45,19 +47,7 @@ public class JoinListener implements Listener {
         player.setExp(0.002f*dayOfYear);
         player.setLevel(year);
 
-        File file = new File("gamestats/skywars/"+player.getName()+".conf");
-        if(!file.exists()){
-            try {
-                file.createNewFile();
-                PrintWriter writer = new PrintWriter(file);
-                writer.write("0");
-                writer.flush();
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        new InitPlayerStats(player);
 
         ItemStack teleporter = new ItemStack(Material.COMPASS);
         ItemMeta teleporterMeta = teleporter.getItemMeta();

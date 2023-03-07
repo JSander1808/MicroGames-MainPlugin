@@ -23,7 +23,7 @@ public class LobbyCommand implements CommandExecutor {
             if(player.getWorld().getName().equalsIgnoreCase("GameServer/Skywars/Server1/server/")||player.getWorld().getName().equalsIgnoreCase("GameServer/Skywars/Server2/server/")||player.getWorld().getName().equalsIgnoreCase("GameServer/Skywars/Server3/server/")||player.getWorld().getName().equalsIgnoreCase("GameServer/Skywars/Server4/server/")){
                 SkywarsManager.updateSkywarsLobby(player.getWorld().getName());
             }
-            Location spawnLocation = new Location(Bukkit.getWorld("world"),26.5,63,-24.5);
+            Location spawnLocation = new Location(Bukkit.getWorld("world"),8.5,-58,8.5,180,0);
             player.teleport(spawnLocation);
             player.setMaxHealth(20);
             player.setHealth(20);

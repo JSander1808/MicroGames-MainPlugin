@@ -146,7 +146,7 @@ public class SkywarsScoreboardManager {
                 objective.setDisplaySlot(DisplaySlot.SIDEBAR);
                 objective.setDisplayName(ChatColor.GOLD+"Skywars - Info");
                 Score score1 = objective.getScore(" ");
-                score1.setScore(names.length+1+4);
+                score1.setScore(names.length+4);
                 Score score2 = objective.getScore("  ");
                 score2.setScore(1);
                 StringBuilder timeString = new StringBuilder();

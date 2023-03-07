@@ -36,6 +36,7 @@ public class WarpCommand implements CommandExecutor {
                         World world = new WorldCreator("warp/"+args[0]).createWorld();
                         Location warpLocation = Bukkit.getWorld(world.getUID()).getSpawnLocation();
                         player.teleport(warpLocation);
+                        player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
                         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP,40,0);
                         player.setGameMode(GameMode.CREATIVE);
                         player.setFlying(true);

@@ -12,6 +12,7 @@ import org.bukkit.entity.EntityType;
 import server.games.skywars.SkywarsHandler;
 import server.games.skywars.SkywarsServer;
 import server.general.Config;
+import server.lobby.Lootbox.Lootbox;
 import server.lobby.hologram.skywars.SkywarsHologram;
 import server.main.Main;
 
@@ -21,6 +22,8 @@ import java.util.ArrayList;
 public class Initial {
 
     public static ArrayList<SkywarsServer> skywarsServers = new ArrayList<SkywarsServer>();
+    public static Lootbox lootbox1;
+    public static Lootbox lootbox2;
 
     public Initial(){
         Config config = new Config("gamestats/skywars/ranklist.conf");
@@ -31,21 +34,21 @@ public class Initial {
         }catch(Exception e){};
 
         World world = Bukkit.getWorld("world");
-        Block skywarsServer1 = world.getBlockAt(-32,61,-30);
+        Block skywarsServer1 = world.getBlockAt(60,-41,-9);
         org.bukkit.block.Sign skywarsServer1Sign = (Sign) skywarsServer1.getState();
         skywarsServer1Sign.setLine(0,ChatColor.GOLD+"Skywars");
         skywarsServer1Sign.setLine(1,ChatColor.GREEN+"Server 1");
         skywarsServer1Sign.setLine(2,ChatColor.GREEN+"0 / "+Matchmaking.skywarsServer1MaxPlayer);
         skywarsServer1Sign.update();
 
-        Block skywarsServer2 = world.getBlockAt(-28,61,-34);
+        Block skywarsServer2 = world.getBlockAt(59,-41,-9);
         org.bukkit.block.Sign skywarsServer2Sign = (Sign) skywarsServer2.getState();
         skywarsServer2Sign.setLine(0,ChatColor.GOLD+"Skywars");
         skywarsServer2Sign.setLine(1,ChatColor.GREEN+"Server 2");
         skywarsServer2Sign.setLine(2,ChatColor.GREEN+"0 / "+Matchmaking.skywarsServer2MaxPlayer);
         skywarsServer2Sign.update();
 
-        Block skywarsServer3Block = world.getBlockAt(-32,61,-38);
+        Block skywarsServer3Block = world.getBlockAt(58,-41,-9);
         org.bukkit.block.Sign skywarsServer3Sign = (Sign) skywarsServer3Block.getState();
         skywarsServer3Sign.setLine(0,ChatColor.GOLD+"Skywars");
         skywarsServer3Sign.setLine(1,ChatColor.GREEN+"Server 3");
@@ -57,7 +60,7 @@ public class Initial {
         }
         skywarsServer3Sign.update();
 
-        Block skywarsServer4Block = world.getBlockAt(-36,61,-34);
+        Block skywarsServer4Block = world.getBlockAt(57,-41,-9);
         org.bukkit.block.Sign skywarsServer4Sign = (Sign) skywarsServer4Block.getState();
         skywarsServer4Sign.setLine(0,ChatColor.GOLD+"Skywars");
         skywarsServer4Sign.setLine(1,ChatColor.GREEN+"Server 4");
@@ -73,10 +76,13 @@ public class Initial {
         skywarsServers.add(new SkywarsServer(4,new File("preServer/Skywars/skywars2")));
         skywarsServers.add(new SkywarsServer(4,new File("preServer/Skywars/skywars3")));
 
-        new SkywarsHologram(new Location(Bukkit.getWorld("world"),-29,59.75,-31));
-        //new SkywarsHologram(new Location(Bukkit.getWorld("warp/MainLobby"),20,-58,-3));
+        new LobbyScoreboardManager();
+        lootbox1 = new Lootbox(new Location(Bukkit.getWorld("world"),17.5,-58,-3.5));
+        lootbox2 = new Lootbox(new Location(Bukkit.getWorld("world"),-0.5,-58,20.5));
+        new SkywarsHologram(new Location(Bukkit.getWorld("world"),-3,-58,-3));
 
 
         Matchmaking.MATCHMAKINGPROCESSID = Bukkit.getScheduler().scheduleAsyncRepeatingTask(Main.getPlugin(), ()->{Matchmaking.MatchmakingHandle();},1,20);
+
     }
 }

@@ -47,27 +47,35 @@ public class SkywarsWorldInitialer {
         System.out.println(playerCount);
         if(playerCount>=1){
             Bukkit.getPlayer(players.get(0)).teleport(new Location(world,57.5,118,56.5,180,0));
+            Bukkit.getPlayer(players.get(0)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
         }
         if(playerCount>=2){
             Bukkit.getPlayer(players.get(1)).teleport(new Location(world,57.5,118,-54.5,0,0));
+            Bukkit.getPlayer(players.get(1)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
         }
         if(playerCount>=3){
             Bukkit.getPlayer(players.get(2)).teleport(new Location(world,1.5,118,0.5,-90,0));
+            Bukkit.getPlayer(players.get(2)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
         }
         if(playerCount>=4){
             Bukkit.getPlayer(players.get(3)).teleport(new Location(world,113.5,118,0.5,90,0));
+            Bukkit.getPlayer(players.get(3)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
         }
         if(playerCount>=5){
             Bukkit.getPlayer(players.get(4)).teleport(new Location(world,95.5,119,38.5,134,0));
+            Bukkit.getPlayer(players.get(4)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
         }
         if(playerCount>=6){
             Bukkit.getPlayer(players.get(5)).teleport(new Location(world,21.5,119,36.5,-134,0));
+            Bukkit.getPlayer(players.get(5)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
         }
         if(playerCount>=7){
             Bukkit.getPlayer(players.get(6)).teleport(new Location(world,19.5,119,-37.5,-43,0));
+            Bukkit.getPlayer(players.get(6)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
         }
         if(playerCount>=8){
             Bukkit.getPlayer(players.get(7)).teleport(new Location(world,94.5,119,-36.5,44,0));
+            Bukkit.getPlayer(players.get(7)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
         }
         fillChest(new Location(world, 58,118,-57));
         fillChest(new Location(world,54,111,-54));
@@ -129,6 +137,7 @@ public class SkywarsWorldInitialer {
                     world.getPlayers().get(i).sendMessage(ChatColor.GREEN+"GO");
                     world.getPlayers().get(i).setHealth(20);
                     world.getPlayers().get(i).setFoodLevel(20);
+                    world.getPlayers().get(i).playSound(world.getPlayers().get(i).getLocation(),Sound.ENTITY_EXPERIENCE_ORB_PICKUP,30,10);
                     new SkywarsScoreboardManager(world.getName(), players);
                 }
                 Bukkit.getScheduler().cancelTask(TaskID);
@@ -140,16 +149,20 @@ public class SkywarsWorldInitialer {
         int playerCount = players.size();
         System.out.println(playerCount);
         if(playerCount>=1){
-            Bukkit.getPlayer(players.get(0)).teleport(new Location(world,21.5,-30,22.5,0,0));
+            Bukkit.getPlayer(players.get(0)).teleport(new Location(world,21.5,-29,22.5,0,0));
+            Bukkit.getPlayer(players.get(0)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
         }
         if(playerCount>=2){
-            Bukkit.getPlayer(players.get(1)).teleport(new Location(world,21.5,-30,128.5,180,0));
+            Bukkit.getPlayer(players.get(1)).teleport(new Location(world,21.5,-29,128.5,180,0));
+            Bukkit.getPlayer(players.get(1)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
         }
         if(playerCount>=3){
-            Bukkit.getPlayer(players.get(2)).teleport(new Location(world,74.5,-30,75.5,90,0));
+            Bukkit.getPlayer(players.get(2)).teleport(new Location(world,74.5,-29,75.5,90,0));
+            Bukkit.getPlayer(players.get(2)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
         }
         if(playerCount>=4){
-            Bukkit.getPlayer(players.get(3)).teleport(new Location(world,-31.5,-30,75.5,-90,0));
+            Bukkit.getPlayer(players.get(3)).teleport(new Location(world,-31.5,-29,75.5,-90,0));
+            Bukkit.getPlayer(players.get(3)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
         }
         fillChest(new Location(world, 22,-29,18));
         fillChest(new Location(world,21,-32,17));
@@ -203,6 +216,7 @@ public class SkywarsWorldInitialer {
                     world.getPlayers().get(i).sendMessage(ChatColor.GREEN+"GO");
                     world.getPlayers().get(i).setHealth(20);
                     world.getPlayers().get(i).setFoodLevel(20);
+                    world.getPlayers().get(i).playSound(world.getPlayers().get(i).getLocation(),Sound.ENTITY_EXPERIENCE_ORB_PICKUP,30,10);
                     new SkywarsScoreboardManager(world.getName(), players);
                 }
                 Bukkit.getScheduler().cancelTask(TaskID);
@@ -216,16 +230,20 @@ public class SkywarsWorldInitialer {
         int playerCount = players.size();
         System.out.println(playerCount);
         if(playerCount>=1){
-            Bukkit.getPlayer(players.get(0)).teleport(new Location(world,8.5,-31,-101.5,0,0));
+            Bukkit.getPlayer(players.get(0)).teleport(new Location(world,8.5,-33,-101.5,0,0));
+            Bukkit.getPlayer(players.get(0)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
         }
         if(playerCount>=2){
-            Bukkit.getPlayer(players.get(1)).teleport(new Location(world,8.5,-32,6.5,-180,0));
+            Bukkit.getPlayer(players.get(1)).teleport(new Location(world,8.5,-33,6.5,-180,0));
+            Bukkit.getPlayer(players.get(1)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
         }
         if(playerCount>=3){
-            Bukkit.getPlayer(players.get(2)).teleport(new Location(world,-45.5,-32,-47.5,-90,0));
+            Bukkit.getPlayer(players.get(2)).teleport(new Location(world,-45.5,-33,-47.5,-90,0));
+            Bukkit.getPlayer(players.get(2)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
         }
         if(playerCount>=4){
-            Bukkit.getPlayer(players.get(3)).teleport(new Location(world,62.5,-32,-47.5,90,0));
+            Bukkit.getPlayer(players.get(3)).teleport(new Location(world,62.5,-33,-47.5,90,0));
+            Bukkit.getPlayer(players.get(3)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
         }
         fillChest(new Location(world, 68,-32,-48));
         fillChest(new Location(world,66,-35,-50));
@@ -279,6 +297,7 @@ public class SkywarsWorldInitialer {
                     world.getPlayers().get(i).sendMessage(ChatColor.GREEN+"GO");
                     world.getPlayers().get(i).setHealth(20);
                     world.getPlayers().get(i).setFoodLevel(20);
+                    world.getPlayers().get(i).playSound(world.getPlayers().get(i).getLocation(),Sound.ENTITY_EXPERIENCE_ORB_PICKUP,30,10);
                     new SkywarsScoreboardManager(world.getName(), players);
                 }
                 Bukkit.getScheduler().cancelTask(TaskID);

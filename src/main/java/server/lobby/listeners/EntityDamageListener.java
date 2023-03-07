@@ -18,7 +18,7 @@ public class EntityDamageListener implements Listener {
             if(player.getWorld().getName().equalsIgnoreCase("world")){
                 event.setCancelled(true);
                 if(player.getHealth() - event.getDamage()<=0){
-                    Location spawnLocation = new Location(Bukkit.getWorld("world"),26.5,63,-24.5);
+                    Location spawnLocation = new Location(Bukkit.getWorld("world"),8.5,-58,8.5,180,0);
                     player.teleport(spawnLocation);
                     player.setMaxHealth(20);
                     player.setHealth(20);
@@ -31,8 +31,8 @@ public class EntityDamageListener implements Listener {
                     event.setCancelled(true);
                     player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP,40,4);
                 }
-                if(player.getLocation().getBlockY()<=0){
-                    Location spawnLocation = new Location(Bukkit.getWorld("world"),26.5,63,-24.5);
+                if(player.getLocation().getBlockY()<=-70){
+                    Location spawnLocation = new Location(Bukkit.getWorld("world"),8.5,-58,8.5,180,0);
                     player.teleport(spawnLocation);
                     player.setMaxHealth(20);
                     player.setHealth(20);

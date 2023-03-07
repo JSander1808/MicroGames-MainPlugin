@@ -10,6 +10,7 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
+import server.lobby.general.Coins;
 import server.lobby.general.Matchmaking;
 
 import java.io.*;
@@ -25,10 +26,16 @@ public class SkywarsManager {
                 SkywarsWinnManager.addWin(Bukkit.getPlayer(Matchmaking.skywarsServer1.get(0)));
                 Bukkit.getPlayer(Matchmaking.skywarsServer1.get(0)).sendMessage(ChatColor.BLUE+"Skywars Siege: "+ChatColor.GREEN+"+1");
                 String winner = Bukkit.getPlayer(Matchmaking.skywarsServer1.get(0)).getName();
+                Bukkit.getPlayer(Matchmaking.skywarsServer1.get(0)).sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"15 Coins "+ChatColor.BLUE+"für das Gewinnen der Runde bekommen.");
+                Coins.addCoins(Bukkit.getPlayer(Matchmaking.skywarsServer1.get(0)).getPlayer(),15);
                 for(int i = 0;i<playerCount;i++){
                     Player player = world.getPlayers().get(0);
+                    if(Bukkit.getPlayer(winner)!=player){
+                        player.sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"5 Coins "+ChatColor.BLUE+"für das mitspielen erhalten.");
+                        Coins.addCoins(player,5);
+                    }
                     System.out.println(player.getName());
-                    Location spawnLocation = new Location(Bukkit.getWorld("world"),26.5,63,-24.5);
+                    Location spawnLocation = new Location(Bukkit.getWorld("world"),8.5,-58,8.5,180,0);
                     player.teleport(spawnLocation);
                     player.getInventory().clear();
                     player.setMaxHealth(20);
@@ -72,9 +79,15 @@ public class SkywarsManager {
                 String winner = Bukkit.getPlayer(Matchmaking.skywarsServer2.get(0)).getName();
                 SkywarsWinnManager.addWin(Bukkit.getPlayer(Matchmaking.skywarsServer2.get(0)));
                 Bukkit.getPlayer(Matchmaking.skywarsServer2.get(0)).sendMessage(ChatColor.BLUE+"Skywars Siege: "+ChatColor.GREEN+"+1");
+                Bukkit.getPlayer(Matchmaking.skywarsServer2.get(0)).sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"15 Coins "+ChatColor.BLUE+"für das Gewinnen der Runde bekommen.");
+                Coins.addCoins(Bukkit.getPlayer(Matchmaking.skywarsServer2.get(0)).getPlayer(),15);
                 for(int i = 0;i<playerCount;i++){
                     Player player = world.getPlayers().get(0);
-                    Location spawnLocation = new Location(Bukkit.getWorld("world"),26.5,63,-24.5);
+                    if(Bukkit.getPlayer(winner)!=player){
+                        player.sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"5 Coins "+ChatColor.BLUE+"für das mitspielen erhalten.");
+                        Coins.addCoins(player,5);
+                    }
+                    Location spawnLocation = new Location(Bukkit.getWorld("world"),8.5,-58,8.5,180,0);
                     player.teleport(spawnLocation);
                     player.getInventory().clear();
                     player.setMaxHealth(20);
@@ -117,9 +130,15 @@ public class SkywarsManager {
                 String winner = Bukkit.getPlayer(Matchmaking.skywarsServer3.get(0)).getName();
                 SkywarsWinnManager.addWin(Bukkit.getPlayer(Matchmaking.skywarsServer3.get(0)));
                 Bukkit.getPlayer(Matchmaking.skywarsServer3.get(0)).sendMessage(ChatColor.BLUE+"Skywars Siege: "+ChatColor.GREEN+"+1");
+                Bukkit.getPlayer(Matchmaking.skywarsServer3.get(0)).sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"15 Coins "+ChatColor.BLUE+"für das Gewinnen der Runde bekommen.");
+                Coins.addCoins(Bukkit.getPlayer(Matchmaking.skywarsServer3.get(0)).getPlayer(),15);
                 for(int i = 0;i<playerCount;i++){
                     Player player = world.getPlayers().get(0);
-                    Location spawnLocation = new Location(Bukkit.getWorld("world"),26.5,63,-24.5);
+                    if(Bukkit.getPlayer(winner)!=player){
+                        player.sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"5 Coins "+ChatColor.BLUE+"für das mitspielen erhalten.");
+                        Coins.addCoins(player,5);
+                    }
+                    Location spawnLocation = new Location(Bukkit.getWorld("world"),8.5,-58,8.5,180,0);
                     player.teleport(spawnLocation);
                     player.getInventory().clear();
                     player.setMaxHealth(20);
@@ -162,9 +181,15 @@ public class SkywarsManager {
                 String winner = Bukkit.getPlayer(Matchmaking.skywarsServer4.get(0)).getName();
                 SkywarsWinnManager.addWin(Bukkit.getPlayer(Matchmaking.skywarsServer4.get(0)));
                 Bukkit.getPlayer(Matchmaking.skywarsServer4.get(0)).sendMessage(ChatColor.BLUE+"Skywars Siege: "+ChatColor.GREEN+"+1");
+                Bukkit.getPlayer(Matchmaking.skywarsServer4.get(0)).sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"15 Coins "+ChatColor.BLUE+"für das Gewinnen der Runde bekommen.");
+                Coins.addCoins(Bukkit.getPlayer(Matchmaking.skywarsServer4.get(0)).getPlayer(),15);
                 for(int i = 0;i<playerCount;i++){
                     Player player = world.getPlayers().get(0);
-                    Location spawnLocation = new Location(Bukkit.getWorld("world"),26.5,63,-24.5);
+                    if(Bukkit.getPlayer(winner)!=player){
+                        player.sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"5 Coins "+ChatColor.BLUE+"für das mitspielen erhalten.");
+                        Coins.addCoins(player,5);
+                    }
+                    Location spawnLocation = new Location(Bukkit.getWorld("world"),8.5,-58,8.5,180,0);
                     player.teleport(spawnLocation);
                     player.getInventory().clear();
                     player.setMaxHealth(20);

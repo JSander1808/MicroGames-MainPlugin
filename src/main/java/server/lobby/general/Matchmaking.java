@@ -29,7 +29,7 @@ public class Matchmaking {
     public static int skywarsServer3Countdown = 60;
     public static int skywarsServer4Countdown = 60;
 
-    public static int skywarsServer1MaxPlayer = 2;
+    public static int skywarsServer1MaxPlayer = 1;
     public static int skywarsServer2MaxPlayer = 2;
     public static int skywarsServer3MaxPlayer = 4;
     public static int skywarsServer4MaxPlayer = 8;
@@ -63,7 +63,7 @@ public class Matchmaking {
         if(server.equalsIgnoreCase("skywarsServer1")){
             if(!skywarsServer1.contains(player.getUniqueId())){
                 World world = Bukkit.getWorld("world");
-                Block skywarsServerBlock = world.getBlockAt(-32,61,-30);
+                Block skywarsServerBlock = world.getBlockAt(60,-41,-9);
                 org.bukkit.block.Sign skywarsServerSign = (Sign) skywarsServerBlock.getState();
                 if(skywarsServerSign.getLine(3).equalsIgnoreCase("")){
                     if((skywarsServer1.size()+1)<=skywarsServer1MaxPlayer){
@@ -79,7 +79,11 @@ public class Matchmaking {
                         player.sendMessage(ChatColor.RED+"The Server is allready full.");
                     }
                 }else{
-                    player.sendMessage(ChatColor.RED+"You can´t join a running game.");
+                    player.teleport(Bukkit.getWorld("GameServer/Skywars/Server1/server/").getSpawnLocation());
+                    player.setGameMode(GameMode.SPECTATOR);
+                    player.getInventory().clear();
+                    removePlayerFromMatchmaking(player);
+                    player.sendMessage(ChatColor.GRAY+"Du beobachtest nun das Spiel");
                 }
             }else{
                 skywarsServer1.remove(player.getUniqueId());
@@ -89,7 +93,7 @@ public class Matchmaking {
         }else if(server.equalsIgnoreCase("skywarsServer2")){
             if(!skywarsServer2.contains(player.getUniqueId())){
                 World world = Bukkit.getWorld("world");
-                Block skywarsServerBlock = world.getBlockAt(-28,61,-34);
+                Block skywarsServerBlock = world.getBlockAt(59,-41,-9);
                 org.bukkit.block.Sign skywarsServerSign = (Sign) skywarsServerBlock.getState();
                 if(skywarsServerSign.getLine(3).equalsIgnoreCase("")){
                     if((skywarsServer2.size()+1)<=skywarsServer2MaxPlayer){
@@ -105,7 +109,11 @@ public class Matchmaking {
                         player.sendMessage(ChatColor.RED+"The Server is allready full.");
                     }
                 }else{
-                    player.sendMessage(ChatColor.RED+"You can´t join a running game.");
+                    player.teleport(Bukkit.getWorld("GameServer/Skywars/Server2/server/").getSpawnLocation());
+                    player.setGameMode(GameMode.SPECTATOR);
+                    player.getInventory().clear();
+                    removePlayerFromMatchmaking(player);
+                    player.sendMessage(ChatColor.GRAY+"Du beobachtest nun das Spiel");
                 }
             }else{
                 skywarsServer2.remove(player.getUniqueId());
@@ -115,7 +123,7 @@ public class Matchmaking {
         }else if(server.equalsIgnoreCase("skywarsServer3")){
             if(!skywarsServer3.contains(player.getUniqueId())){
                 World world = Bukkit.getWorld("world");
-                Block skywarsServerBlock = world.getBlockAt(-32,61,-38);
+                Block skywarsServerBlock = world.getBlockAt(58,-41,-9);
                 org.bukkit.block.Sign skywarsServerSign = (Sign) skywarsServerBlock.getState();
                 if(skywarsServerSign.getLine(3).equalsIgnoreCase("")){
                     if((skywarsServer3.size()+1)<=skywarsServer3MaxPlayer){
@@ -131,7 +139,11 @@ public class Matchmaking {
                         player.sendMessage(ChatColor.RED+"The Server is allready full.");
                     }
                 }else{
-                    player.sendMessage(ChatColor.RED+"You can´t join a running game.");
+                    player.teleport(Bukkit.getWorld("GameServer/Skywars/Server3/server/").getSpawnLocation());
+                    player.setGameMode(GameMode.SPECTATOR);
+                    player.getInventory().clear();
+                    removePlayerFromMatchmaking(player);
+                    player.sendMessage(ChatColor.GRAY+"Du beobachtest nun das Spiel");
                 }
             }else{
                 skywarsServer3.remove(player.getUniqueId());
@@ -141,7 +153,7 @@ public class Matchmaking {
         }else if(server.equalsIgnoreCase("skywarsServer4")){
             if(!skywarsServer4.contains(player.getUniqueId())){
                 World world = Bukkit.getWorld("world");
-                Block skywarsServerBlock = world.getBlockAt(-36,61,-34);
+                Block skywarsServerBlock = world.getBlockAt(57,-41,-9);
                 org.bukkit.block.Sign skywarsServerSign = (Sign) skywarsServerBlock.getState();
                 if(skywarsServerSign.getLine(3).equalsIgnoreCase("")){
                     if((skywarsServer4.size()+1)<=skywarsServer4MaxPlayer){
@@ -157,7 +169,11 @@ public class Matchmaking {
                         player.sendMessage(ChatColor.RED+"The Server is allready full.");
                     }
                 }else{
-                    player.sendMessage(ChatColor.RED+"You can´t join a running game.");
+                    player.teleport(Bukkit.getWorld("GameServer/Skywars/Server4/server/").getSpawnLocation());
+                    player.setGameMode(GameMode.SPECTATOR);
+                    player.getInventory().clear();
+                    removePlayerFromMatchmaking(player);
+                    player.sendMessage(ChatColor.GRAY+"Du beobachtest nun das Spiel");
                 }
             }else{
                 skywarsServer4.remove(player.getUniqueId());
@@ -170,7 +186,7 @@ public class Matchmaking {
     public static void updateSigns(){
         World world = Bukkit.getWorld("world");
 
-        Block skywarsServer1Block = world.getBlockAt(-32,61,-30);
+        Block skywarsServer1Block = world.getBlockAt(60,-41,-9);
         org.bukkit.block.Sign skywarsServer1Sign = (Sign) skywarsServer1Block.getState();
         skywarsServer1Sign.setLine(0, ChatColor.GOLD+"Skywars");
         skywarsServer1Sign.setLine(1,ChatColor.GREEN+"Server 1");
@@ -182,7 +198,7 @@ public class Matchmaking {
         }
         skywarsServer1Sign.update();
 
-        Block skywarsServer2Block = world.getBlockAt(-28,61,-34);
+        Block skywarsServer2Block = world.getBlockAt(59,-41,-9);
         org.bukkit.block.Sign skywarsServer2Sign = (Sign) skywarsServer2Block.getState();
         skywarsServer2Sign.setLine(0,ChatColor.GOLD+"Skywars");
         skywarsServer2Sign.setLine(1,ChatColor.GREEN+"Server 2");
@@ -194,7 +210,7 @@ public class Matchmaking {
         }
         skywarsServer2Sign.update();
 
-        Block skywarsServer3Block = world.getBlockAt(-32,61,-38);
+        Block skywarsServer3Block = world.getBlockAt(58,-41,-9);
         org.bukkit.block.Sign skywarsServer3Sign = (Sign) skywarsServer3Block.getState();
         skywarsServer3Sign.setLine(0,ChatColor.GOLD+"Skywars");
         skywarsServer3Sign.setLine(1,ChatColor.GREEN+"Server 3");
@@ -206,7 +222,7 @@ public class Matchmaking {
         }
         skywarsServer3Sign.update();
 
-        Block skywarsServer4Block = world.getBlockAt(-36,61,-34);
+        Block skywarsServer4Block = world.getBlockAt(57,-41,-9);
         org.bukkit.block.Sign skywarsServer4Sign = (Sign) skywarsServer4Block.getState();
         skywarsServer4Sign.setLine(0,ChatColor.GOLD+"Skywars");
         skywarsServer4Sign.setLine(1,ChatColor.GREEN+"Server 4");
