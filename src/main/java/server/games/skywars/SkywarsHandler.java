@@ -1,21 +1,7 @@
 package server.games.skywars;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.WorldCreator;
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import server.lobby.general.Initial;
-import server.lobby.general.Matchmaking;
-import server.main.Main;
-
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.UUID;
 
 public class SkywarsHandler {

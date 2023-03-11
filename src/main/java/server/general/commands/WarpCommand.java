@@ -5,6 +5,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import server.games.bedwars.BedwarsShop;
+import server.games.bedwars.BedwarsWorldInitialer;
 
 import java.io.File;
 import java.io.IOException;

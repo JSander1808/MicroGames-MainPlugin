@@ -7,8 +7,10 @@ import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.potion.PotionType;
 import server.main.Main;
 
 import java.io.*;
@@ -35,6 +37,10 @@ public class SkywarsWorldInitialer {
                     initSkywars2(players,world);
                 }else if(serverMap.getWorldFolder().getName().equalsIgnoreCase("skywars3")){
                     initSkywars3(players,world);
+                }else if(serverMap.getWorldFolder().getName().equalsIgnoreCase("skywars4")){
+                    initSkywars4(players,world);
+                }else if(serverMap.getWorldFolder().getName().equalsIgnoreCase("skywars5")){
+                    initSkywars5(players,world);
                 }
             }
         });
@@ -305,6 +311,142 @@ public class SkywarsWorldInitialer {
         },0,20);
     }
 
+    public void initSkywars4(ArrayList<UUID> players, World world){
+        int playerCount = players.size();
+        System.out.println(playerCount);
+        if(playerCount>=1){
+            Bukkit.getPlayer(players.get(0)).teleport(new Location(world,8.5,-58,6.5,180,0));
+            Bukkit.getPlayer(players.get(0)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
+        }
+        if(playerCount>=2){
+            Bukkit.getPlayer(players.get(1)).teleport(new Location(world,8.5,-58,-66.5,0,0));
+            Bukkit.getPlayer(players.get(1)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
+        }
+        if(playerCount>=3){
+            Bukkit.getPlayer(players.get(2)).teleport(new Location(world,44.5,-58,-30,90,0));
+            Bukkit.getPlayer(players.get(2)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
+        }
+        if(playerCount>=4){
+            Bukkit.getPlayer(players.get(3)).teleport(new Location(world,-27.5,-58,-30.5,-90,0));
+            Bukkit.getPlayer(players.get(3)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
+        }
+        fillChest(new Location(world, -33,-58,-34));
+        fillChest(new Location(world,-29,-58,-29));
+        fillChest(new Location(world, -18,-58,-32));
+        fillChest(new Location(world, 6,-58,-68));
+        fillChest(new Location(world,  11,-58,-72));
+        fillChest(new Location(world,  9,-58,-57));
+        fillChest(new Location(world,  45,-58,-33));
+        fillChest(new Location(world,  49,-58,-28));
+        fillChest(new Location(world,  34,-58,-30));
+        fillChest(new Location(world,  10,-58,6));
+        fillChest(new Location(world, 5,-58,10));
+        fillChest(new Location(world, 7,-58,-5));
+        fillChest(new Location(world,  8,-58,-29));
+        fillChest(new Location(world,  6,-58,-31));
+        fillChest(new Location(world,  8,-58,-33));
+        fillChest(new Location(world,  10,-58,-31));
+        world.setTime(15000);
+
+        for(int i = 0;i<players.size();i++){
+            Player player = Bukkit.getPlayer(players.get(i));
+            player.getInventory().clear();
+            player.setGameMode(GameMode.SURVIVAL);
+
+            ItemStack stone = new ItemStack(Material.STONE);
+            stone.setAmount(64);
+            player.getInventory().clear();
+            player.getInventory().setItem(8, stone);
+
+            player.setLevel(0);
+            player.setExp(0);
+            player.sendTitle(ChatColor.GREEN+"Skywars  SOLO",ChatColor.RED+"Teamen ist verboten.");
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,((MatchCooldown*20)+80),255));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,((MatchCooldown*20)+80),255));
+        }
+        MatchCooldown+=4;
+        TaskID = Bukkit.getScheduler().scheduleAsyncRepeatingTask(Main.getPlugin(), () -> {
+            if(MatchCooldown!=0){
+                MatchCooldown--;
+                if(MatchCooldown<=5){
+                    for(int i = 0;i<world.getPlayers().size();i++){
+                        world.getPlayers().get(i).sendMessage(ChatColor.GREEN+"Match started in: "+MatchCooldown);
+                    }
+                }
+            }else{
+                for(int i = 0;i<world.getPlayers().size();i++){
+                    world.getPlayers().get(i).sendMessage(ChatColor.GREEN+"GO");
+                    world.getPlayers().get(i).setHealth(20);
+                    world.getPlayers().get(i).setFoodLevel(20);
+                    world.getPlayers().get(i).playSound(world.getPlayers().get(i).getLocation(),Sound.ENTITY_EXPERIENCE_ORB_PICKUP,30,10);
+                    new SkywarsScoreboardManager(world.getName(), players);
+                }
+                Bukkit.getScheduler().cancelTask(TaskID);
+            }
+        },0,20);
+    }
+
+    public void initSkywars5(ArrayList<UUID> players, World world){
+        int playerCount = players.size();
+        System.out.println(playerCount);
+        if(playerCount>=1){
+            Bukkit.getPlayer(players.get(0)).teleport(new Location(world,45.5,-58,-30.5,90,0));
+            Bukkit.getPlayer(players.get(0)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
+        }
+        if(playerCount>=2){
+            Bukkit.getPlayer(players.get(1)).teleport(new Location(world,-28.5,-58,-30.5,-90,0));
+            Bukkit.getPlayer(players.get(1)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
+        }
+        fillChest(new Location(world, -33,-58,-34));
+        fillChest(new Location(world,-29,-58,-29));
+        fillChest(new Location(world, -18,-58,-32));
+        fillChest(new Location(world, 6,-58,-31));
+        fillChest(new Location(world,  8,-58,-33));
+        fillChest(new Location(world,  10,-58,-31));
+        fillChest(new Location(world,  8,-58,-29));
+        fillChest(new Location(world,  34,-58,-30));
+        fillChest(new Location(world,  45,-58,-33));
+        fillChest(new Location(world,  49,-58,-28));
+        world.setTime(15000);
+
+        for(int i = 0;i<players.size();i++){
+            Player player = Bukkit.getPlayer(players.get(i));
+            player.getInventory().clear();
+            player.setGameMode(GameMode.SURVIVAL);
+
+            ItemStack stone = new ItemStack(Material.STONE);
+            stone.setAmount(64);
+            player.getInventory().clear();
+            player.getInventory().setItem(8, stone);
+
+            player.setLevel(0);
+            player.setExp(0);
+            player.sendTitle(ChatColor.GREEN+"Skywars  SOLO",ChatColor.RED+"Teamen ist verboten.");
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,((MatchCooldown*20)+80),255));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,((MatchCooldown*20)+80),255));
+        }
+        MatchCooldown+=4;
+        TaskID = Bukkit.getScheduler().scheduleAsyncRepeatingTask(Main.getPlugin(), () -> {
+            if(MatchCooldown!=0){
+                MatchCooldown--;
+                if(MatchCooldown<=5){
+                    for(int i = 0;i<world.getPlayers().size();i++){
+                        world.getPlayers().get(i).sendMessage(ChatColor.GREEN+"Match started in: "+MatchCooldown);
+                    }
+                }
+            }else{
+                for(int i = 0;i<world.getPlayers().size();i++){
+                    world.getPlayers().get(i).sendMessage(ChatColor.GREEN+"GO");
+                    world.getPlayers().get(i).setHealth(20);
+                    world.getPlayers().get(i).setFoodLevel(20);
+                    world.getPlayers().get(i).playSound(world.getPlayers().get(i).getLocation(),Sound.ENTITY_EXPERIENCE_ORB_PICKUP,30,10);
+                    new SkywarsScoreboardManager(world.getName(), players);
+                }
+                Bukkit.getScheduler().cancelTask(TaskID);
+            }
+        },0,20);
+    }
+
     public void copyWorld(File source, File target){
         try {
             ArrayList<String> ignore = new ArrayList<String>(Arrays.asList("uid.dat", "session.dat"));
@@ -400,6 +542,9 @@ public class SkywarsWorldInitialer {
         itemPool.add(apple);
         ItemStack arrow = new ItemStack(Material.ARROW);
         arrow.setAmount(8);
+        ItemStack oak_logs = new ItemStack(Material.OAK_LOG);
+        oak_logs.setAmount(4);
+        itemPool.add(oak_logs);
         itemPool.add(arrow);
         ItemStack stone = new ItemStack(Material.STONE);
         stone.setAmount(32);
@@ -407,6 +552,9 @@ public class SkywarsWorldInitialer {
         ItemStack cobweps = new ItemStack(Material.COBWEB);
         cobweps.setAmount(3);
         itemPool.add(cobweps);
+        Potion instantDamagePotion = new Potion(PotionType.INSTANT_DAMAGE,1);
+        instantDamagePotion.setSplash(true);
+        itemPool.add(instantDamagePotion.toItemStack(1));
 
 
         int random = (int) Math.floor((Math.random()*(itemPool.size()-1))+1);

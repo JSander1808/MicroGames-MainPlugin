@@ -35,7 +35,7 @@ public class PlayerInteractListener implements Listener {
                     }
                 }
             }catch(Exception e){}
-            if(event.getClickedBlock() == null){
+            try{
                 if(event.getItem()!=null){
                     switch(event.getItem().getType()){
                         case COMPASS:
@@ -43,33 +43,41 @@ public class PlayerInteractListener implements Listener {
                             break;
                     }
                 }
-            }else{
-                try{
-                    if(event.getClickedBlock().getType()==Material.SPRUCE_WALL_SIGN){
-                        System.out.println("debugtest");
-                        org.bukkit.block.Sign sign = (Sign) event.getClickedBlock().getState();
-                        if(sign.getLine(0).equalsIgnoreCase(ChatColor.GOLD+"Skywars")){
-                            if(sign.getLine(1).equalsIgnoreCase(ChatColor.GREEN+"Server 1")){
-                                Matchmaking.addPlayerToMatchmaking(player, "skywarsServer1");
-                                System.out.println("debug");
-                            }
-                            if(sign.getLine(1).equalsIgnoreCase(ChatColor.GREEN+"Server 2")){
-                                Matchmaking.addPlayerToMatchmaking(player, "skywarsServer2");
-                            }
-                            if(sign.getLine(1).equalsIgnoreCase(ChatColor.GREEN+"Server 3")){
-                                Matchmaking.addPlayerToMatchmaking(player, "skywarsServer3");
-                            }
-                            if(sign.getLine(1).equalsIgnoreCase(ChatColor.GREEN+"Server 4")){
-                                Matchmaking.addPlayerToMatchmaking(player, "skywarsServer4");
-                            }
+            }catch(Exception e){}
+            try{
+                if(event.getClickedBlock().getType()==Material.SPRUCE_WALL_SIGN){
+                    org.bukkit.block.Sign sign = (Sign) event.getClickedBlock().getState();
+                    if(sign.getLine(0).equalsIgnoreCase(ChatColor.GOLD+"Skywars")){
+                        if(sign.getLine(1).equalsIgnoreCase(ChatColor.GREEN+"Server 1 | SOLO")){
+                            Matchmaking.addPlayerToMatchmaking(player, "skywarsServer1");
                         }
-                    } else if (event.getClickedBlock().getType()==Material.ENDER_CHEST||event.getClickedBlock().getType()==Material.OAK_DOOR||event.getClickedBlock().getType()==Material.ANVIL||event.getClickedBlock().getType()==Material.FURNACE||event.getClickedBlock().getType()==Material.ENCHANTING_TABLE||event.getClickedBlock().getType()==Material.OAK_TRAPDOOR||event.getClickedBlock().getType()==Material.SPRUCE_TRAPDOOR) {
-                        event.setCancelled(true);
+                        if(sign.getLine(1).equalsIgnoreCase(ChatColor.GREEN+"Server 2 | SOLO")){
+                            Matchmaking.addPlayerToMatchmaking(player, "skywarsServer2");
+                        }
+                        if(sign.getLine(1).equalsIgnoreCase(ChatColor.GREEN+"Server 3 | SOLO")){
+                            Matchmaking.addPlayerToMatchmaking(player, "skywarsServer3");
+                        }
+                        if(sign.getLine(1).equalsIgnoreCase(ChatColor.GREEN+"Server 4 | SOLO")){
+                            Matchmaking.addPlayerToMatchmaking(player, "skywarsServer4");
+                        }
+                    }else if(sign.getLine(0).equalsIgnoreCase(ChatColor.GOLD+"Bedwars")){
+                        if(sign.getLine(1).equalsIgnoreCase(ChatColor.GREEN+"Server 1 | SOLO")){
+                            Matchmaking.addPlayerToMatchmaking(player, "bedwarsServer1");
+                        }
+                        if(sign.getLine(1).equalsIgnoreCase(ChatColor.GREEN+"Server 2 | SOLO")){
+                            Matchmaking.addPlayerToMatchmaking(player, "bedwarsServer2");
+                        }
+                        if(sign.getLine(1).equalsIgnoreCase(ChatColor.GREEN+"Server 3 | DUO")){
+                            Matchmaking.addPlayerToMatchmaking(player, "bedwarsServer3");
+                        }
+                        if(sign.getLine(1).equalsIgnoreCase(ChatColor.GREEN+"Server 4 | TEAM")){
+                            Matchmaking.addPlayerToMatchmaking(player, "bedwarsServer4");
+                        }
                     }
-                }catch(Exception e){
-                    e.printStackTrace();
+                } else if (event.getClickedBlock().getType()==Material.ENDER_CHEST||event.getClickedBlock().getType()==Material.OAK_DOOR||event.getClickedBlock().getType()==Material.ANVIL||event.getClickedBlock().getType()==Material.FURNACE||event.getClickedBlock().getType()==Material.ENCHANTING_TABLE||event.getClickedBlock().getType()==Material.OAK_TRAPDOOR||event.getClickedBlock().getType()==Material.SPRUCE_TRAPDOOR) {
+                    event.setCancelled(true);
                 }
-            }
+            }catch(Exception e){}
         }
     }
 }

@@ -23,7 +23,6 @@ public class Lootbox {
     }
 
     public void openLootBox(Player player){
-
         player.sendMessage(ChatColor.RED+"Lootboxen sind noch nicht verfügbar.");
     }
 

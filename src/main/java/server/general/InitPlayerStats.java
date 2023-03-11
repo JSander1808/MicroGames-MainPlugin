@@ -24,6 +24,20 @@ public class InitPlayerStats {
             }
         }
 
+        File bedwarsRankFile = new File("gamestats/bedwars/"+player.getName()+".conf");
+        if(!bedwarsRankFile.exists()){
+            try {
+                bedwarsRankFile.createNewFile();
+                PrintWriter writer = new PrintWriter(bedwarsRankFile);
+                writer.write("0");
+                writer.flush();
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         Config playerConfig = new Config("playerstats/"+player.getName()+".conf");
         playerConfig.init();
         if(!playerConfig.existdata("coins")){

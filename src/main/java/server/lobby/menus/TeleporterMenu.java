@@ -3,6 +3,7 @@ package server.lobby.menus;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -25,7 +26,7 @@ public class TeleporterMenu {
         ItemMeta bedwarsMeta = bedwars.getItemMeta();
         bedwarsMeta.setDisplayName(ChatColor.GOLD+"Bedwars");
         ArrayList bedwarsLore = new ArrayList();
-        bedwarsLore.add(ChatColor.RED+"Nicht Erreichbar");
+        bedwarsLore.add(ChatColor.GREEN+"Erreichbar");
         bedwarsMeta.setLore(bedwarsLore);
         bedwars.setItemMeta(bedwarsMeta);
 
@@ -37,15 +38,34 @@ public class TeleporterMenu {
         skywarsMeta.setLore(skywarsLore);
         skywars.setItemMeta(skywarsMeta);
 
+        ItemStack stickBattle = new ItemStack(Material.STICK);
+        ItemMeta stickBattleMeta = stickBattle.getItemMeta();
+        stickBattleMeta.setDisplayName(ChatColor.GOLD+"Stick-Battle");
+        stickBattleMeta.addEnchant(Enchantment.KNOCKBACK,5,true);
+        ArrayList stickBattleLore = new ArrayList();
+        stickBattleLore.add(ChatColor.RED+"Nicht Erreichbar");
+        stickBattleMeta.setLore(stickBattleLore);
+        stickBattle.setItemMeta(stickBattleMeta);
+
+        ItemStack tntRun = new ItemStack(Material.TNT);
+        ItemMeta tntRunMeta = tntRun.getItemMeta();
+        tntRunMeta.setDisplayName(ChatColor.GOLD+"TNT-Run");
+        ArrayList tntRunLore = new ArrayList();
+        tntRunLore.add(ChatColor.RED+"Nicht Erreichbar");
+        tntRunMeta.setLore(tntRunLore);
+        tntRun.setItemMeta(tntRunMeta);
+
         ItemStack close = new ItemStack(Material.BARRIER);
         ItemMeta closeMeta = close.getItemMeta();
         closeMeta.setDisplayName(ChatColor.RED+"Schließen");
         close.setItemMeta(closeMeta);
 
         Inventory inv = Bukkit.createInventory(null,3*9,ChatColor.GOLD+"Teleporter");
-        inv.setItem(12,spawn);
-        inv.setItem(13,bedwars);
-        inv.setItem(14,skywars);
+        inv.setItem(11,spawn);
+        inv.setItem(12,bedwars);
+        inv.setItem(13,skywars);
+        inv.setItem(14,stickBattle);
+        inv.setItem(15, tntRun);
         inv.setItem(26,close);
 
         player.openInventory(inv);

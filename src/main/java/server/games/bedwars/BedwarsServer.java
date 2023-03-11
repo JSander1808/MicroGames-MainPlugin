@@ -1,16 +1,16 @@
-package server.games.skywars;
+package server.games.bedwars;
+
+import server.games.skywars.SkywarsServer;
 
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.UUID;
 
-public class SkywarsServer {
+public class BedwarsServer {
 
     private int maxplayer;
     private File worldFolder;
 
-    public SkywarsServer(int maxplayer, File worldFolder){
+    public BedwarsServer(int maxplayer, File worldFolder){
         this.maxplayer=maxplayer;
         this.worldFolder=worldFolder;
     }
@@ -22,14 +22,14 @@ public class SkywarsServer {
     public void setWorldFolder(File wordFolder) {
         this.worldFolder = wordFolder;
     }
-    public static ArrayList<SkywarsServer> getServerByMaxPlayer(ArrayList<SkywarsServer> servers, int maxPlayer){
-        ArrayList<SkywarsServer> skywarsServers = new ArrayList<SkywarsServer>();
+    public static ArrayList<BedwarsServer> getServerByMaxPlayer(ArrayList<BedwarsServer> servers, int maxPlayer){
+        ArrayList<BedwarsServer> bedwarsServers = new ArrayList<BedwarsServer>();
         for(int i = 0;i< servers.size();i++){
             if(servers.get(i).getMaxplayer()>=maxPlayer){
-                skywarsServers.add(servers.get(i));
+                bedwarsServers.add(servers.get(i));
             }
         }
-        return skywarsServers;
+        return bedwarsServers;
     }
 
     public int getMaxplayer() {

@@ -31,8 +31,10 @@ public class SkywarsManager {
                 for(int i = 0;i<playerCount;i++){
                     Player player = world.getPlayers().get(0);
                     if(Bukkit.getPlayer(winner)!=player){
-                        player.sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"5 Coins "+ChatColor.BLUE+"für das mitspielen erhalten.");
-                        Coins.addCoins(player,5);
+                        if(!Matchmaking.skywarsServer1Spectator.contains(player.getUniqueId())){
+                            player.sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"5 Coins "+ChatColor.BLUE+"für das mitspielen erhalten.");
+                            Coins.addCoins(player,5);
+                        }
                     }
                     System.out.println(player.getName());
                     Location spawnLocation = new Location(Bukkit.getWorld("world"),8.5,-58,8.5,180,0);
@@ -69,6 +71,7 @@ public class SkywarsManager {
                     Inventory inv = player.getInventory();
                     inv.setItem(0,teleporter);
                     Matchmaking.removePlayerFromMatchmaking(player);
+                    Matchmaking.removePlayerFromSpectator(player);
                 }
                 Matchmaking.skywarsServer1Running=false;
             }
@@ -84,8 +87,10 @@ public class SkywarsManager {
                 for(int i = 0;i<playerCount;i++){
                     Player player = world.getPlayers().get(0);
                     if(Bukkit.getPlayer(winner)!=player){
-                        player.sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"5 Coins "+ChatColor.BLUE+"für das mitspielen erhalten.");
-                        Coins.addCoins(player,5);
+                        if(!Matchmaking.skywarsServer2Spectator.contains(player.getUniqueId())){
+                            player.sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"5 Coins "+ChatColor.BLUE+"für das mitspielen erhalten.");
+                            Coins.addCoins(player,5);
+                        }
                     }
                     Location spawnLocation = new Location(Bukkit.getWorld("world"),8.5,-58,8.5,180,0);
                     player.teleport(spawnLocation);
@@ -121,6 +126,7 @@ public class SkywarsManager {
                     Inventory inv = player.getInventory();
                     inv.setItem(0,teleporter);
                     Matchmaking.removePlayerFromMatchmaking(player);
+                    Matchmaking.removePlayerFromSpectator(player);
                 }
             }
         }else if(server.equalsIgnoreCase("GameServer/Skywars/Server3/server/")){
@@ -135,8 +141,10 @@ public class SkywarsManager {
                 for(int i = 0;i<playerCount;i++){
                     Player player = world.getPlayers().get(0);
                     if(Bukkit.getPlayer(winner)!=player){
-                        player.sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"5 Coins "+ChatColor.BLUE+"für das mitspielen erhalten.");
-                        Coins.addCoins(player,5);
+                        if(!Matchmaking.skywarsServer3Spectator.contains(player.getUniqueId())){
+                            player.sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"5 Coins "+ChatColor.BLUE+"für das mitspielen erhalten.");
+                            Coins.addCoins(player,5);
+                        }
                     }
                     Location spawnLocation = new Location(Bukkit.getWorld("world"),8.5,-58,8.5,180,0);
                     player.teleport(spawnLocation);
@@ -172,6 +180,7 @@ public class SkywarsManager {
                     Inventory inv = player.getInventory();
                     inv.setItem(0,teleporter);
                     Matchmaking.removePlayerFromMatchmaking(player);
+                    Matchmaking.removePlayerFromSpectator(player);
                 }
             }
         }else if(server.equalsIgnoreCase("GameServer/Skywars/Server4/server/")){
@@ -186,8 +195,10 @@ public class SkywarsManager {
                 for(int i = 0;i<playerCount;i++){
                     Player player = world.getPlayers().get(0);
                     if(Bukkit.getPlayer(winner)!=player){
-                        player.sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"5 Coins "+ChatColor.BLUE+"für das mitspielen erhalten.");
-                        Coins.addCoins(player,5);
+                        if(!Matchmaking.skywarsServer4Spectator.contains(player.getUniqueId())){
+                            player.sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"5 Coins "+ChatColor.BLUE+"für das mitspielen erhalten.");
+                            Coins.addCoins(player,5);
+                        }
                     }
                     Location spawnLocation = new Location(Bukkit.getWorld("world"),8.5,-58,8.5,180,0);
                     player.teleport(spawnLocation);
@@ -224,6 +235,7 @@ public class SkywarsManager {
                     inv.setItem(0,teleporter);
 
                     Matchmaking.removePlayerFromMatchmaking(player);
+                    Matchmaking.removePlayerFromSpectator(player);
                 }
             }
         }
