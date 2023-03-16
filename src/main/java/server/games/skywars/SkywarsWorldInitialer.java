@@ -1,16 +1,19 @@
 package server.games.skywars;
 
+import net.md_5.bungee.api.chat.hover.content.Item;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
+import server.general.Config;
 import server.main.Main;
 
 import java.io.*;
@@ -50,7 +53,6 @@ public class SkywarsWorldInitialer {
 
     public void initSkywars1(ArrayList<UUID> players, World world){
         int playerCount = players.size();
-        System.out.println(playerCount);
         if(playerCount>=1){
             Bukkit.getPlayer(players.get(0)).teleport(new Location(world,57.5,118,56.5,180,0));
             Bukkit.getPlayer(players.get(0)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
@@ -128,6 +130,7 @@ public class SkywarsWorldInitialer {
             player.sendTitle(ChatColor.GREEN+"Skywars  SOLO",ChatColor.RED+"Teamen ist verboten.");
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,((MatchCooldown*20)+80),255));
             player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,((MatchCooldown*20)+80),255));
+            getKitItems(player);
         }
         MatchCooldown+=4;
         TaskID = Bukkit.getScheduler().scheduleAsyncRepeatingTask(Main.getPlugin(), () -> {
@@ -153,7 +156,6 @@ public class SkywarsWorldInitialer {
 
     public void initSkywars2(ArrayList<UUID> players, World world){
         int playerCount = players.size();
-        System.out.println(playerCount);
         if(playerCount>=1){
             Bukkit.getPlayer(players.get(0)).teleport(new Location(world,21.5,-29,22.5,0,0));
             Bukkit.getPlayer(players.get(0)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
@@ -207,6 +209,7 @@ public class SkywarsWorldInitialer {
             player.sendTitle(ChatColor.GREEN+"Skywars  SOLO",ChatColor.RED+"Teamen ist verboten.");
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,((MatchCooldown*20)+80),255));
             player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,((MatchCooldown*20)+80),255));
+            getKitItems(player);
         }
         MatchCooldown+=4;
         TaskID = Bukkit.getScheduler().scheduleAsyncRepeatingTask(Main.getPlugin(), () -> {
@@ -234,7 +237,6 @@ public class SkywarsWorldInitialer {
 
     public void initSkywars3(ArrayList<UUID> players, World world){
         int playerCount = players.size();
-        System.out.println(playerCount);
         if(playerCount>=1){
             Bukkit.getPlayer(players.get(0)).teleport(new Location(world,8.5,-33,-101.5,0,0));
             Bukkit.getPlayer(players.get(0)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
@@ -288,6 +290,7 @@ public class SkywarsWorldInitialer {
             player.sendTitle(ChatColor.GREEN+"Skywars  SOLO",ChatColor.RED+"Teamen ist verboten.");
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,((MatchCooldown*20)+80),255));
             player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,((MatchCooldown*20)+80),255));
+            getKitItems(player);
         }
         MatchCooldown+=4;
         TaskID = Bukkit.getScheduler().scheduleAsyncRepeatingTask(Main.getPlugin(), () -> {
@@ -313,7 +316,6 @@ public class SkywarsWorldInitialer {
 
     public void initSkywars4(ArrayList<UUID> players, World world){
         int playerCount = players.size();
-        System.out.println(playerCount);
         if(playerCount>=1){
             Bukkit.getPlayer(players.get(0)).teleport(new Location(world,8.5,-58,6.5,180,0));
             Bukkit.getPlayer(players.get(0)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
@@ -363,6 +365,7 @@ public class SkywarsWorldInitialer {
             player.sendTitle(ChatColor.GREEN+"Skywars  SOLO",ChatColor.RED+"Teamen ist verboten.");
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,((MatchCooldown*20)+80),255));
             player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,((MatchCooldown*20)+80),255));
+            getKitItems(player);
         }
         MatchCooldown+=4;
         TaskID = Bukkit.getScheduler().scheduleAsyncRepeatingTask(Main.getPlugin(), () -> {
@@ -388,7 +391,6 @@ public class SkywarsWorldInitialer {
 
     public void initSkywars5(ArrayList<UUID> players, World world){
         int playerCount = players.size();
-        System.out.println(playerCount);
         if(playerCount>=1){
             Bukkit.getPlayer(players.get(0)).teleport(new Location(world,45.5,-58,-30.5,90,0));
             Bukkit.getPlayer(players.get(0)).setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
@@ -424,6 +426,7 @@ public class SkywarsWorldInitialer {
             player.sendTitle(ChatColor.GREEN+"Skywars  SOLO",ChatColor.RED+"Teamen ist verboten.");
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,((MatchCooldown*20)+80),255));
             player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,((MatchCooldown*20)+80),255));
+            getKitItems(player);
         }
         MatchCooldown+=4;
         TaskID = Bukkit.getScheduler().scheduleAsyncRepeatingTask(Main.getPlugin(), () -> {
@@ -585,5 +588,146 @@ public class SkywarsWorldInitialer {
         itemPool.add(new ItemStack(Material.GOLDEN_APPLE));
         int random = (int) Math.floor((Math.random()*(itemPool.size()-1))+1);
         return itemPool.get(random);
+    }
+
+    public void givePlayerItem(Player player, ItemStack item){
+        player.getInventory().addItem(item);
+    }
+
+    public void getKitItems(Player player){
+        Config playerConfig = new Config("playerstats/"+player.getName()+".conf");
+        if(playerConfig.get("kits.skywars.active").equalsIgnoreCase("sprengmeister")){
+            ItemStack tnt = new ItemStack(Material.TNT);
+            tnt.setAmount(5);
+            givePlayerItem(player,tnt);
+            givePlayerItem(player, new ItemStack(Material.FLINT_AND_STEEL));
+        }else if(playerConfig.get("kits.skywars.active").equalsIgnoreCase("maurer")){
+            ItemStack bricks = new ItemStack(Material.BRICKS);
+            bricks.setAmount(64);
+            givePlayerItem(player, bricks);
+            givePlayerItem(player, new ItemStack(Material.GOLDEN_HELMET));
+        }else if(playerConfig.get("kits.skywars.active").equalsIgnoreCase("grillmeister")){
+            ItemStack steak = new ItemStack(Material.COOKED_BEEF);
+            steak.setAmount(32);
+            givePlayerItem(player,steak);
+            ItemStack chicken = new ItemStack(Material.COOKED_CHICKEN);
+            chicken.setAmount(32);
+            givePlayerItem(player,chicken);
+            givePlayerItem(player, new ItemStack(Material.FLINT_AND_STEEL));
+            ItemStack furnace = new ItemStack(Material.FURNACE);
+            furnace.setAmount(12);
+            givePlayerItem(player,furnace);
+        }else if(playerConfig.get("kits.skywars.active").equalsIgnoreCase("zauberer")){
+            givePlayerItem(player, new ItemStack(Material.ENCHANTING_TABLE));
+            ItemStack xpbottles = new ItemStack(Material.EXPERIENCE_BOTTLE);
+            xpbottles.setAmount(32);
+            givePlayerItem(player,xpbottles);
+        }else if(playerConfig.get("kits.skywars.active").equalsIgnoreCase("crafter")){
+            ItemStack craftingtables = new ItemStack(Material.CRAFTING_TABLE);
+            craftingtables.setAmount(64);
+            givePlayerItem(player,craftingtables);
+            ItemStack anvils = new ItemStack(Material.ANVIL);
+            anvils.setAmount(32);
+            givePlayerItem(player, anvils);
+            ItemStack sticks = new ItemStack(Material.STICK);
+            sticks.setAmount(64);
+            givePlayerItem(player, sticks);
+            ItemStack iron = new ItemStack(Material.IRON_INGOT);
+            iron.setAmount(5);
+            ItemStack coal = new ItemStack(Material.COAL);
+            coal.setAmount(5);
+            ItemStack dia = new ItemStack(Material.DIAMOND);
+            dia.setAmount(5);
+            givePlayerItem(player,iron);
+            givePlayerItem(player, coal);
+            givePlayerItem(player,dia);
+        }else if(playerConfig.get("kits.skywars.active").equalsIgnoreCase("tank")){
+            givePlayerItem(player,new ItemStack(Material.IRON_HELMET));
+            givePlayerItem(player,new ItemStack(Material.IRON_CHESTPLATE));
+            givePlayerItem(player,new ItemStack(Material.IRON_LEGGINGS));
+            givePlayerItem(player,new ItemStack(Material.IRON_BOOTS));
+        }else if(playerConfig.get("kits.skywars.active").equalsIgnoreCase("assasine")){
+            givePlayerItem(player, new ItemStack(Material.DIAMOND_BOOTS));
+            givePlayerItem(player, new ItemStack(Material.DIAMOND_SWORD));
+        }else if(playerConfig.get("kits.skywars.active").equalsIgnoreCase("pirat")){
+            givePlayerItem(player, new ItemStack(Material.GOLDEN_SWORD));
+            ItemStack dispenser = new ItemStack(Material.DISPENSER);
+            dispenser.setAmount(3);
+            givePlayerItem(player, dispenser);
+            ItemStack fire = new ItemStack(Material.FIRE_CHARGE);
+            fire.setAmount(16);
+            givePlayerItem(player,fire);
+            ItemStack lever = new ItemStack(Material.LEVER);
+            lever.setAmount(3);
+            givePlayerItem(player,lever);
+        }else if(playerConfig.get("kits.skywars.active").equalsIgnoreCase("miner")){
+            givePlayerItem(player, new ItemStack(Material.DIAMOND_PICKAXE));
+            givePlayerItem(player, new ItemStack(Material.IRON_HELMET));
+        }else if(playerConfig.get("kits.skywars.active").equalsIgnoreCase("bauer")){
+            ItemStack haybale = new ItemStack(Material.HAY_BLOCK);
+            haybale.setAmount(64);
+            givePlayerItem(player, haybale);
+            ItemStack bread = new ItemStack(Material.BREAD);
+            bread.setAmount(16);
+            givePlayerItem(player, bread);
+            givePlayerItem(player, new ItemStack(Material.IRON_HOE));
+        }else if(playerConfig.get("kits.skywars.active").equalsIgnoreCase("schneeman")){
+            ItemStack snowball = new ItemStack(Material.SNOWBALL);
+            snowball.setAmount(16);
+            givePlayerItem(player,snowball);
+        }else if(playerConfig.get("kits.skywars.active").equalsIgnoreCase("angler")){
+            givePlayerItem(player, new ItemStack(Material.FISHING_ROD));
+            ItemStack fish = new ItemStack(Material.COOKED_COD);
+            fish.setAmount(20);
+            givePlayerItem(player,fish);
+        }else if(playerConfig.get("kits.skywars.active").equalsIgnoreCase("enderman")){
+            givePlayerItem(player, new ItemStack(Material.ENDER_PEARL));
+        }else if(playerConfig.get("kits.skywars.active").equalsIgnoreCase("geizhals")){
+            givePlayerItem(player, new ItemStack(Material.GOLDEN_APPLE));
+        }else if(playerConfig.get("kits.skywars.active").equalsIgnoreCase("bogenmeister")){
+            givePlayerItem(player, new ItemStack(Material.BOW));
+            ItemStack arrows = new ItemStack(Material.ARROW);
+            arrows.setAmount(8);
+            givePlayerItem(player, arrows);
+        }else if(playerConfig.get("kits.skywars.active").equalsIgnoreCase("spinne")){
+            ItemStack cobweb = new ItemStack(Material.COBWEB);
+            cobweb.setAmount(5);
+            givePlayerItem(player,cobweb);
+            Potion instantDamage = new Potion(PotionType.INSTANT_DAMAGE,1);
+            instantDamage.setSplash(true);
+            givePlayerItem(player, instantDamage.toItemStack(1));
+        }else if(playerConfig.get("kits.skywars.active").equalsIgnoreCase("ritter")){
+            givePlayerItem(player,new ItemStack(Material.IRON_SWORD));
+            givePlayerItem(player,new ItemStack(Material.IRON_AXE));
+        }else if(playerConfig.get("kits.skywars.active").equalsIgnoreCase("sensenman")){
+            givePlayerItem(player, new ItemStack(Material.DIAMOND_HOE));
+            ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
+            ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
+            ItemStack leggings = new ItemStack(Material.LEATHER_LEGGINGS);
+            ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
+            LeatherArmorMeta helmetMeta = (LeatherArmorMeta) helmet.getItemMeta();
+            helmetMeta.setColor(Color.BLACK);
+            helmet.setItemMeta(helmetMeta);
+            LeatherArmorMeta chestplateMeta = (LeatherArmorMeta) chestplate.getItemMeta();
+            chestplateMeta.setColor(Color.BLACK);
+            chestplate.setItemMeta(chestplateMeta);
+            LeatherArmorMeta leggingsMeta = (LeatherArmorMeta) leggings.getItemMeta();
+            leggingsMeta.setColor(Color.BLACK);
+            leggings.setItemMeta(chestplateMeta);
+            LeatherArmorMeta bootsMeta = (LeatherArmorMeta) boots.getItemMeta();
+            bootsMeta.setColor(Color.BLACK);
+            boots.setItemMeta(bootsMeta);
+            givePlayerItem(player,helmet);
+            givePlayerItem(player,chestplate);
+            givePlayerItem(player,leggings);
+            givePlayerItem(player,boots);
+            Potion fast = new Potion(PotionType.SPEED,1);
+            fast.setSplash(true);
+            givePlayerItem(player,fast.toItemStack(1));
+        }else if(playerConfig.get("kits.skywars.active").equalsIgnoreCase("starter")){
+            givePlayerItem(player, new ItemStack(Material.WOODEN_SWORD));
+            givePlayerItem(player, new ItemStack(Material.WOODEN_PICKAXE));
+            givePlayerItem(player, new ItemStack(Material.WOODEN_AXE));
+        }
     }
 }

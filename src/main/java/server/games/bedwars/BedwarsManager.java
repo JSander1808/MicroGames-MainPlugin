@@ -7,8 +7,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.scoreboard.Scoreboard;
-import server.games.skywars.SkywarsWinnManager;
-import server.lobby.general.Coins;
+import server.general.Coins;
+import server.general.Level;
 import server.lobby.general.Matchmaking;
 
 import java.util.Calendar;
@@ -20,26 +20,29 @@ public class BedwarsManager {
             if(server.equalsIgnoreCase("GameServer/Bedwars/Server1/server/")){
                 World world = Bukkit.getWorld("GameServer/Bedwars/Server1/server/");
                 int playerCount = world.getPlayers().size();
-                BedwarsWinnManager.addWin(Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(0)));
-                Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(0)).sendMessage(ChatColor.BLUE+"Bedwars Siege: "+ChatColor.GREEN+"+1");
-                String winner = Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(0)).getName();
-                Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(0)).sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"15 Coins "+ChatColor.BLUE+"für das Gewinnen der Runde bekommen.");
-                Coins.addCoins(Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(0)).getPlayer(),15);
+                StringBuilder winnerMessage = new StringBuilder();
+                for(int i = 0;i<Matchmaking.bedwarsServer1.size();i++){
+                    BedwarsWinnManager.addWin(Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(i)));
+                    Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(i)).sendMessage(ChatColor.BLUE+"Bedwars Siege: "+ChatColor.GREEN+"+1");
+                    String winner = Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(i)).getName();
+                    Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(i)).sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"15 Coins "+ChatColor.BLUE+"für das Gewinnen der Runde bekommen.");
+                    Coins.addCoins(Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(i)).getPlayer(),15);
+                    Level.addXp(Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(i)).getPlayer(),20);
+                    winnerMessage.append(Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(i)).getName()).append("  ");
+                }
                 for(int i = 0;i<playerCount;i++){
                     Player player = world.getPlayers().get(0);
-                    if(Bukkit.getPlayer(winner)!=player){
+                    if(!Matchmaking.bedwarsServer1.contains(player.getUniqueId())){
                         if(!Matchmaking.bedwarsServer1Spectator.contains(player.getUniqueId())){
-                            player.sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"5 Coins "+ChatColor.BLUE+"für das mitspielen erhalten.");
-                            Coins.addCoins(player,5);
+                            Level.addXp(player, 5);
                         }
                     }
-                    System.out.println(player.getName());
                     Location spawnLocation = new Location(Bukkit.getWorld("world"),8.5,-58,8.5,180,0);
                     player.teleport(spawnLocation);
                     player.getInventory().clear();
                     player.setMaxHealth(20);
                     player.setHealth(20);
-                    player.sendTitle(ChatColor.BLUE+""+winner,ChatColor.GOLD+"Hat Gewonnen");
+                    player.sendTitle(ChatColor.BLUE+"Gewonnen hat",ChatColor.GOLD+""+winnerMessage);
                     player.setFoodLevel(20);
                     player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
                     player.setGameMode(GameMode.ADVENTURE);
@@ -65,8 +68,14 @@ public class BedwarsManager {
                     teleporterMeta.setDisplayName(ChatColor.GOLD+"Teleporter");
                     teleporter.setItemMeta(teleporterMeta);
 
+                    ItemStack kits = new ItemStack(Material.CHEST);
+                    ItemMeta kitsMeta = kits.getItemMeta();
+                    kitsMeta.setDisplayName(ChatColor.GOLD+"Kit Menu");
+                    kits.setItemMeta(kitsMeta);
+
                     Inventory inv = player.getInventory();
                     inv.setItem(0,teleporter);
+                    inv.setItem(4,kits);
                     Matchmaking.removePlayerFromMatchmaking(player);
                     Matchmaking.removePlayerFromSpectator(player);
                 }
@@ -74,26 +83,29 @@ public class BedwarsManager {
             }else if(server.equalsIgnoreCase("GameServer/Bedwars/Server2/server/")){
                 World world = Bukkit.getWorld("GameServer/Bedwars/Server2/server/");
                 int playerCount = world.getPlayers().size();
-                BedwarsWinnManager.addWin(Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(0)));
-                Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(0)).sendMessage(ChatColor.BLUE+"Bedwars Siege: "+ChatColor.GREEN+"+1");
-                String winner = Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(0)).getName();
-                Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(0)).sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"15 Coins "+ChatColor.BLUE+"für das Gewinnen der Runde bekommen.");
-                Coins.addCoins(Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(0)).getPlayer(),15);
+                StringBuilder winnerMessage = new StringBuilder();
+                for(int i = 0;i<Matchmaking.bedwarsServer2.size();i++){
+                    BedwarsWinnManager.addWin(Bukkit.getPlayer(Matchmaking.bedwarsServer2.get(i)));
+                    Bukkit.getPlayer(Matchmaking.bedwarsServer2.get(i)).sendMessage(ChatColor.BLUE+"Bedwars Siege: "+ChatColor.GREEN+"+1");
+                    String winner = Bukkit.getPlayer(Matchmaking.bedwarsServer2.get(i)).getName();
+                    Bukkit.getPlayer(Matchmaking.bedwarsServer2.get(i)).sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"15 Coins "+ChatColor.BLUE+"für das Gewinnen der Runde bekommen.");
+                    Coins.addCoins(Bukkit.getPlayer(Matchmaking.bedwarsServer2.get(i)).getPlayer(),15);
+                    Level.addXp(Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(i)).getPlayer(),20);
+                    winnerMessage.append(Bukkit.getPlayer(Matchmaking.bedwarsServer2.get(i)).getName()).append("  ");
+                }
                 for(int i = 0;i<playerCount;i++){
                     Player player = world.getPlayers().get(0);
-                    if(Bukkit.getPlayer(winner)!=player){
-                        if(!Matchmaking.skywarsServer1Spectator.contains(player.getUniqueId())){
-                            player.sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"5 Coins "+ChatColor.BLUE+"für das mitspielen erhalten.");
-                            Coins.addCoins(player,5);
+                    if(!Matchmaking.bedwarsServer2.contains(player.getUniqueId())){
+                        if(!Matchmaking.skywarsServer2Spectator.contains(player.getUniqueId())){
+                            Level.addXp(player, 5);
                         }
                     }
-                    System.out.println(player.getName());
                     Location spawnLocation = new Location(Bukkit.getWorld("world"),8.5,-58,8.5,180,0);
                     player.teleport(spawnLocation);
                     player.getInventory().clear();
                     player.setMaxHealth(20);
                     player.setHealth(20);
-                    player.sendTitle(ChatColor.BLUE+""+winner,ChatColor.GOLD+"Hat Gewonnen");
+                    player.sendTitle(ChatColor.BLUE+"Gewonnen hat",ChatColor.GOLD+""+winnerMessage);
                     player.setFoodLevel(20);
                     player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
                     player.setGameMode(GameMode.ADVENTURE);
@@ -119,35 +131,44 @@ public class BedwarsManager {
                     teleporterMeta.setDisplayName(ChatColor.GOLD+"Teleporter");
                     teleporter.setItemMeta(teleporterMeta);
 
+                    ItemStack kits = new ItemStack(Material.CHEST);
+                    ItemMeta kitsMeta = kits.getItemMeta();
+                    kitsMeta.setDisplayName(ChatColor.GOLD+"Kit Menu");
+                    kits.setItemMeta(kitsMeta);
+
                     Inventory inv = player.getInventory();
                     inv.setItem(0,teleporter);
+                    inv.setItem(4,kits);
                     Matchmaking.removePlayerFromMatchmaking(player);
                     Matchmaking.removePlayerFromSpectator(player);
                 }
-                Matchmaking.skywarsServer1Running=false;
+                Matchmaking.skywarsServer2Running=false;
             }else if(server.equalsIgnoreCase("GameServer/Bedwars/Server3/server/")){
                 World world = Bukkit.getWorld("GameServer/Bedwars/Server3/server/");
                 int playerCount = world.getPlayers().size();
-                BedwarsWinnManager.addWin(Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(0)));
-                Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(0)).sendMessage(ChatColor.BLUE+"Bedwars Siege: "+ChatColor.GREEN+"+1");
-                String winner = Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(0)).getName();
-                Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(0)).sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"15 Coins "+ChatColor.BLUE+"für das Gewinnen der Runde bekommen.");
-                Coins.addCoins(Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(0)).getPlayer(),15);
+                StringBuilder winnerMessage = new StringBuilder();
+                for(int i = 0;i<Matchmaking.bedwarsServer3.size();i++){
+                    BedwarsWinnManager.addWin(Bukkit.getPlayer(Matchmaking.bedwarsServer3.get(i)));
+                    Bukkit.getPlayer(Matchmaking.bedwarsServer3.get(i)).sendMessage(ChatColor.BLUE+"Bedwars Siege: "+ChatColor.GREEN+"+1");
+                    String winner = Bukkit.getPlayer(Matchmaking.bedwarsServer3.get(i)).getName();
+                    Bukkit.getPlayer(Matchmaking.bedwarsServer3.get(i)).sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"15 Coins "+ChatColor.BLUE+"für das Gewinnen der Runde bekommen.");
+                    Coins.addCoins(Bukkit.getPlayer(Matchmaking.bedwarsServer3.get(i)).getPlayer(),15);
+                    Level.addXp(Bukkit.getPlayer(Matchmaking.bedwarsServer3.get(i)).getPlayer(),20);
+                    winnerMessage.append(Bukkit.getPlayer(Matchmaking.bedwarsServer3.get(i)).getName()).append("  ");
+                }
                 for(int i = 0;i<playerCount;i++){
                     Player player = world.getPlayers().get(0);
-                    if(Bukkit.getPlayer(winner)!=player){
-                        if(!Matchmaking.skywarsServer1Spectator.contains(player.getUniqueId())){
-                            player.sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"5 Coins "+ChatColor.BLUE+"für das mitspielen erhalten.");
-                            Coins.addCoins(player,5);
+                    if(!Matchmaking.bedwarsServer3.contains(player.getUniqueId())){
+                        if(!Matchmaking.skywarsServer3Spectator.contains(player.getUniqueId())){
+                            Level.addXp(player, 5);
                         }
                     }
-                    System.out.println(player.getName());
                     Location spawnLocation = new Location(Bukkit.getWorld("world"),8.5,-58,8.5,180,0);
                     player.teleport(spawnLocation);
                     player.getInventory().clear();
                     player.setMaxHealth(20);
                     player.setHealth(20);
-                    player.sendTitle(ChatColor.BLUE+""+winner,ChatColor.GOLD+"Hat Gewonnen");
+                    player.sendTitle(ChatColor.BLUE+"Gewonnen hat",ChatColor.GOLD+""+winnerMessage);
                     player.setFoodLevel(20);
                     player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
                     player.setGameMode(GameMode.ADVENTURE);
@@ -173,34 +194,43 @@ public class BedwarsManager {
                     teleporterMeta.setDisplayName(ChatColor.GOLD+"Teleporter");
                     teleporter.setItemMeta(teleporterMeta);
 
+                    ItemStack kits = new ItemStack(Material.CHEST);
+                    ItemMeta kitsMeta = kits.getItemMeta();
+                    kitsMeta.setDisplayName(ChatColor.GOLD+"Kit Menu");
+                    kits.setItemMeta(kitsMeta);
+
                     Inventory inv = player.getInventory();
                     inv.setItem(0,teleporter);
+                    inv.setItem(4,kits);
                     Matchmaking.removePlayerFromMatchmaking(player);
                     Matchmaking.removePlayerFromSpectator(player);
                 }
-                Matchmaking.skywarsServer1Running=false;
+                Matchmaking.skywarsServer3Running=false;
             }else if(server.equalsIgnoreCase("GameServer/Bedwars/Server4/server/")){
                 World world = Bukkit.getWorld("GameServer/Bedwars/Server4/server/");
                 int playerCount = world.getPlayers().size();
-                BedwarsWinnManager.addWin(Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(0)));
-                Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(0)).sendMessage(ChatColor.BLUE+"Bedwars Siege: "+ChatColor.GREEN+"+1");
-                String winner = Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(0)).getName();
-                Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(0)).sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"15 Coins "+ChatColor.BLUE+"für das Gewinnen der Runde bekommen.");
-                Coins.addCoins(Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(0)).getPlayer(),15);
+                StringBuilder winnerMessage = new StringBuilder();
+                for(int i = 0;i<Matchmaking.bedwarsServer4.size();i++){
+                    BedwarsWinnManager.addWin(Bukkit.getPlayer(Matchmaking.bedwarsServer4.get(i)));
+                    Bukkit.getPlayer(Matchmaking.bedwarsServer4.get(i)).sendMessage(ChatColor.BLUE+"Bedwars Siege: "+ChatColor.GREEN+"+1");
+                    String winner = Bukkit.getPlayer(Matchmaking.bedwarsServer4.get(i)).getName();
+                    Bukkit.getPlayer(Matchmaking.bedwarsServer4.get(i)).sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"15 Coins "+ChatColor.BLUE+"für das Gewinnen der Runde bekommen.");
+                    Coins.addCoins(Bukkit.getPlayer(Matchmaking.bedwarsServer4.get(i)).getPlayer(),15);
+                    Level.addXp(Bukkit.getPlayer(Matchmaking.bedwarsServer4.get(i)).getPlayer(),20);
+                    winnerMessage.append(Bukkit.getPlayer(Matchmaking.bedwarsServer4.get(i)).getName()).append("  ");
+                }
                 for(int i = 0;i<playerCount;i++){
                     Player player = world.getPlayers().get(0);
-                    if(Bukkit.getPlayer(winner)!=player){
-                        if(!Matchmaking.skywarsServer1Spectator.contains(player.getUniqueId())){
-                            player.sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"5 Coins "+ChatColor.BLUE+"für das mitspielen erhalten.");
-                            Coins.addCoins(player,5);
+                    if(!Matchmaking.bedwarsServer4.contains(player.getUniqueId())){
+                        if(!Matchmaking.skywarsServer4Spectator.contains(player.getUniqueId())){
+                            Level.addXp(player, 5);
                         }
                     }
-                    System.out.println(player.getName());
                     Location spawnLocation = new Location(Bukkit.getWorld("world"),8.5,-58,8.5,180,0);
                     player.teleport(spawnLocation);
                     player.getInventory().clear();
                     player.setMaxHealth(20);
-                    player.sendTitle(ChatColor.BLUE+""+winner,ChatColor.GOLD+"Hat Gewonnen");
+                    player.sendTitle(ChatColor.BLUE+"Gewonnen hat",ChatColor.GOLD+""+winnerMessage);
                     player.setHealth(20);
                     player.setFoodLevel(20);
                     player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
@@ -227,12 +257,18 @@ public class BedwarsManager {
                     teleporterMeta.setDisplayName(ChatColor.GOLD+"Teleporter");
                     teleporter.setItemMeta(teleporterMeta);
 
+                    ItemStack kits = new ItemStack(Material.CHEST);
+                    ItemMeta kitsMeta = kits.getItemMeta();
+                    kitsMeta.setDisplayName(ChatColor.GOLD+"Kit Menu");
+                    kits.setItemMeta(kitsMeta);
+
                     Inventory inv = player.getInventory();
                     inv.setItem(0,teleporter);
+                    inv.setItem(4,kits);
                     Matchmaking.removePlayerFromMatchmaking(player);
                     Matchmaking.removePlayerFromSpectator(player);
                 }
-                Matchmaking.skywarsServer1Running=false;
+                Matchmaking.skywarsServer4Running=false;
             }
         }
     }
@@ -449,7 +485,6 @@ public class BedwarsManager {
                 }
             }
         }
-        System.out.println(teams);
         return teams;
     }
 }

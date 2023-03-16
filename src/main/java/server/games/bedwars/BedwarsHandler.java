@@ -17,7 +17,7 @@ public class BedwarsHandler {
             int map = (int) Math.floor((Math.random() * (servers.size())));
             if(servers.get(map).getWorldFolder().getName().equalsIgnoreCase("bedwars1")) BedwarsServerMap[server-1] = 1;
             if(servers.get(map).getWorldFolder().getName().equalsIgnoreCase("bedwars2")) BedwarsServerMap[server-1] = 2;
-            System.out.println(BedwarsServerMap[0]);
+            if(servers.get(map).getWorldFolder().getName().equalsIgnoreCase("bedwars3")) BedwarsServerMap[server-1] = 3;
             System.out.println("Map: "+map);
             new BedwarsWorldInitialer(players,server,servers.get(map));
         }else{

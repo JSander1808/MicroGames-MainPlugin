@@ -6,14 +6,10 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
-import server.lobby.general.Coins;
+import server.general.Coins;
+import server.general.Level;
 import server.lobby.general.Matchmaking;
 
-import java.io.*;
 import java.util.Calendar;
 
 public class SkywarsManager {
@@ -28,15 +24,14 @@ public class SkywarsManager {
                 String winner = Bukkit.getPlayer(Matchmaking.skywarsServer1.get(0)).getName();
                 Bukkit.getPlayer(Matchmaking.skywarsServer1.get(0)).sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"15 Coins "+ChatColor.BLUE+"für das Gewinnen der Runde bekommen.");
                 Coins.addCoins(Bukkit.getPlayer(Matchmaking.skywarsServer1.get(0)).getPlayer(),15);
+                Level.addXp(Bukkit.getPlayer(Matchmaking.skywarsServer1.get(0)).getPlayer(),20);
                 for(int i = 0;i<playerCount;i++){
                     Player player = world.getPlayers().get(0);
                     if(Bukkit.getPlayer(winner)!=player){
                         if(!Matchmaking.skywarsServer1Spectator.contains(player.getUniqueId())){
-                            player.sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"5 Coins "+ChatColor.BLUE+"für das mitspielen erhalten.");
-                            Coins.addCoins(player,5);
+                            Level.addXp(player,5);
                         }
                     }
-                    System.out.println(player.getName());
                     Location spawnLocation = new Location(Bukkit.getWorld("world"),8.5,-58,8.5,180,0);
                     player.teleport(spawnLocation);
                     player.getInventory().clear();
@@ -68,8 +63,14 @@ public class SkywarsManager {
                     teleporterMeta.setDisplayName(ChatColor.GOLD+"Teleporter");
                     teleporter.setItemMeta(teleporterMeta);
 
+                    ItemStack kits = new ItemStack(Material.CHEST);
+                    ItemMeta kitsMeta = kits.getItemMeta();
+                    kitsMeta.setDisplayName(ChatColor.GOLD+"Kit Menu");
+                    kits.setItemMeta(kitsMeta);
+
                     Inventory inv = player.getInventory();
                     inv.setItem(0,teleporter);
+                    inv.setItem(4,kits);
                     Matchmaking.removePlayerFromMatchmaking(player);
                     Matchmaking.removePlayerFromSpectator(player);
                 }
@@ -84,12 +85,12 @@ public class SkywarsManager {
                 Bukkit.getPlayer(Matchmaking.skywarsServer2.get(0)).sendMessage(ChatColor.BLUE+"Skywars Siege: "+ChatColor.GREEN+"+1");
                 Bukkit.getPlayer(Matchmaking.skywarsServer2.get(0)).sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"15 Coins "+ChatColor.BLUE+"für das Gewinnen der Runde bekommen.");
                 Coins.addCoins(Bukkit.getPlayer(Matchmaking.skywarsServer2.get(0)).getPlayer(),15);
+                Level.addXp(Bukkit.getPlayer(Matchmaking.skywarsServer2.get(0)).getPlayer(),20);
                 for(int i = 0;i<playerCount;i++){
                     Player player = world.getPlayers().get(0);
                     if(Bukkit.getPlayer(winner)!=player){
                         if(!Matchmaking.skywarsServer2Spectator.contains(player.getUniqueId())){
-                            player.sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"5 Coins "+ChatColor.BLUE+"für das mitspielen erhalten.");
-                            Coins.addCoins(player,5);
+                            Level.addXp(player,5);
                         }
                     }
                     Location spawnLocation = new Location(Bukkit.getWorld("world"),8.5,-58,8.5,180,0);
@@ -123,8 +124,14 @@ public class SkywarsManager {
                     teleporterMeta.setDisplayName(ChatColor.GOLD+"Teleporter");
                     teleporter.setItemMeta(teleporterMeta);
 
+                    ItemStack kits = new ItemStack(Material.CHEST);
+                    ItemMeta kitsMeta = kits.getItemMeta();
+                    kitsMeta.setDisplayName(ChatColor.GOLD+"Kit Menu");
+                    kits.setItemMeta(kitsMeta);
+
                     Inventory inv = player.getInventory();
                     inv.setItem(0,teleporter);
+                    inv.setItem(4,kits);
                     Matchmaking.removePlayerFromMatchmaking(player);
                     Matchmaking.removePlayerFromSpectator(player);
                 }
@@ -138,12 +145,12 @@ public class SkywarsManager {
                 Bukkit.getPlayer(Matchmaking.skywarsServer3.get(0)).sendMessage(ChatColor.BLUE+"Skywars Siege: "+ChatColor.GREEN+"+1");
                 Bukkit.getPlayer(Matchmaking.skywarsServer3.get(0)).sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"15 Coins "+ChatColor.BLUE+"für das Gewinnen der Runde bekommen.");
                 Coins.addCoins(Bukkit.getPlayer(Matchmaking.skywarsServer3.get(0)).getPlayer(),15);
+                Level.addXp(Bukkit.getPlayer(Matchmaking.skywarsServer3.get(0)).getPlayer(),20);
                 for(int i = 0;i<playerCount;i++){
                     Player player = world.getPlayers().get(0);
                     if(Bukkit.getPlayer(winner)!=player){
                         if(!Matchmaking.skywarsServer3Spectator.contains(player.getUniqueId())){
-                            player.sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"5 Coins "+ChatColor.BLUE+"für das mitspielen erhalten.");
-                            Coins.addCoins(player,5);
+                            Level.addXp(player,5);
                         }
                     }
                     Location spawnLocation = new Location(Bukkit.getWorld("world"),8.5,-58,8.5,180,0);
@@ -177,8 +184,14 @@ public class SkywarsManager {
                     teleporterMeta.setDisplayName(ChatColor.GOLD+"Teleporter");
                     teleporter.setItemMeta(teleporterMeta);
 
+                    ItemStack kits = new ItemStack(Material.CHEST);
+                    ItemMeta kitsMeta = kits.getItemMeta();
+                    kitsMeta.setDisplayName(ChatColor.GOLD+"Kit Menu");
+                    kits.setItemMeta(kitsMeta);
+
                     Inventory inv = player.getInventory();
                     inv.setItem(0,teleporter);
+                    inv.setItem(1,kits);
                     Matchmaking.removePlayerFromMatchmaking(player);
                     Matchmaking.removePlayerFromSpectator(player);
                 }
@@ -192,12 +205,12 @@ public class SkywarsManager {
                 Bukkit.getPlayer(Matchmaking.skywarsServer4.get(0)).sendMessage(ChatColor.BLUE+"Skywars Siege: "+ChatColor.GREEN+"+1");
                 Bukkit.getPlayer(Matchmaking.skywarsServer4.get(0)).sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"15 Coins "+ChatColor.BLUE+"für das Gewinnen der Runde bekommen.");
                 Coins.addCoins(Bukkit.getPlayer(Matchmaking.skywarsServer4.get(0)).getPlayer(),15);
+                Level.addXp(Bukkit.getPlayer(Matchmaking.skywarsServer4.get(0)).getPlayer(),20);
                 for(int i = 0;i<playerCount;i++){
                     Player player = world.getPlayers().get(0);
                     if(Bukkit.getPlayer(winner)!=player){
                         if(!Matchmaking.skywarsServer4Spectator.contains(player.getUniqueId())){
-                            player.sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"5 Coins "+ChatColor.BLUE+"für das mitspielen erhalten.");
-                            Coins.addCoins(player,5);
+                            Level.addXp(player,5);
                         }
                     }
                     Location spawnLocation = new Location(Bukkit.getWorld("world"),8.5,-58,8.5,180,0);
@@ -231,8 +244,14 @@ public class SkywarsManager {
                     teleporterMeta.setDisplayName(ChatColor.GOLD+"Teleporter");
                     teleporter.setItemMeta(teleporterMeta);
 
+                    ItemStack kits = new ItemStack(Material.CHEST);
+                    ItemMeta kitsMeta = kits.getItemMeta();
+                    kitsMeta.setDisplayName(ChatColor.GOLD+"Kit Menu");
+                    kits.setItemMeta(kitsMeta);
+
                     Inventory inv = player.getInventory();
                     inv.setItem(0,teleporter);
+                    inv.setItem(4,kits);
 
                     Matchmaking.removePlayerFromMatchmaking(player);
                     Matchmaking.removePlayerFromSpectator(player);

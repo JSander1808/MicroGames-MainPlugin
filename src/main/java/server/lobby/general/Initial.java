@@ -1,20 +1,12 @@
 package server.lobby.general;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.block.Block;
-import org.bukkit.block.Sign;
-import org.bukkit.block.data.type.WallSign;
-import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.EntityType;
 import server.games.bedwars.BedwarsServer;
-import server.games.skywars.SkywarsHandler;
 import server.games.skywars.SkywarsServer;
 import server.general.Config;
 import server.lobby.Lootbox.Lootbox;
-import server.lobby.hologram.skywars.BedwarsHologram;
+import server.lobby.hologram.bedwars.BedwarsHologram;
 import server.lobby.hologram.skywars.SkywarsHologram;
 import server.main.Main;
 
@@ -43,6 +35,7 @@ public class Initial {
 
         bedwarsServers.add(new BedwarsServer(4,new File("preserver/Bedwars/bedwars1")));
         bedwarsServers.add(new BedwarsServer(2,new File("preserver/Bedwars/bedwars2")));
+        bedwarsServers.add(new BedwarsServer(4,new File("preserver/Bedwars/bedwars3")));
 
         new LobbyScoreboardManager();
         lootbox1 = new Lootbox(new Location(Bukkit.getWorld("world"),17.5,-58,-3.5));
@@ -50,6 +43,16 @@ public class Initial {
 
         new SkywarsHologram(new Location(Bukkit.getWorld("world"),-3,-58.5,-3));
         new BedwarsHologram(new Location(Bukkit.getWorld("world"),20,-58.5,20));
+
+        Config serverConfig = new Config("serverstats/shop/lootbox.conf");
+        serverConfig.init();
+        if(!serverConfig.existdata("lootboxCost")){
+            serverConfig.set("lootboxCost","500");
+        }
+        if(!serverConfig.existdata("sale")){
+            serverConfig.set("sale","0");
+        }
+
 
 
         Matchmaking.MATCHMAKINGPROCESSID = Bukkit.getScheduler().scheduleAsyncRepeatingTask(Main.getPlugin(), ()->{Matchmaking.MatchmakingHandle();},1,20);

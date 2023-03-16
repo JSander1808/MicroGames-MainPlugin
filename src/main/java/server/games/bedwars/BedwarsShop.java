@@ -107,7 +107,6 @@ public class BedwarsShop {
                 team = "green";
             }
         }
-        System.out.println(team);
 
         Inventory inv = Bukkit.createInventory(null,6*9,ChatColor.GOLD+"Bedwars-Shop");
 

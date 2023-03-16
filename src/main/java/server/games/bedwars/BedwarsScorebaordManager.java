@@ -248,44 +248,6 @@ public class BedwarsScorebaordManager {
         },0,20);
     }
 
-    public boolean existBed(Team team, World world, int server, int serverMap){
-        if(serverMap==1){
-            if(team.getName().equalsIgnoreCase("bedwarsServer"+server+"TeamRed")){
-                if(world.getBlockAt(88,3,88).getType()==Material.RED_BED){
-                    return true;
-                }
-            }
-            if(team.getName().equalsIgnoreCase("bedwarsServer"+server+"TeamYellow")){
-                if(world.getBlockAt(-70,3,88).getType()==Material.YELLOW_BED){
-                    return true;
-                }
-            }
-            if(team.getName().equalsIgnoreCase("bedwarsServer"+server+"TeamGreen")){
-                if(world.getBlockAt(9,3,9).getType()==Material.GREEN_BED){
-                    return true;
-                }
-            }
-            if(team.getName().equalsIgnoreCase("bedwarsServer"+server+"TeamBlue")){
-                if(world.getBlockAt(9,3,167).getType()==Material.BLUE_BED){
-                    return true;
-                }
-            }
-        }
-        if(serverMap==2){
-            if(team.getName().equalsIgnoreCase("bedwarsServer"+server+"TeamRed")){
-                if(world.getBlockAt(8,0,-91).getType()==Material.RED_BED){
-                    return true;
-                }
-            }
-            if(team.getName().equalsIgnoreCase("bedwarsServer"+server+"TeamYellow")){
-                if(world.getBlockAt(8,0,7).getType()==Material.YELLOW_BED){
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
     public int getTeams(Scoreboard scoreboard, int server){
         int teams = 0;
         if(scoreboard.getTeam("bedwarsServer"+server+"TeamRed").getPlayers().size()>=1){
@@ -331,5 +293,65 @@ public class BedwarsScorebaordManager {
             }catch(Exception e){}
         }
         return alivePlayer;
+    }
+
+    public boolean existBed(Team team, World world, int server, int serverMap){
+        if(serverMap==1){
+            if(team.getName().equalsIgnoreCase("bedwarsServer"+server+"TeamRed")){
+                if(world.getBlockAt(88,3,88).getType()==Material.RED_BED){
+                    return true;
+                }
+            }
+            if(team.getName().equalsIgnoreCase("bedwarsServer"+server+"TeamYellow")){
+                if(world.getBlockAt(-70,3,88).getType()==Material.YELLOW_BED){
+                    return true;
+                }
+            }
+            if(team.getName().equalsIgnoreCase("bedwarsServer"+server+"TeamGreen")){
+                if(world.getBlockAt(9,3,9).getType()==Material.GREEN_BED){
+                    return true;
+                }
+            }
+            if(team.getName().equalsIgnoreCase("bedwarsServer"+server+"TeamBlue")){
+                if(world.getBlockAt(9,3,167).getType()==Material.BLUE_BED){
+                    return true;
+                }
+            }
+        }
+        if(serverMap==2){
+            if(team.getName().equalsIgnoreCase("bedwarsServer"+server+"TeamRed")){
+                if(world.getBlockAt(8,0,-91).getType()==Material.RED_BED){
+                    return true;
+                }
+            }
+            if(team.getName().equalsIgnoreCase("bedwarsServer"+server+"TeamYellow")){
+                if(world.getBlockAt(8,0,7).getType()==Material.YELLOW_BED){
+                    return true;
+                }
+            }
+        }
+        if(serverMap==3){
+            if(team.getName().equalsIgnoreCase("bedwarsServer"+server+"TeamRed")){
+                if(world.getBlockAt(5,-1,1).getType()==Material.RED_BED){
+                    return true;
+                }
+            }
+            if(team.getName().equalsIgnoreCase("bedwarsServer"+server+"TeamYellow")){
+                if(world.getBlockAt(-19,-1,-189).getType()==Material.YELLOW_BED){
+                    return true;
+                }
+            }
+            if(team.getName().equalsIgnoreCase("bedwarsServer"+server+"TeamGreen")){
+                if(world.getBlockAt(-102,-1,-82).getType()==Material.GREEN_BED){
+                    return true;
+                }
+            }
+            if(team.getName().equalsIgnoreCase("bedwarsServer"+server+"TeamBlue")){
+                if(world.getBlockAt(88,-1,-106).getType()==Material.BLUE_BED){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

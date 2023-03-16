@@ -10,14 +10,14 @@ import server.games.skywars.SkywarsAutoTNT;
 import server.games.skywars.SkywarsEntityDamageListener;
 import server.general.commands.InvseeCommand;
 import server.general.commands.LobbyCommand;
-import server.general.PingListener;
+import server.general.listeners.PingListener;
 import server.general.commands.WarpCommand;
 import server.general.listeners.InvseeInventoryClickListener;
-import server.lobby.commands.StartCommand;
+import server.lobby.commands.*;
 import server.lobby.general.Initial;
 import server.lobby.general.LobbyScoreboardManager;
 import server.lobby.general.Matchmaking;
-import server.lobby.hologram.skywars.BedwarsHologram;
+import server.lobby.hologram.bedwars.BedwarsHologram;
 import server.lobby.hologram.skywars.SkywarsHologram;
 import server.lobby.listeners.*;
 
@@ -47,6 +47,12 @@ public final class Main extends JavaPlugin {
         getCommand("lobby").setExecutor(new LobbyCommand());
         getCommand("start").setExecutor(new StartCommand());
         getCommand("invsee").setExecutor(new InvseeCommand());
+        getCommand("skywars").setExecutor(new SkywarsCommand());
+        getCommand("bedwars").setExecutor(new BedwarsCommand());
+        getCommand("spawn").setExecutor(new SpawnCommand());
+        getCommand("kit").setExecutor(new KitCommand());
+        getCommand("tntrun").setExecutor(new TNTRunCommand());
+        getCommand("stickbattle").setExecutor(new StickBattleCommand());
 
         new Initial();
     }

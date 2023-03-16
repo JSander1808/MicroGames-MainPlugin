@@ -13,11 +13,6 @@ public class Config {
     }
 
     public void init(){
-        try {
-            Thread.sleep(25);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         File file = new File(path);
         if(!file.exists()){
             String[] pathname = path.split("/");
@@ -37,11 +32,6 @@ public class Config {
     }
 
     public void set(String keyword, String value){
-        try {
-            Thread.sleep(25);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         File file = new File(path);
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -73,11 +63,6 @@ public class Config {
     }
 
     public String get(String keyword){
-        try {
-            Thread.sleep(25);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         File file = new File(path);
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -106,11 +91,6 @@ public class Config {
     }
 
     public boolean existdata(String keyword){
-        try {
-            Thread.sleep(25);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         File file = new File(path);
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -119,7 +99,6 @@ public class Config {
                 String[] result = temp.split("->");
                 if(result[0].equalsIgnoreCase(keyword)){
                     if(result.length==2){
-                        System.out.println(result.length);
                         return true;
                     }
                 }

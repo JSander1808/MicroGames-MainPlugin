@@ -11,6 +11,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import server.lobby.general.Initial;
 import server.lobby.general.Matchmaking;
+import server.lobby.menus.KitManagerMenu;
 import server.lobby.menus.TeleporterMenu;
 
 public class PlayerInteractListener implements Listener {
@@ -40,6 +41,9 @@ public class PlayerInteractListener implements Listener {
                     switch(event.getItem().getType()){
                         case COMPASS:
                             new TeleporterMenu(player);
+                            break;
+                        case CHEST:
+                            new KitManagerMenu(player);
                             break;
                     }
                 }

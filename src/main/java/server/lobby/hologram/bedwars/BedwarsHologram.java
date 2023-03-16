@@ -1,4 +1,4 @@
-package server.lobby.hologram.skywars;
+package server.lobby.hologram.bedwars;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

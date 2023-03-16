@@ -282,7 +282,12 @@ public class Matchmaking {
                         player.sendMessage(ChatColor.RED+"The Server is allready full.");
                     }
                 }else{
-                    player.sendMessage(ChatColor.RED+"You can´t join a running game.");
+                    player.teleport(Bukkit.getWorld("GameServer/Bedwars/Server1/server/").getSpawnLocation());
+                    player.setGameMode(GameMode.SPECTATOR);
+                    player.getInventory().clear();
+                    removePlayerFromMatchmaking(player);
+                    player.sendMessage(ChatColor.GRAY+"Du beobachtest nun das Spiel");
+                    Matchmaking.bedwarsServer1Spectator.add(player.getUniqueId());
                 }
             }else{
                 bedwarsServer1.remove(player.getUniqueId());
@@ -308,7 +313,12 @@ public class Matchmaking {
                         player.sendMessage(ChatColor.RED+"The Server is allready full.");
                     }
                 }else{
-                    player.sendMessage(ChatColor.RED+"You can´t join a running game.");
+                    player.teleport(Bukkit.getWorld("GameServer/Bedwars/Server2/server/").getSpawnLocation());
+                    player.setGameMode(GameMode.SPECTATOR);
+                    player.getInventory().clear();
+                    removePlayerFromMatchmaking(player);
+                    player.sendMessage(ChatColor.GRAY+"Du beobachtest nun das Spiel");
+                    Matchmaking.bedwarsServer2Spectator.add(player.getUniqueId());
                 }
             }else{
                 bedwarsServer2.remove(player.getUniqueId());
@@ -334,7 +344,12 @@ public class Matchmaking {
                         player.sendMessage(ChatColor.RED+"The Server is allready full.");
                     }
                 }else{
-                    player.sendMessage(ChatColor.RED+"You can´t join a running game.");
+                    player.teleport(Bukkit.getWorld("GameServer/Bedwars/Server3/server/").getSpawnLocation());
+                    player.setGameMode(GameMode.SPECTATOR);
+                    player.getInventory().clear();
+                    removePlayerFromMatchmaking(player);
+                    player.sendMessage(ChatColor.GRAY+"Du beobachtest nun das Spiel");
+                    Matchmaking.bedwarsServer3Spectator.add(player.getUniqueId());
                 }
             }else{
                 bedwarsServer3.remove(player.getUniqueId());
@@ -360,7 +375,12 @@ public class Matchmaking {
                         player.sendMessage(ChatColor.RED+"The Server is allready full.");
                     }
                 }else{
-                    player.sendMessage(ChatColor.RED+"You can´t join a running game.");
+                    player.teleport(Bukkit.getWorld("GameServer/Bedwars/Server4/server/").getSpawnLocation());
+                    player.setGameMode(GameMode.SPECTATOR);
+                    player.getInventory().clear();
+                    removePlayerFromMatchmaking(player);
+                    player.sendMessage(ChatColor.GRAY+"Du beobachtest nun das Spiel");
+                    Matchmaking.bedwarsServer4Spectator.add(player.getUniqueId());
                 }
             }else{
                 bedwarsServer4.remove(player.getUniqueId());

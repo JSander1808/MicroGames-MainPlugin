@@ -54,7 +54,13 @@ public class JoinListener implements Listener {
         teleporterMeta.setDisplayName(ChatColor.GOLD+"Teleporter");
         teleporter.setItemMeta(teleporterMeta);
 
+        ItemStack kits = new ItemStack(Material.CHEST);
+        ItemMeta kitsMeta = kits.getItemMeta();
+        kitsMeta.setDisplayName(ChatColor.GOLD+"Kit Menu");
+        kits.setItemMeta(kitsMeta);
+
         Inventory inv = player.getInventory();
         inv.setItem(0,teleporter);
+        inv.setItem(4,kits);
     }
 }

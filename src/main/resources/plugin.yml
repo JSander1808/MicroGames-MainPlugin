@@ -8,3 +8,9 @@ commands:
    lobby:
    start:
    invsee:
+   skywars:
+   bedwars:
+   spawn:
+   kit:
+   tntrun:
+   stickbattle:

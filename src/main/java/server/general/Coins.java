@@ -1,4 +1,4 @@
-package server.lobby.general;
+package server.general;
 
 import org.bukkit.entity.Player;
 import server.general.Config;
