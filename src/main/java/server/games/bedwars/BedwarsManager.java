@@ -79,7 +79,7 @@ public class BedwarsManager {
                     Matchmaking.removePlayerFromMatchmaking(player);
                     Matchmaking.removePlayerFromSpectator(player);
                 }
-                Matchmaking.skywarsServer1Running=false;
+                Matchmaking.bedwarsServer1Running=false;
             }else if(server.equalsIgnoreCase("GameServer/Bedwars/Server2/server/")){
                 World world = Bukkit.getWorld("GameServer/Bedwars/Server2/server/");
                 int playerCount = world.getPlayers().size();
@@ -90,13 +90,13 @@ public class BedwarsManager {
                     String winner = Bukkit.getPlayer(Matchmaking.bedwarsServer2.get(i)).getName();
                     Bukkit.getPlayer(Matchmaking.bedwarsServer2.get(i)).sendMessage(ChatColor.BLUE+"Du hast "+ChatColor.GOLD+"15 Coins "+ChatColor.BLUE+"für das Gewinnen der Runde bekommen.");
                     Coins.addCoins(Bukkit.getPlayer(Matchmaking.bedwarsServer2.get(i)).getPlayer(),15);
-                    Level.addXp(Bukkit.getPlayer(Matchmaking.bedwarsServer1.get(i)).getPlayer(),20);
+                    Level.addXp(Bukkit.getPlayer(Matchmaking.bedwarsServer2.get(i)).getPlayer(),20);
                     winnerMessage.append(Bukkit.getPlayer(Matchmaking.bedwarsServer2.get(i)).getName()).append("  ");
                 }
                 for(int i = 0;i<playerCount;i++){
                     Player player = world.getPlayers().get(0);
                     if(!Matchmaking.bedwarsServer2.contains(player.getUniqueId())){
-                        if(!Matchmaking.skywarsServer2Spectator.contains(player.getUniqueId())){
+                        if(!Matchmaking.bedwarsServer2Spectator.contains(player.getUniqueId())){
                             Level.addXp(player, 5);
                         }
                     }
@@ -142,7 +142,7 @@ public class BedwarsManager {
                     Matchmaking.removePlayerFromMatchmaking(player);
                     Matchmaking.removePlayerFromSpectator(player);
                 }
-                Matchmaking.skywarsServer2Running=false;
+                Matchmaking.bedwarsServer2Running=false;
             }else if(server.equalsIgnoreCase("GameServer/Bedwars/Server3/server/")){
                 World world = Bukkit.getWorld("GameServer/Bedwars/Server3/server/");
                 int playerCount = world.getPlayers().size();
@@ -159,7 +159,7 @@ public class BedwarsManager {
                 for(int i = 0;i<playerCount;i++){
                     Player player = world.getPlayers().get(0);
                     if(!Matchmaking.bedwarsServer3.contains(player.getUniqueId())){
-                        if(!Matchmaking.skywarsServer3Spectator.contains(player.getUniqueId())){
+                        if(!Matchmaking.bedwarsServer3Spectator.contains(player.getUniqueId())){
                             Level.addXp(player, 5);
                         }
                     }
@@ -205,7 +205,7 @@ public class BedwarsManager {
                     Matchmaking.removePlayerFromMatchmaking(player);
                     Matchmaking.removePlayerFromSpectator(player);
                 }
-                Matchmaking.skywarsServer3Running=false;
+                Matchmaking.bedwarsServer3Running=false;
             }else if(server.equalsIgnoreCase("GameServer/Bedwars/Server4/server/")){
                 World world = Bukkit.getWorld("GameServer/Bedwars/Server4/server/");
                 int playerCount = world.getPlayers().size();
@@ -222,7 +222,7 @@ public class BedwarsManager {
                 for(int i = 0;i<playerCount;i++){
                     Player player = world.getPlayers().get(0);
                     if(!Matchmaking.bedwarsServer4.contains(player.getUniqueId())){
-                        if(!Matchmaking.skywarsServer4Spectator.contains(player.getUniqueId())){
+                        if(!Matchmaking.bedwarsServer4Spectator.contains(player.getUniqueId())){
                             Level.addXp(player, 5);
                         }
                     }
@@ -268,7 +268,7 @@ public class BedwarsManager {
                     Matchmaking.removePlayerFromMatchmaking(player);
                     Matchmaking.removePlayerFromSpectator(player);
                 }
-                Matchmaking.skywarsServer4Running=false;
+                Matchmaking.bedwarsServer4Running=false;
             }
         }
     }

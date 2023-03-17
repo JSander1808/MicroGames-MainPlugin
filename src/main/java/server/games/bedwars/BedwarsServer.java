@@ -1,6 +1,5 @@
 package server.games.bedwars;
 
-import server.games.skywars.SkywarsServer;
 
 import java.io.File;
 import java.util.ArrayList;

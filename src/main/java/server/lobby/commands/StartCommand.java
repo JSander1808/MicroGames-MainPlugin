@@ -39,26 +39,26 @@ public class StartCommand implements CommandExecutor {
                             player.sendMessage(ChatColor.RED+"In your Queue are not enough Player.");
                         }
                     }else if(Matchmaking.bedwarsServer1.contains(player.getUniqueId())){
-                        if(Matchmaking.bedwarsServer1.size()>=Matchmaking.skywarsServer1MaxPlayer){
-                            Matchmaking.skywarsServer1Countdown=6;
+                        if(Matchmaking.bedwarsServer1.size()>=Matchmaking.bedwarsServer1MaxPlayer){
+                            Matchmaking.bedwarsServer1Countdown=6;
                         }else{
                             player.sendMessage(ChatColor.RED+"In your Queue are not enough Player.");
                         }
                     }else if(Matchmaking.bedwarsServer2.contains(player.getUniqueId())){
-                        if(Matchmaking.bedwarsServer2.size()>=Matchmaking.skywarsServer2MaxPlayer/2){
-                            Matchmaking.skywarsServer2Countdown=6;
+                        if(Matchmaking.bedwarsServer2.size()>=Matchmaking.bedwarsServer2MaxPlayer/2){
+                            Matchmaking.bedwarsServer2Countdown=6;
                         }else{
                             player.sendMessage(ChatColor.RED+"In your Queue are not enough Player.");
                         }
                     }else if(Matchmaking.bedwarsServer3.contains(player.getUniqueId())){
-                        if(Matchmaking.bedwarsServer3.size()>=Matchmaking.skywarsServer3MaxPlayer){
-                            Matchmaking.skywarsServer3Countdown=6;
+                        if(Matchmaking.bedwarsServer3.size()>=Matchmaking.bedwarsServer3MaxPlayer){
+                            Matchmaking.bedwarsServer3Countdown=6;
                         }else{
                             player.sendMessage(ChatColor.RED+"In your Queue are not enough Player.");
                         }
                     }else if(Matchmaking.bedwarsServer4.contains(player.getUniqueId())){
-                        if(Matchmaking.bedwarsServer4.size()>=Matchmaking.skywarsServer4MaxPlayer/2&&Matchmaking.bedwarsServer4.size()%2==0){
-                            Matchmaking.skywarsServer4Countdown=6;
+                        if(Matchmaking.bedwarsServer4.size()>=Matchmaking.bedwarsServer4MaxPlayer/2&&Matchmaking.bedwarsServer4.size()%2==0){
+                            Matchmaking.bedwarsServer4Countdown=6;
                         }else{
                             player.sendMessage(ChatColor.RED+"In your Queue are not enough Player.");
                         }
