@@ -20,6 +20,8 @@ public class BedwarsWorldInitialer {
 
     public int TaskID;
     public int MatchCooldown = 5;
+    
+    public static BedwarsRunntimeManager[] brm = new BedwarsRunntimeManager[4];
 
 
     public BedwarsWorldInitialer(ArrayList<UUID> players, int server, BedwarsServer serverMap){
@@ -124,18 +126,21 @@ public class BedwarsWorldInitialer {
             }
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,((MatchCooldown*20)+80),255));
             player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,((MatchCooldown*20)+80),255));
+            player.getInventory().clear();
+            player.setHealth(20);
+            player.setFoodLevel(20);
         }
 
-        BedwarsRunntimeManager brm = new BedwarsRunntimeManager(world);
-        brm.addIronSpawn(new Location(world, 9.5,3,182.5));
-        brm.addIronSpawn(new Location(world, -84.5,3,88.5));
-        brm.addIronSpawn(new Location(world, 9.5,3,-5.5));
-        brm.addIronSpawn(new Location(world,  103.5,3,88.5));
-        brm.addGoldSpawn(new Location(world,56.5,4,88.5));
-        brm.addGoldSpawn(new Location(world,9.5,4,41.5));
-        brm.addGoldSpawn(new Location(world,-37.5,4,88.5));
-        brm.addGoldSpawn(new Location(world,9.5,4,135.5));
-        brm.addDiamondSpawn(new Location(world,9.5,9,88.5));
+        brm[server] = new BedwarsRunntimeManager(world);
+        brm[server].addIronSpawn(new Location(world, 9.5,3,182.5));
+        brm[server].addIronSpawn(new Location(world, -84.5,3,88.5));
+        brm[server].addIronSpawn(new Location(world, 9.5,3,-5.5));
+        brm[server].addIronSpawn(new Location(world,  103.5,3,88.5));
+        brm[server].addGoldSpawn(new Location(world,56.5,4,88.5));
+        brm[server].addGoldSpawn(new Location(world,9.5,4,41.5));
+        brm[server].addGoldSpawn(new Location(world,-37.5,4,88.5));
+        brm[server].addGoldSpawn(new Location(world,9.5,4,135.5));
+        brm[server].addDiamondSpawn(new Location(world,9.5,9,88.5));
 
         Villager shop1 = (Villager) world.spawnEntity(new Location(world,9.5,3,-9.5), EntityType.VILLAGER);
         shop1.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,Integer.MAX_VALUE,255));
@@ -153,15 +158,12 @@ public class BedwarsWorldInitialer {
                 MatchCooldown--;
                 if(MatchCooldown<=5){
                     for(int i = 0;i<world.getPlayers().size();i++){
-                        world.getPlayers().get(i).sendMessage(ChatColor.GREEN+"Match started in: "+MatchCooldown);
+                        world.getPlayers().get(i).sendMessage(ChatColor.GOLD+"Match started in: "+ChatColor.GREEN+MatchCooldown);
                     }
                 }
             }else{
                 for(int i = 0;i<world.getPlayers().size();i++){
-                    world.getPlayers().get(i).getInventory().clear();
                     world.getPlayers().get(i).sendMessage(ChatColor.GREEN+"GO");
-                    world.getPlayers().get(i).setHealth(20);
-                    world.getPlayers().get(i).setFoodLevel(20);
                     world.getPlayers().get(i).playSound(world.getPlayers().get(i).getLocation(),Sound.ENTITY_EXPERIENCE_ORB_PICKUP,30,10);
                     ItemStack woodenSword = new ItemStack(Material.WOODEN_SWORD);
                     world.getPlayers().get(i).getInventory().setItem(0,woodenSword);
@@ -334,14 +336,17 @@ public class BedwarsWorldInitialer {
             }
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,((MatchCooldown*20)+80),255));
             player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,((MatchCooldown*20)+80),255));
+            player.getInventory().clear();
+            player.setHealth(20);
+            player.setFoodLevel(20);
         }
 
-        BedwarsRunntimeManager brm = new BedwarsRunntimeManager(world);
-        brm.addIronSpawn(new Location(world, 8.5,1,-1.5));
-        brm.addIronSpawn(new Location(world, 8.5,1,-81.5));
-        brm.addGoldSpawn(new Location(world, 8.5,1,-58.5));
-        brm.addGoldSpawn(new Location(world,  8.5,1,-25.5));
-        brm.addDiamondSpawn(new Location(world,8.5,1,-41.5));
+        brm[server] = new BedwarsRunntimeManager(world);
+        brm[server].addIronSpawn(new Location(world, 8.5,1,-1.5));
+        brm[server].addIronSpawn(new Location(world, 8.5,1,-81.5));
+        brm[server].addGoldSpawn(new Location(world, 8.5,1,-58.5));
+        brm[server].addGoldSpawn(new Location(world,  8.5,1,-25.5));
+        brm[server].addDiamondSpawn(new Location(world,8.5,1,-41.5));
 
         Villager shop1 = (Villager) world.spawnEntity(new Location(world,8.5,0,15.5), EntityType.VILLAGER);
         shop1.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,Integer.MAX_VALUE,255));
@@ -355,15 +360,12 @@ public class BedwarsWorldInitialer {
                 MatchCooldown--;
                 if(MatchCooldown<=5){
                     for(int i = 0;i<world.getPlayers().size();i++){
-                        world.getPlayers().get(i).sendMessage(ChatColor.GREEN+"Match started in: "+MatchCooldown);
+                        world.getPlayers().get(i).sendMessage(ChatColor.GOLD+"Match started in: "+ChatColor.GREEN+MatchCooldown);
                     }
                 }
             }else{
                 for(int i = 0;i<world.getPlayers().size();i++){
-                    world.getPlayers().get(i).getInventory().clear();
                     world.getPlayers().get(i).sendMessage(ChatColor.GREEN+"GO");
-                    world.getPlayers().get(i).setHealth(20);
-                    world.getPlayers().get(i).setFoodLevel(20);
                     world.getPlayers().get(i).playSound(world.getPlayers().get(i).getLocation(),Sound.ENTITY_EXPERIENCE_ORB_PICKUP,30,10);
                     ItemStack woodenSword = new ItemStack(Material.WOODEN_SWORD);
                     world.getPlayers().get(i).getInventory().setItem(0,woodenSword);
@@ -548,18 +550,21 @@ public class BedwarsWorldInitialer {
             }
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,((MatchCooldown*20)+80),255));
             player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,((MatchCooldown*20)+80),255));
+            player.getInventory().clear();
+            player.setHealth(20);
+            player.setFoodLevel(20);
         }
 
-        BedwarsRunntimeManager brm = new BedwarsRunntimeManager(world);
-        brm.addIronSpawn(new Location(world, -99.5,0,-97.5));
-        brm.addIronSpawn(new Location(world, -10.5,0,-0.5));
-        brm.addIronSpawn(new Location(world, 86.5,0,-89.5));
-        brm.addIronSpawn(new Location(world,  -2.5,0,-186.5));
-        brm.addGoldSpawn(new Location(world,-115.5,5,-88.5));
-        brm.addGoldSpawn(new Location(world,-1.5,5,15.5));
-        brm.addGoldSpawn(new Location(world,102.5,5,-98.5));
-        brm.addGoldSpawn(new Location(world,-11.5,5,-202.5));
-        brm.addDiamondSpawn(new Location(world,-6.5,26,-93.5));
+        brm[server] = new BedwarsRunntimeManager(world);
+        brm[server].addIronSpawn(new Location(world, -99.5,0,-97.5));
+        brm[server].addIronSpawn(new Location(world, -10.5,0,-0.5));
+        brm[server].addIronSpawn(new Location(world, 86.5,0,-89.5));
+        brm[server].addIronSpawn(new Location(world,  -2.5,0,-186.5));
+        brm[server].addGoldSpawn(new Location(world,-115.5,5,-88.5));
+        brm[server].addGoldSpawn(new Location(world,-1.5,5,15.5));
+        brm[server].addGoldSpawn(new Location(world,102.5,5,-98.5));
+        brm[server].addGoldSpawn(new Location(world,-11.5,5,-202.5));
+        brm[server].addDiamondSpawn(new Location(world,-6.5,26,-93.5));
 
         Villager shop1 = (Villager) world.spawnEntity(new Location(world,1.5,0,18.5), EntityType.VILLAGER);
         shop1.setCustomName(ChatColor.DARK_GREEN+"Soos");
@@ -589,15 +594,12 @@ public class BedwarsWorldInitialer {
                 MatchCooldown--;
                 if(MatchCooldown<=5){
                     for(int i = 0;i<world.getPlayers().size();i++){
-                        world.getPlayers().get(i).sendMessage(ChatColor.GREEN+"Match started in: "+MatchCooldown);
+                        world.getPlayers().get(i).sendMessage(ChatColor.GOLD+"Match started in: "+ChatColor.GREEN+MatchCooldown);
                     }
                 }
             }else{
                 for(int i = 0;i<world.getPlayers().size();i++){
-                    world.getPlayers().get(i).getInventory().clear();
                     world.getPlayers().get(i).sendMessage(ChatColor.GREEN+"GO");
-                    world.getPlayers().get(i).setHealth(20);
-                    world.getPlayers().get(i).setFoodLevel(20);
                     world.getPlayers().get(i).playSound(world.getPlayers().get(i).getLocation(),Sound.ENTITY_EXPERIENCE_ORB_PICKUP,30,10);
                     ItemStack woodenSword = new ItemStack(Material.WOODEN_SWORD);
                     world.getPlayers().get(i).getInventory().setItem(0,woodenSword);

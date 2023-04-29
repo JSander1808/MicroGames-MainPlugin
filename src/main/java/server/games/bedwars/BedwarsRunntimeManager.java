@@ -16,6 +16,9 @@ public class BedwarsRunntimeManager {
     private int ironSpawnDelay = 0;
     private int goldSpawnDelay = 0;
     private int diamondSpawnDelay = 0;
+    public int ironLevel = 1;
+    public int goldLevel = 1;
+    public int diaLevel = 1;
     private ArrayList<Location> ironSpawnLocation = new ArrayList<Location>();
     private ArrayList<Location> goldSpawnLocation = new ArrayList<Location>();
     private ArrayList<Location> diamondSpawnLocation = new ArrayList<Location>();
@@ -25,29 +28,77 @@ public class BedwarsRunntimeManager {
             if(world.getPlayers().size()==0){
                 Bukkit.getScheduler().cancelTask(TaskID);
             }else{
-                if(ironSpawnDelay>=0){
-                    for(int i = 0;i<ironSpawnLocation.size();i++){
-                        world.dropItem(ironSpawnLocation.get(i),new ItemStack(Material.IRON_INGOT));
+                if(ironLevel==1){
+                    if(ironSpawnDelay>=4){
+                        for(int i = 0;i<ironSpawnLocation.size();i++){
+                            world.dropItem(ironSpawnLocation.get(i),new ItemStack(Material.IRON_INGOT));
+                        }
+                        ironSpawnDelay=0;
                     }
-                    ironSpawnDelay=0;
+                }else if(ironLevel==2){
+                    if(ironSpawnDelay>=2){
+                        for(int i = 0;i<ironSpawnLocation.size();i++){
+                            world.dropItem(ironSpawnLocation.get(i),new ItemStack(Material.IRON_INGOT));
+                        }
+                        ironSpawnDelay=0;
+                    }
+                }else{
+                    if(ironSpawnDelay>=1){
+                        for(int i = 0;i<ironSpawnLocation.size();i++){
+                            world.dropItem(ironSpawnLocation.get(i),new ItemStack(Material.IRON_INGOT));
+                        }
+                        ironSpawnDelay=0;
+                    }
                 }
                 ironSpawnDelay++;
-                if(goldSpawnDelay>=15){
-                    for(int i = 0;i<goldSpawnLocation.size();i++){
-                        world.dropItem(goldSpawnLocation.get(i),new ItemStack(Material.GOLD_INGOT));
+                if(goldLevel==1){
+                    if(goldSpawnDelay>=60){
+                        for(int i = 0;i<goldSpawnLocation.size();i++){
+                            world.dropItem(goldSpawnLocation.get(i),new ItemStack(Material.GOLD_INGOT));
+                        }
+                        goldSpawnDelay=0;
                     }
-                    goldSpawnDelay=0;
+                }else if(goldLevel==2){
+                    if(goldSpawnDelay>=30){
+                        for(int i = 0;i<goldSpawnLocation.size();i++){
+                            world.dropItem(goldSpawnLocation.get(i),new ItemStack(Material.GOLD_INGOT));
+                        }
+                        goldSpawnDelay=0;
+                    }
+                }else{
+                    if(goldSpawnDelay>=15){
+                        for(int i = 0;i<goldSpawnLocation.size();i++){
+                            world.dropItem(goldSpawnLocation.get(i),new ItemStack(Material.GOLD_INGOT));
+                        }
+                        goldSpawnDelay=0;
+                    }
                 }
                 goldSpawnDelay++;
-                if(diamondSpawnDelay>=50){
-                    for(int i = 0;i<diamondSpawnLocation.size();i++){
-                        world.dropItem(diamondSpawnLocation.get(i),new ItemStack(Material.DIAMOND));
+                if(diaLevel==1){
+                    if(diamondSpawnDelay>=200){
+                        for(int i = 0;i<diamondSpawnLocation.size();i++){
+                            world.dropItem(diamondSpawnLocation.get(i),new ItemStack(Material.DIAMOND));
+                        }
+                        diamondSpawnDelay=0;
                     }
-                    diamondSpawnDelay=0;
+                }else if(diaLevel==2){
+                    if(diamondSpawnDelay>=100){
+                        for(int i = 0;i<diamondSpawnLocation.size();i++){
+                            world.dropItem(diamondSpawnLocation.get(i),new ItemStack(Material.DIAMOND));
+                        }
+                        diamondSpawnDelay=0;
+                    }
+                }else{
+                    if(diamondSpawnDelay>=50){
+                        for(int i = 0;i<diamondSpawnLocation.size();i++){
+                            world.dropItem(diamondSpawnLocation.get(i),new ItemStack(Material.DIAMOND));
+                        }
+                        diamondSpawnDelay=0;
+                    }
                 }
                 diamondSpawnDelay++;
             }
-        },0,20);
+        },0,5);
     }
 
     public void addIronSpawn(Location location){

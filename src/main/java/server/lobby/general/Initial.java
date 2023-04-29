@@ -4,6 +4,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import server.games.bedwars.BedwarsServer;
 import server.games.skywars.SkywarsServer;
+import server.games.tntrun.TntrunHandler;
+import server.games.tntrun.TntrunServer;
 import server.general.Config;
 import server.lobby.Lootbox.Lootbox;
 import server.lobby.hologram.bedwars.BedwarsHologram;
@@ -17,6 +19,7 @@ public class Initial {
 
     public static ArrayList<SkywarsServer> skywarsServers = new ArrayList<SkywarsServer>();
     public static ArrayList<BedwarsServer> bedwarsServers = new ArrayList<BedwarsServer>();
+    public static ArrayList<TntrunServer> tntrunServers = new ArrayList<TntrunServer>();
     public static Lootbox lootbox1;
     public static Lootbox lootbox2;
 
@@ -36,6 +39,8 @@ public class Initial {
         bedwarsServers.add(new BedwarsServer(4,new File("preserver/Bedwars/bedwars1")));
         bedwarsServers.add(new BedwarsServer(2,new File("preserver/Bedwars/bedwars2")));
         bedwarsServers.add(new BedwarsServer(4,new File("preserver/Bedwars/bedwars3")));
+
+        tntrunServers.add(new TntrunServer(4,new File("preserver/Tntrun/tntrun1")));
 
         new LobbyScoreboardManager();
         lootbox1 = new Lootbox(new Location(Bukkit.getWorld("world"),17.5,-58,-3.5));

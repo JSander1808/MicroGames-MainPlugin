@@ -15,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import server.games.bedwars.BedwarsHandler;
 import server.games.bedwars.BedwarsWorldInitialer;
 import server.games.skywars.SkywarsHandler;
+import server.games.tntrun.TntrunHandler;
 import server.main.Main;
 
 import java.io.File;
@@ -34,6 +35,10 @@ public class Matchmaking {
     public static int bedwarsServer2Countdown = 60;
     public static int bedwarsServer3Countdown = 60;
     public static int bedwarsServer4Countdown = 60;
+    public static int tntrunServer1Countdown = 60;
+    public static int tntrunServer2Countdown = 60;
+    public static int tntrunServer3Countdown = 60;
+    public static int tntrunServer4Countdown = 60;
 
 
 
@@ -49,6 +54,10 @@ public class Matchmaking {
     public static int bedwarsServer2MaxPlayer = 4;
     public static int bedwarsServer3MaxPlayer = 4;
     public static int bedwarsServer4MaxPlayer = 8;
+    public static int tntrunServer1MaxPlayer = 4;
+    public static int tntrunServer2MaxPlayer = 1;
+    public static int tntrunServer3MaxPlayer = 8;
+    public static int tntrunServer4MaxPlayer = 8;
 
 
 
@@ -83,6 +92,20 @@ public class Matchmaking {
     public static boolean bedwarsServer4Running = false;
 
 
+    public static ArrayList<UUID> tntrunServer1 = new ArrayList<>();
+    public static ArrayList<UUID> tntrunServer1Spectator = new ArrayList<>();
+    public static boolean tntrunServer1Running = false;
+    public static ArrayList<UUID> tntrunServer2 = new ArrayList<>();
+    public static ArrayList<UUID> tntrunServer2Spectator = new ArrayList<>();
+    public static boolean tntrunServer2Running = false;
+    public static ArrayList<UUID> tntrunServer3 = new ArrayList<>();
+    public static ArrayList<UUID> tntrunServer3Spectator = new ArrayList<>();
+    public static boolean tntrunServer3Running = false;
+    public static ArrayList<UUID> tntrunServer4 = new ArrayList<>();
+    public static ArrayList<UUID> tntrunServer4Spectator = new ArrayList<>();
+    public static boolean tntrunServer4Running = false;
+
+
 
 
 
@@ -112,6 +135,18 @@ public class Matchmaking {
         }else if(bedwarsServer4.contains(player.getUniqueId())){
             bedwarsServer4.remove(player.getUniqueId());
             updateSigns();
+        }else if(tntrunServer1.contains(player.getUniqueId())){
+            tntrunServer1.remove(player.getUniqueId());
+            updateSigns();
+        }else if(tntrunServer2.contains(player.getUniqueId())){
+            tntrunServer2.remove(player.getUniqueId());
+            updateSigns();
+        }else if(tntrunServer3.contains(player.getUniqueId())){
+            tntrunServer3.remove(player.getUniqueId());
+            updateSigns();
+        }else if(tntrunServer4.contains(player.getUniqueId())){
+            tntrunServer4.remove(player.getUniqueId());
+            updateSigns();
         }
     }
 
@@ -132,6 +167,14 @@ public class Matchmaking {
             bedwarsServer3Spectator.remove(player.getUniqueId());
         }else if(bedwarsServer4Spectator.contains(player.getUniqueId())){
             bedwarsServer4Spectator.remove(player.getUniqueId());
+        }else if(tntrunServer1Spectator.contains(player.getUniqueId())){
+            tntrunServer1Spectator.remove(player.getUniqueId());
+        }else if(tntrunServer2Spectator.contains(player.getUniqueId())){
+            tntrunServer2Spectator.remove(player.getUniqueId());
+        }else if(tntrunServer3Spectator.contains(player.getUniqueId())){
+            tntrunServer3Spectator.remove(player.getUniqueId());
+        }else if(tntrunServer4Spectator.contains(player.getUniqueId())){
+            tntrunServer4Spectator.remove(player.getUniqueId());
         }
     }
 
@@ -387,6 +430,133 @@ public class Matchmaking {
                 updateSigns();
                 player.sendMessage(ChatColor.RED+"Du wurdest aus der Spielersuche entfernt.");
             }
+
+//------------------------------------------------------------------TNT-Run--------------------------------------------------------------------------------------------
+
+        }else if(server.equalsIgnoreCase("tntrunServer1")){
+            if(!tntrunServer1.contains(player.getUniqueId())){
+                World world = Bukkit.getWorld("world");
+                Block bedwarsServerBlock = world.getBlockAt(-31,-54,35);
+                org.bukkit.block.Sign tntrunServerSign = (Sign) bedwarsServerBlock.getState();
+                if(tntrunServerSign.getLine(3).equalsIgnoreCase("")){
+                    if((tntrunServer1.size()+1)<=tntrunServer1MaxPlayer){
+                        removePlayerFromMatchmaking(player);
+                        tntrunServer1.add(player.getUniqueId());
+                        updateSigns();
+                        for(int i = 0;i<tntrunServer1.size();i++){
+                            Bukkit.getPlayer(tntrunServer1.get(i)).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN+"Spielersuche...  "+tntrunServer1.size()+" / "+tntrunServer1MaxPlayer));
+                        }
+                        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP,40,2);
+                        player.sendMessage(ChatColor.GREEN+"Du wurdest der Spielersuche hinzugefügt...");
+                    }else{
+                        player.sendMessage(ChatColor.RED+"The Server is allready full.");
+                    }
+                }else{
+                    player.teleport(Bukkit.getWorld("GameServer/Tntrun/Server1/server/").getSpawnLocation());
+                    player.setGameMode(GameMode.SPECTATOR);
+                    player.getInventory().clear();
+                    removePlayerFromMatchmaking(player);
+                    player.sendMessage(ChatColor.GRAY+"Du beobachtest nun das Spiel");
+                    Matchmaking.tntrunServer1Spectator.add(player.getUniqueId());
+                }
+            }else{
+                tntrunServer1.remove(player.getUniqueId());
+                updateSigns();
+                player.sendMessage(ChatColor.RED+"Du wurdest aus der Spielersuche entfernt.");
+            }
+        }else if(server.equalsIgnoreCase("tntrunServer2")){
+            if(!tntrunServer2.contains(player.getUniqueId())){
+                World world = Bukkit.getWorld("world");
+                Block bedwarsServerBlock = world.getBlockAt(-31,-54,36);
+                org.bukkit.block.Sign tntrunServerSign = (Sign) bedwarsServerBlock.getState();
+                if(tntrunServerSign.getLine(3).equalsIgnoreCase("")){
+                    if((tntrunServer2.size()+1)<=tntrunServer2MaxPlayer){
+                        removePlayerFromMatchmaking(player);
+                        tntrunServer2.add(player.getUniqueId());
+                        updateSigns();
+                        for(int i = 0;i<tntrunServer2.size();i++){
+                            Bukkit.getPlayer(tntrunServer2.get(i)).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN+"Spielersuche...  "+tntrunServer2.size()+" / "+tntrunServer2MaxPlayer));
+                        }
+                        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP,40,2);
+                        player.sendMessage(ChatColor.GREEN+"Du wurdest der Spielersuche hinzugefügt...");
+                    }else{
+                        player.sendMessage(ChatColor.RED+"The Server is allready full.");
+                    }
+                }else{
+                    player.teleport(Bukkit.getWorld("GameServer/Tntrun/Server2/server/").getSpawnLocation());
+                    player.setGameMode(GameMode.SPECTATOR);
+                    player.getInventory().clear();
+                    removePlayerFromMatchmaking(player);
+                    player.sendMessage(ChatColor.GRAY+"Du beobachtest nun das Spiel");
+                    Matchmaking.tntrunServer2Spectator.add(player.getUniqueId());
+                }
+            }else{
+                tntrunServer2.remove(player.getUniqueId());
+                updateSigns();
+                player.sendMessage(ChatColor.RED+"Du wurdest aus der Spielersuche entfernt.");
+            }
+        }else if(server.equalsIgnoreCase("tntrunServer3")){
+            if(!tntrunServer3.contains(player.getUniqueId())){
+                World world = Bukkit.getWorld("world");
+                Block bedwarsServerBlock = world.getBlockAt(-31,-54,37);
+                org.bukkit.block.Sign tntrunServerSign = (Sign) bedwarsServerBlock.getState();
+                if(tntrunServerSign.getLine(3).equalsIgnoreCase("")){
+                    if((tntrunServer3.size()+1)<=tntrunServer3MaxPlayer){
+                        removePlayerFromMatchmaking(player);
+                        tntrunServer3.add(player.getUniqueId());
+                        updateSigns();
+                        for(int i = 0;i<tntrunServer3.size();i++){
+                            Bukkit.getPlayer(tntrunServer3.get(i)).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN+"Spielersuche...  "+tntrunServer3.size()+" / "+tntrunServer3MaxPlayer));
+                        }
+                        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP,40,2);
+                        player.sendMessage(ChatColor.GREEN+"Du wurdest der Spielersuche hinzugefügt...");
+                    }else{
+                        player.sendMessage(ChatColor.RED+"The Server is allready full.");
+                    }
+                }else{
+                    player.teleport(Bukkit.getWorld("GameServer/Tntrun/Server3/server/").getSpawnLocation());
+                    player.setGameMode(GameMode.SPECTATOR);
+                    player.getInventory().clear();
+                    removePlayerFromMatchmaking(player);
+                    player.sendMessage(ChatColor.GRAY+"Du beobachtest nun das Spiel");
+                    Matchmaking.tntrunServer3Spectator.add(player.getUniqueId());
+                }
+            }else{
+                tntrunServer3.remove(player.getUniqueId());
+                updateSigns();
+                player.sendMessage(ChatColor.RED+"Du wurdest aus der Spielersuche entfernt.");
+            }
+        }else if(server.equalsIgnoreCase("tntrunServer4")){
+            if(!tntrunServer4.contains(player.getUniqueId())){
+                World world = Bukkit.getWorld("world");
+                Block bedwarsServerBlock = world.getBlockAt(-31,-54,38);
+                org.bukkit.block.Sign tntrunServerSign = (Sign) bedwarsServerBlock.getState();
+                if(tntrunServerSign.getLine(3).equalsIgnoreCase("")){
+                    if((tntrunServer4.size()+1)<=tntrunServer4MaxPlayer){
+                        removePlayerFromMatchmaking(player);
+                        tntrunServer4.add(player.getUniqueId());
+                        updateSigns();
+                        for(int i = 0;i<tntrunServer4.size();i++){
+                            Bukkit.getPlayer(tntrunServer4.get(i)).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN+"Spielersuche...  "+tntrunServer4.size()+" / "+tntrunServer4MaxPlayer));
+                        }
+                        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP,40,2);
+                        player.sendMessage(ChatColor.GREEN+"Du wurdest der Spielersuche hinzugefügt...");
+                    }else{
+                        player.sendMessage(ChatColor.RED+"The Server is allready full.");
+                    }
+                }else{
+                    player.teleport(Bukkit.getWorld("GameServer/Tntrun/Server4/server/").getSpawnLocation());
+                    player.setGameMode(GameMode.SPECTATOR);
+                    player.getInventory().clear();
+                    removePlayerFromMatchmaking(player);
+                    player.sendMessage(ChatColor.GRAY+"Du beobachtest nun das Spiel");
+                    Matchmaking.tntrunServer4Spectator.add(player.getUniqueId());
+                }
+            }else{
+                tntrunServer4.remove(player.getUniqueId());
+                updateSigns();
+                player.sendMessage(ChatColor.RED+"Du wurdest aus der Spielersuche entfernt.");
+            }
         }
     }
 
@@ -491,6 +661,56 @@ public class Matchmaking {
             bedwarsServer4Sign.setLine(3,"");
         }
         bedwarsServer4Sign.update();
+
+//------------------------------------------------------------------TNT-Run--------------------------------------------------------------------------------------------
+
+        Block tntrunServer1Block = world.getBlockAt(-31,-54,35);
+        org.bukkit.block.Sign tntrunServer1Sign = (Sign) tntrunServer1Block.getState();
+        tntrunServer1Sign.setLine(0,ChatColor.GOLD+"TNT-Run");
+        tntrunServer1Sign.setLine(1,ChatColor.GREEN+"Server 1 | SOLO");
+        tntrunServer1Sign.setLine(2,ChatColor.GREEN+""+tntrunServer1.size()+" / "+tntrunServer1MaxPlayer);
+        if(tntrunServer1Running){
+            tntrunServer1Sign.setLine(3,ChatColor.RED+"Spiel läuft");
+        }else{
+            tntrunServer1Sign.setLine(3,"");
+        }
+        tntrunServer1Sign.update();
+
+        Block tntrunServer2Block = world.getBlockAt(-31,-54,36);
+        org.bukkit.block.Sign tntrunServer2Sign = (Sign) tntrunServer2Block.getState();
+        tntrunServer2Sign.setLine(0,ChatColor.GOLD+"TNT-Run");
+        tntrunServer2Sign.setLine(1,ChatColor.GREEN+"Server 2 | SOLO");
+        tntrunServer2Sign.setLine(2,ChatColor.GREEN+""+tntrunServer2.size()+" / "+tntrunServer2MaxPlayer);
+        if(tntrunServer2Running){
+            tntrunServer2Sign.setLine(3,ChatColor.RED+"Spiel läuft");
+        }else{
+            tntrunServer2Sign.setLine(3,"");
+        }
+        tntrunServer2Sign.update();
+
+        Block tntrunServer3Block = world.getBlockAt(-31,-54,37);
+        org.bukkit.block.Sign tntrunServer3Sign = (Sign) tntrunServer3Block.getState();
+        tntrunServer3Sign.setLine(0,ChatColor.GOLD+"TNT-Run");
+        tntrunServer3Sign.setLine(1,ChatColor.GREEN+"Server 3 | SOLO");
+        tntrunServer3Sign.setLine(2,ChatColor.GREEN+""+tntrunServer3.size()+" / "+tntrunServer3MaxPlayer);
+        if(tntrunServer3Running){
+            tntrunServer3Sign.setLine(3,ChatColor.RED+"Spiel läuft");
+        }else{
+            tntrunServer3Sign.setLine(3,"");
+        }
+        tntrunServer3Sign.update();
+
+        Block tntrunServer4Block = world.getBlockAt(-31,-54,38);
+        org.bukkit.block.Sign tntrunServer4Sign = (Sign) tntrunServer4Block.getState();
+        tntrunServer4Sign.setLine(0,ChatColor.GOLD+"TNT-Run");
+        tntrunServer4Sign.setLine(1,ChatColor.GREEN+"Server 4 | SOLO");
+        tntrunServer4Sign.setLine(2,ChatColor.GREEN+""+tntrunServer4.size()+" / "+tntrunServer4MaxPlayer);
+        if(tntrunServer4Running){
+            tntrunServer4Sign.setLine(3,ChatColor.RED+"Spiel läuft");
+        }else{
+            tntrunServer4Sign.setLine(3,"");
+        }
+        tntrunServer4Sign.update();
     }
 
     public static void MatchmakingHandle(){
@@ -711,6 +931,115 @@ public class Matchmaking {
         }
 
 
+//------------------------------------------------------------------TNT-Run--------------------------------------------------------------------------------------------
+
+        if(tntrunServer1.size()>=tntrunServer1MaxPlayer/2){
+            tntrunServer1Countdown--;
+        }else{
+            tntrunServer1Countdown=60;
+        }
+        if(tntrunServer1.size()==0){
+            File server = new File("GameServer/Tntrun/Server1/server");
+            if(server.isDirectory()){
+                if(Bukkit.getWorld("GameServer/Tntrun/Server1/server/").getPlayers().size()==0){
+                    Bukkit.getScheduler().runTask(Main.getPlugin(), ()->{
+                        World unload = Bukkit.getWorld("GameServer/Tntrun/Server1/server/");
+                        unloadWorld(unload);
+                        deleteWorld(new File("GameServer/Tntrun/Server1/server"));
+                    });
+                    tntrunServer1Running=false;
+                    tntrunServer1Countdown=60;
+                }
+            }
+        }
+        if(tntrunServer1.size()==tntrunServer1MaxPlayer&&tntrunServer1Countdown>10) tntrunServer1Countdown=10;
+        if(tntrunServer1Countdown==5){
+            Thread thread = new Thread(()->{new TntrunHandler(tntrunServer1, 1); });
+            thread.start();
+            tntrunServer1Running=true;
+        }
+
+
+        if(tntrunServer2.size()>=tntrunServer2MaxPlayer){
+            tntrunServer2Countdown--;
+        }else{
+            tntrunServer2Countdown=60;
+        }
+        if(tntrunServer2.size()==0){
+            File server = new File("GameServer/Tntrun/Server2/server");
+            if(server.isDirectory()){
+                if(Bukkit.getWorld("GameServer/Tntrun/Server2/server/").getPlayers().size()==0){
+                    Bukkit.getScheduler().runTask(Main.getPlugin(), ()->{
+                        World unload = Bukkit.getWorld("GameServer/Tntrun/Server2/server/");
+                        unloadWorld(unload);
+                        deleteWorld(new File("GameServer/Tntrun/Server2/server"));
+                    });
+                    tntrunServer2Running=false;
+                    tntrunServer2Countdown=60;
+                }
+            }
+        }
+        if(tntrunServer2.size()==tntrunServer2MaxPlayer&&tntrunServer2Countdown>10) tntrunServer2Countdown=10;
+        if(tntrunServer2Countdown==5){
+            Thread thread = new Thread(()->{new TntrunHandler(tntrunServer2, 2); });
+            thread.start();
+            tntrunServer2Running=true;
+        }
+
+
+        if(tntrunServer3.size()>=tntrunServer3MaxPlayer/2){
+            tntrunServer3Countdown--;
+        }else{
+            tntrunServer3Countdown=60;
+        }
+        if(tntrunServer3.size()==0){
+            File server = new File("GameServer/Tntrun/Server3/server");
+            if(server.isDirectory()){
+                if(Bukkit.getWorld("GameServer/Tntrun/Server3/server/").getPlayers().size()==0){
+                    Bukkit.getScheduler().runTask(Main.getPlugin(), ()->{
+                        World unload = Bukkit.getWorld("GameServer/Tntrun/Server3/server/");
+                        unloadWorld(unload);
+                        deleteWorld(new File("GameServer/Tntrun/Server3/server"));
+                    });
+                    tntrunServer3Running=false;
+                    tntrunServer3Countdown=60;
+                }
+            }
+        }
+        if(tntrunServer3.size()==tntrunServer3MaxPlayer&&tntrunServer3Countdown>10) tntrunServer3Countdown=10;
+        if(tntrunServer3Countdown==5){
+            Thread thread = new Thread(()->{new TntrunHandler(tntrunServer3, 3); });
+            thread.start();
+            tntrunServer3Running=true;
+        }
+
+
+        if(tntrunServer4.size()>=tntrunServer4MaxPlayer/2){
+            tntrunServer4Countdown--;
+        }else{
+            tntrunServer4Countdown=60;
+        }
+        if(tntrunServer4.size()==0){
+            File server = new File("GameServer/Tntrun/Server4/server");
+            if(server.isDirectory()){
+                if(Bukkit.getWorld("GameServer/Tntrun/Server4/server/").getPlayers().size()==0){
+                    Bukkit.getScheduler().runTask(Main.getPlugin(), ()->{
+                        World unload = Bukkit.getWorld("GameServer/Tntrun/Server4/server/");
+                        unloadWorld(unload);
+                        deleteWorld(new File("GameServer/Tntrun/Server4/server"));
+                    });
+                    tntrunServer4Running=false;
+                    tntrunServer4Countdown=60;
+                }
+            }
+        }
+        if(tntrunServer4.size()==tntrunServer4MaxPlayer&&tntrunServer4Countdown>10) tntrunServer4Countdown=10;
+        if(tntrunServer4Countdown==5){
+            Thread thread = new Thread(()->{new TntrunHandler(tntrunServer4, 4); });
+            thread.start();
+            tntrunServer4Running=true;
+        }
+
 
 
 
@@ -816,6 +1145,60 @@ public class Matchmaking {
                         Bukkit.getPlayer(bedwarsServer4.get(i)).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN+"Spielersuche...  "+bedwarsServer4.size()+" / "+bedwarsServer4MaxPlayer+"   "+bedwarsServer4Countdown+"s"));
                     }else{
                         Bukkit.getPlayer(bedwarsServer4.get(i)).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN+"Spielersuche...  "+bedwarsServer4.size()+" / "+bedwarsServer4MaxPlayer));
+                    }
+                }
+            }
+        }
+
+//------------------------------------------------------------------TNT-Run--------------------------------------------------------------------------------------------
+
+        if(tntrunServer1.size()>=1){
+            for(int i = 0;i<tntrunServer1.size();i++){
+                Player player = Bukkit.getPlayer(tntrunServer1.get(i));
+                if(player.getWorld().getName().equalsIgnoreCase("world")){
+                    if(tntrunServer1Countdown<60){
+                        Bukkit.getPlayer(tntrunServer1.get(i)).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN+"Spielersuche...  "+tntrunServer1.size()+" / "+tntrunServer1MaxPlayer+"   "+tntrunServer1Countdown+"s"));
+                    }else{
+                        Bukkit.getPlayer(tntrunServer1.get(i)).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN+"Spielersuche...  "+tntrunServer1.size()+" / "+tntrunServer1MaxPlayer));
+                    }
+                }
+            }
+        }
+
+        if(tntrunServer2.size()>=1){
+            for(int i = 0;i<tntrunServer2.size();i++){
+                Player player = Bukkit.getPlayer(tntrunServer2.get(i));
+                if(player.getWorld().getName().equalsIgnoreCase("world")){
+                    if(tntrunServer2Countdown<60){
+                        Bukkit.getPlayer(tntrunServer2.get(i)).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN+"Spielersuche...  "+tntrunServer2.size()+" / "+tntrunServer2MaxPlayer+"   "+tntrunServer2Countdown+"s"));
+                    }else{
+                        Bukkit.getPlayer(tntrunServer2.get(i)).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN+"Spielersuche...  "+tntrunServer2.size()+" / "+tntrunServer2MaxPlayer));
+                    }
+                }
+            }
+        }
+
+        if(tntrunServer3.size()>=1){
+            for(int i = 0;i<tntrunServer3.size();i++){
+                Player player = Bukkit.getPlayer(tntrunServer3.get(i));
+                if(player.getWorld().getName().equalsIgnoreCase("world")){
+                    if(tntrunServer3Countdown<60){
+                        Bukkit.getPlayer(tntrunServer3.get(i)).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN+"Spielersuche...  "+tntrunServer3.size()+" / "+tntrunServer3MaxPlayer+"   "+tntrunServer3Countdown+"s"));
+                    }else{
+                        Bukkit.getPlayer(tntrunServer3.get(i)).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN+"Spielersuche...  "+tntrunServer3.size()+" / "+tntrunServer3MaxPlayer));
+                    }
+                }
+            }
+        }
+
+        if(tntrunServer4.size()>=1){
+            for(int i = 0;i<tntrunServer4.size();i++){
+                Player player = Bukkit.getPlayer(tntrunServer4.get(i));
+                if(player.getWorld().getName().equalsIgnoreCase("world")){
+                    if(tntrunServer4Countdown<60){
+                        Bukkit.getPlayer(tntrunServer4.get(i)).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN+"Spielersuche...  "+tntrunServer4.size()+" / "+tntrunServer4MaxPlayer+"   "+tntrunServer4Countdown+"s"));
+                    }else{
+                        Bukkit.getPlayer(tntrunServer4.get(i)).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN+"Spielersuche...  "+tntrunServer4.size()+" / "+tntrunServer4MaxPlayer));
                     }
                 }
             }

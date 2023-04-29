@@ -77,9 +77,24 @@ public class PlayerInteractListener implements Listener {
                         if(sign.getLine(1).equalsIgnoreCase(ChatColor.GREEN+"Server 4 | TEAM")){
                             Matchmaking.addPlayerToMatchmaking(player, "bedwarsServer4");
                         }
+                    }else if(sign.getLine(0).equalsIgnoreCase(ChatColor.GOLD+"TNT-Run")){
+                        if(sign.getLine(1).equalsIgnoreCase(ChatColor.GREEN+"Server 1 | SOLO")){
+                            Matchmaking.addPlayerToMatchmaking(player, "tntrunServer1");
+                        }
+                        if(sign.getLine(1).equalsIgnoreCase(ChatColor.GREEN+"Server 2 | SOLO")){
+                            Matchmaking.addPlayerToMatchmaking(player, "tntrunServer2");
+                        }
+                        if(sign.getLine(1).equalsIgnoreCase(ChatColor.GREEN+"Server 3 | SOLO")){
+                            Matchmaking.addPlayerToMatchmaking(player, "tntrunServer3");
+                        }
+                        if(sign.getLine(1).equalsIgnoreCase(ChatColor.GREEN+"Server 4 | SOLO")){
+                            Matchmaking.addPlayerToMatchmaking(player, "tntrunServer4");
+                        }
                     }
                 } else if (event.getClickedBlock().getType()==Material.ENDER_CHEST||event.getClickedBlock().getType()==Material.OAK_DOOR||event.getClickedBlock().getType()==Material.ANVIL||event.getClickedBlock().getType()==Material.FURNACE||event.getClickedBlock().getType()==Material.ENCHANTING_TABLE||event.getClickedBlock().getType()==Material.OAK_TRAPDOOR||event.getClickedBlock().getType()==Material.SPRUCE_TRAPDOOR) {
-                    event.setCancelled(true);
+                    if(!(player.getGameMode() == GameMode.CREATIVE)){
+                        event.setCancelled(true);
+                    }
                 }
             }catch(Exception e){}
         }

@@ -3,7 +3,9 @@ package server.games.bedwars;
 import org.bukkit.*;
 import org.bukkit.block.data.type.Bed;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.SplashPotion;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -32,14 +34,14 @@ public class BedwarsListeners implements Listener {
     public void onClick(InventoryClickEvent event){
         if(event.getWhoClicked() instanceof Player){
             Player player = (Player) event.getWhoClicked();
-            if(player.getWorld().getName().equalsIgnoreCase("GameServer/Bedwars/Server1/server/")||player.getWorld().getName().equalsIgnoreCase("GameServer/Bedwars/Server2/server/")||player.getWorld().getName().equalsIgnoreCase("GameServer/Bedwars/Server3/server/")||player.getWorld().getName().equalsIgnoreCase("GameServer/Bedwars/Server4/server/")){
+            if(player.getWorld().getName().equalsIgnoreCase("GameServer/Bedwars/Server1/server/")){
                 if(event.getView().getTitle().equalsIgnoreCase(ChatColor.GOLD+"Bedwars-Shop")){
                     if(!event.getClick().isShiftClick()) {
                         if (event.getRawSlot() < 54) {
                             event.setCancelled(true);
                             switch (event.getCurrentItem().getType()) {
                                 default:
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case STONE_SWORD:
                                     if (removeIron(BedwarsShop.stoneSwordCost, player)) {
@@ -47,7 +49,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player,1);
                                     break;
                                 case IRON_SWORD:
                                     if (removeGold(BedwarsShop.ironSwordCost, player)) {
@@ -55,7 +57,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player,1);
                                     break;
                                 case DIAMOND_SWORD:
                                     if (removeDiamond(BedwarsShop.diamondSwordCost, player)) {
@@ -63,7 +65,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case STONE_PICKAXE:
                                     if (removeIron(BedwarsShop.stonePickaxeCost, player)) {
@@ -71,7 +73,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case IRON_PICKAXE:
                                     if (removeGold(BedwarsShop.ironPickaxeCost, player)) {
@@ -79,7 +81,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case DIAMOND_PICKAXE:
                                     if (removeDiamond(BedwarsShop.diamondPickaxeCost, player)) {
@@ -87,7 +89,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case STONE_AXE:
                                     if (removeIron(BedwarsShop.stoneAxeCost, player)) {
@@ -95,7 +97,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case IRON_AXE:
                                     if (removeGold(BedwarsShop.ironAxeCost, player)) {
@@ -103,7 +105,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case DIAMOND_AXE:
                                     if (removeDiamond(BedwarsShop.diamondAxeCost, player)) {
@@ -111,7 +113,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case IRON_CHESTPLATE:
                                     if (removeIron(BedwarsShop.ironChestplateCost, player)) {
@@ -122,7 +124,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case DIAMOND_CHESTPLATE:
                                     if (removeGold(BedwarsShop.diamondChestplateCost, player)) {
@@ -133,7 +135,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case NETHERITE_CHESTPLATE:
                                     if (removeDiamond(BedwarsShop.netherideChestplateCost, player)) {
@@ -144,26 +146,28 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
-                                case SPLASH_POTION:
-                                    Potion potion = Potion.fromItemStack(event.getCurrentItem());
-                                    if (potion.getType() == PotionType.INSTANT_DAMAGE) {
+                                case POTION:
+                                    if (event.getSlot()==27) {
                                         if (removeGold(BedwarsShop.instantDamageCost, player)) {
                                             Potion instantDamage = new Potion(PotionType.INSTANT_DAMAGE);
+                                            instantDamage.setSplash(true);
+                                            instantDamage.setLevel(2);
                                             givePlayerItem(player, instantDamage.toItemStack(1));
                                         } else {
                                             player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                         }
-                                    } else if (potion.getType() == PotionType.INVISIBILITY) {
+                                    } else if (event.getSlot()==28) {
                                         if (removeGold(BedwarsShop.invisibleCost, player)) {
                                             Potion instantDamage = new Potion(PotionType.INVISIBILITY);
+                                            instantDamage.setSplash(true);
                                             givePlayerItem(player, instantDamage.toItemStack(1));
                                         } else {
                                             player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                         }
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case BOW:
                                     if (removeGold(BedwarsShop.bowCost, player)) {
@@ -171,7 +175,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case SHIELD:
                                     if (removeIron(BedwarsShop.shieldCost, player)) {
@@ -179,7 +183,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case RED_WOOL:
                                     if (removeIron(BedwarsShop.woolCost, player)) {
@@ -189,7 +193,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case YELLOW_WOOL:
                                     if (removeIron(BedwarsShop.woolCost, player)) {
@@ -199,7 +203,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case GREEN_WOOL:
                                     if (removeIron(BedwarsShop.woolCost, player)) {
@@ -209,7 +213,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case BLUE_WOOL:
                                     if (removeIron(BedwarsShop.woolCost, player)) {
@@ -219,7 +223,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case STONE:
                                     if (removeGold(BedwarsShop.stoneCost, player)) {
@@ -229,7 +233,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case BRICKS:
                                     if (removeGold(BedwarsShop.bricksCost, player)) {
@@ -239,7 +243,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case END_STONE:
                                     if (removeDiamond(BedwarsShop.endstoneCost, player)) {
@@ -249,7 +253,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case STICK:
                                     if (removeGold(BedwarsShop.knockbackStickCost, player)) {
@@ -261,7 +265,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case ENDER_PEARL:
                                     if (removeDiamond(BedwarsShop.enderperlCost, player)) {
@@ -269,7 +273,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case FISHING_ROD:
                                     if (removeGold(BedwarsShop.fishingrotCost, player)) {
@@ -277,7 +281,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case SHEARS:
                                     if (removeIron(BedwarsShop.shearCost, player)) {
@@ -285,7 +289,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case ARROW:
                                     if (removeGold(BedwarsShop.arrowCost, player)) {
@@ -295,7 +299,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case SNOWBALL:
                                     if (removeIron(BedwarsShop.snowballCost, player)) {
@@ -305,7 +309,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case COOKED_BEEF:
                                     if (removeIron(BedwarsShop.steakCost, player)) {
@@ -315,7 +319,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case GOLDEN_APPLE:
                                     if (removeDiamond(BedwarsShop.goldappleCost, player)) {
@@ -323,7 +327,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case LAVA_BUCKET:
                                     if (removeGold(BedwarsShop.lavabukkitCost, player)) {
@@ -331,7 +335,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case FLINT_AND_STEEL:
                                     if (removeIron(BedwarsShop.flintandsteelCost, player)) {
@@ -339,7 +343,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case WATER_BUCKET:
                                     if (removeGold(BedwarsShop.waterbukkitCost, player)) {
@@ -347,7 +351,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case COBWEB:
                                     if (removeIron(BedwarsShop.cobwebCost, player)) {
@@ -357,7 +361,7 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
                                     break;
                                 case TOTEM_OF_UNDYING:
                                     if (removeDiamond(BedwarsShop.totemCost, player)) {
@@ -365,7 +369,1336 @@ public class BedwarsListeners implements Listener {
                                     } else {
                                         player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
                                     }
-                                    new BedwarsShop(player);
+                                    new BedwarsShop(player, 1);
+                                    break;
+                                case IRON_INGOT:
+                                    if(BedwarsWorldInitialer.brm[1].ironLevel==1){
+                                        if(removeGold(BedwarsShop.upgradeIronLevel1Cost, player)){
+                                            BedwarsWorldInitialer.brm[1].ironLevel++;
+                                            for(Player Sessionplayers : Bukkit.getWorld("GameServer/Bedwars/Server1/server/").getPlayers()){
+                                                Sessionplayers.sendMessage(ChatColor.GOLD+"[Bedwars] "+ChatColor.GREEN+"Eisenspawner sind nun auf Level "+BedwarsWorldInitialer.brm[1].ironLevel);
+                                            }
+                                        }else{
+                                            player.sendMessage(ChatColor.RED+"Das kannst du dir nicht kaufen");
+                                        }
+                                    }else if(BedwarsWorldInitialer.brm[1].ironLevel==2){
+                                        if(removeDiamond(BedwarsShop.upgradeIronLevel2Cost, player)){
+                                            BedwarsWorldInitialer.brm[1].ironLevel++;
+                                            for(Player Sessionplayers : Bukkit.getWorld("GameServer/Bedwars/Server1/server/").getPlayers()){
+                                                Sessionplayers.sendMessage(ChatColor.GOLD+"[Bedwars] "+ChatColor.GREEN+"Eisenspawner sind nun auf Level "+BedwarsWorldInitialer.brm[1].ironLevel);
+                                            }
+                                        }else{
+                                            player.sendMessage(ChatColor.RED+"Das kannst du dir nicht kaufen");
+                                        }
+                                    }else{
+                                        player.sendMessage(ChatColor.RED+"Die Eisenspawner sind bereits auf dem maximales Level");
+                                    }
+                                    new BedwarsShop(player, 1);
+                                    break;
+                                case GOLD_INGOT:
+                                    if(BedwarsWorldInitialer.brm[1].goldLevel==1){
+                                        if(removeGold(BedwarsShop.upgradeGoldLevel1Cost, player)){
+                                            BedwarsWorldInitialer.brm[1].goldLevel++;
+                                            for(Player Sessionplayers : Bukkit.getWorld("GameServer/Bedwars/Server1/server/").getPlayers()){
+                                                Sessionplayers.sendMessage(ChatColor.GOLD+"[Bedwars] "+ChatColor.GREEN+"Goldspawner sind nun auf Level "+BedwarsWorldInitialer.brm[1].goldLevel);
+                                            }
+                                        }else{
+                                            player.sendMessage(ChatColor.RED+"Das kannst du dir nicht kaufen");
+                                        }
+                                    }else if(BedwarsWorldInitialer.brm[1].goldLevel==2){
+                                        if(removeDiamond(BedwarsShop.upgradeGoldLevel2Cost, player)){
+                                            BedwarsWorldInitialer.brm[1].goldLevel++;
+                                            for(Player Sessionplayers : Bukkit.getWorld("GameServer/Bedwars/Server1/server/").getPlayers()){
+                                                Sessionplayers.sendMessage(ChatColor.GOLD+"[Bedwars] "+ChatColor.GREEN+"Goldspawner sind nun auf Level "+BedwarsWorldInitialer.brm[1].goldLevel);
+                                            }
+                                        }else{
+                                            player.sendMessage(ChatColor.RED+"Das kannst du dir nicht kaufen");
+                                        }
+                                    }else{
+                                        player.sendMessage(ChatColor.RED+"Die Goldspawner sind bereits auf dem maximales Level");
+                                    }
+                                    new BedwarsShop(player, 1);
+                                    break;
+                                case DIAMOND:
+                                    if(BedwarsWorldInitialer.brm[1].diaLevel==1){
+                                        if(removeGold(BedwarsShop.upgradeDiaLevel1Cost, player)){
+                                            BedwarsWorldInitialer.brm[1].diaLevel++;
+                                            for(Player Sessionplayers : Bukkit.getWorld("GameServer/Bedwars/Server1/server/").getPlayers()){
+                                                Sessionplayers.sendMessage(ChatColor.GOLD+"[Bedwars] "+ChatColor.GREEN+"Diamantenspawner sind nun auf Level "+BedwarsWorldInitialer.brm[1].diaLevel);
+                                            }
+                                        }else{
+                                            player.sendMessage(ChatColor.RED+"Das kannst du dir nicht kaufen");
+                                        }
+                                    }else if(BedwarsWorldInitialer.brm[1].diaLevel==2){
+                                        if(removeDiamond(BedwarsShop.upgradeDiaLevel2Cost, player)){
+                                            BedwarsWorldInitialer.brm[1].diaLevel++;
+                                            for(Player Sessionplayers : Bukkit.getWorld("GameServer/Bedwars/Server1/server/").getPlayers()){
+                                                Sessionplayers.sendMessage(ChatColor.GOLD+"[Bedwars] "+ChatColor.GREEN+"Diamantenspawner sind nun auf Level "+BedwarsWorldInitialer.brm[1].diaLevel);
+                                            }
+                                        }else{
+                                            player.sendMessage(ChatColor.RED+"Das kannst du dir nicht kaufen");
+                                        }
+                                    }else{
+                                        player.sendMessage(ChatColor.RED+"Diamantenspawner sind bereits auf dem maximalen Level");
+                                    }
+                                    new BedwarsShop(player, 1);
+                                    break;
+                                case BARRIER:
+                                    player.closeInventory();
+                                    break;
+                            }
+                            player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 15, 2);
+                        }
+                    }else{
+                        event.setCancelled(true);
+                    }
+                }
+            }else if(player.getWorld().getName().equalsIgnoreCase("GameServer/Bedwars/Server2/server/")){
+                if(event.getView().getTitle().equalsIgnoreCase(ChatColor.GOLD+"Bedwars-Shop")){
+                    if(!event.getClick().isShiftClick()) {
+                        if (event.getRawSlot() < 54) {
+                            event.setCancelled(true);
+                            switch (event.getCurrentItem().getType()) {
+                                default:
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case STONE_SWORD:
+                                    if (removeIron(BedwarsShop.stoneSwordCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.STONE_SWORD));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case IRON_SWORD:
+                                    if (removeGold(BedwarsShop.ironSwordCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.IRON_SWORD));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case DIAMOND_SWORD:
+                                    if (removeDiamond(BedwarsShop.diamondSwordCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.DIAMOND_SWORD));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case STONE_PICKAXE:
+                                    if (removeIron(BedwarsShop.stonePickaxeCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.STONE_PICKAXE));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case IRON_PICKAXE:
+                                    if (removeGold(BedwarsShop.ironPickaxeCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.IRON_PICKAXE));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case DIAMOND_PICKAXE:
+                                    if (removeDiamond(BedwarsShop.diamondPickaxeCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.DIAMOND_PICKAXE));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case STONE_AXE:
+                                    if (removeIron(BedwarsShop.stoneAxeCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.STONE_AXE));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case IRON_AXE:
+                                    if (removeGold(BedwarsShop.ironAxeCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.IRON_AXE));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case DIAMOND_AXE:
+                                    if (removeDiamond(BedwarsShop.diamondAxeCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.DIAMOND_AXE));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case IRON_CHESTPLATE:
+                                    if (removeIron(BedwarsShop.ironChestplateCost, player)) {
+                                        player.getInventory().setItem(36, new ItemStack(Material.IRON_BOOTS));
+                                        player.getInventory().setItem(37, new ItemStack(Material.IRON_LEGGINGS));
+                                        player.getInventory().setItem(38, new ItemStack(Material.IRON_CHESTPLATE));
+                                        player.getInventory().setItem(39, new ItemStack(Material.IRON_HELMET));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case DIAMOND_CHESTPLATE:
+                                    if (removeGold(BedwarsShop.diamondChestplateCost, player)) {
+                                        player.getInventory().setItem(36, new ItemStack(Material.DIAMOND_BOOTS));
+                                        player.getInventory().setItem(37, new ItemStack(Material.DIAMOND_LEGGINGS));
+                                        player.getInventory().setItem(38, new ItemStack(Material.DIAMOND_CHESTPLATE));
+                                        player.getInventory().setItem(39, new ItemStack(Material.DIAMOND_HELMET));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case NETHERITE_CHESTPLATE:
+                                    if (removeDiamond(BedwarsShop.netherideChestplateCost, player)) {
+                                        player.getInventory().setItem(36, new ItemStack(Material.NETHERITE_BOOTS));
+                                        player.getInventory().setItem(37, new ItemStack(Material.NETHERITE_LEGGINGS));
+                                        player.getInventory().setItem(38, new ItemStack(Material.NETHERITE_CHESTPLATE));
+                                        player.getInventory().setItem(39, new ItemStack(Material.NETHERITE_HELMET));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case SPLASH_POTION:
+                                    if (event.getSlot()==27) {
+                                        if (removeGold(BedwarsShop.instantDamageCost, player)) {
+                                            Potion instantDamage = new Potion(PotionType.INSTANT_DAMAGE);
+                                            instantDamage.setSplash(true);
+                                            instantDamage.setLevel(2);
+                                            givePlayerItem(player, instantDamage.toItemStack(1));
+                                        } else {
+                                            player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                        }
+                                    } else if (event.getSlot()==28) {
+                                        if (removeGold(BedwarsShop.invisibleCost, player)) {
+                                            Potion instantDamage = new Potion(PotionType.INVISIBILITY);
+                                            instantDamage.setSplash(true);
+                                            givePlayerItem(player, instantDamage.toItemStack(1));
+                                        } else {
+                                            player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                        }
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case BOW:
+                                    if (removeGold(BedwarsShop.bowCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.BOW));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case SHIELD:
+                                    if (removeIron(BedwarsShop.shieldCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.SHIELD));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case RED_WOOL:
+                                    if (removeIron(BedwarsShop.woolCost, player)) {
+                                        ItemStack wool = new ItemStack(Material.RED_WOOL);
+                                        wool.setAmount(16);
+                                        givePlayerItem(player, wool);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case YELLOW_WOOL:
+                                    if (removeIron(BedwarsShop.woolCost, player)) {
+                                        ItemStack wool = new ItemStack(Material.YELLOW_WOOL);
+                                        wool.setAmount(16);
+                                        givePlayerItem(player, wool);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case GREEN_WOOL:
+                                    if (removeIron(BedwarsShop.woolCost, player)) {
+                                        ItemStack wool = new ItemStack(Material.GREEN_WOOL);
+                                        wool.setAmount(16);
+                                        givePlayerItem(player, wool);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case BLUE_WOOL:
+                                    if (removeIron(BedwarsShop.woolCost, player)) {
+                                        ItemStack wool = new ItemStack(Material.BLUE_WOOL);
+                                        wool.setAmount(16);
+                                        givePlayerItem(player, wool);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case STONE:
+                                    if (removeGold(BedwarsShop.stoneCost, player)) {
+                                        ItemStack stone = new ItemStack(Material.STONE);
+                                        stone.setAmount(16);
+                                        givePlayerItem(player, stone);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case BRICKS:
+                                    if (removeGold(BedwarsShop.bricksCost, player)) {
+                                        ItemStack bricks = new ItemStack(Material.BRICKS);
+                                        bricks.setAmount(16);
+                                        givePlayerItem(player, bricks);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case END_STONE:
+                                    if (removeDiamond(BedwarsShop.endstoneCost, player)) {
+                                        ItemStack endstone = new ItemStack(Material.END_STONE);
+                                        endstone.setAmount(16);
+                                        givePlayerItem(player, endstone);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case STICK:
+                                    if (removeGold(BedwarsShop.knockbackStickCost, player)) {
+                                        ItemStack stick = new ItemStack(Material.STICK);
+                                        ItemMeta stickMeta = stick.getItemMeta();
+                                        stickMeta.addEnchant(Enchantment.KNOCKBACK, 2, true);
+                                        stick.setItemMeta(stickMeta);
+                                        givePlayerItem(player, stick);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case ENDER_PEARL:
+                                    if (removeDiamond(BedwarsShop.enderperlCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.ENDER_PEARL));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case FISHING_ROD:
+                                    if (removeGold(BedwarsShop.fishingrotCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.FISHING_ROD));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case SHEARS:
+                                    if (removeIron(BedwarsShop.shearCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.SHEARS));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case ARROW:
+                                    if (removeGold(BedwarsShop.arrowCost, player)) {
+                                        ItemStack arrow = new ItemStack(Material.ARROW);
+                                        arrow.setAmount(8);
+                                        givePlayerItem(player, arrow);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case SNOWBALL:
+                                    if (removeIron(BedwarsShop.snowballCost, player)) {
+                                        ItemStack snowball = new ItemStack(Material.SNOWBALL);
+                                        snowball.setAmount(8);
+                                        givePlayerItem(player, snowball);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case COOKED_BEEF:
+                                    if (removeIron(BedwarsShop.steakCost, player)) {
+                                        ItemStack steak = new ItemStack(Material.COOKED_BEEF);
+                                        steak.setAmount(16);
+                                        givePlayerItem(player, steak);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case GOLDEN_APPLE:
+                                    if (removeDiamond(BedwarsShop.goldappleCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.GOLDEN_APPLE));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case LAVA_BUCKET:
+                                    if (removeGold(BedwarsShop.lavabukkitCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.LAVA_BUCKET));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case FLINT_AND_STEEL:
+                                    if (removeIron(BedwarsShop.flintandsteelCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.FLINT_AND_STEEL));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case WATER_BUCKET:
+                                    if (removeGold(BedwarsShop.waterbukkitCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.WATER_BUCKET));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case COBWEB:
+                                    if (removeIron(BedwarsShop.cobwebCost, player)) {
+                                        ItemStack cobweb = new ItemStack(Material.COBWEB);
+                                        cobweb.setAmount(5);
+                                        givePlayerItem(player, cobweb);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case TOTEM_OF_UNDYING:
+                                    if (removeDiamond(BedwarsShop.totemCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.TOTEM_OF_UNDYING));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case IRON_INGOT:
+                                    if(BedwarsWorldInitialer.brm[2].ironLevel==1){
+                                        if(removeGold(BedwarsShop.upgradeIronLevel1Cost, player)){
+                                            BedwarsWorldInitialer.brm[2].ironLevel++;
+                                            for(Player Sessionplayers : Bukkit.getWorld("GameServer/Bedwars/Server2/server/").getPlayers()){
+                                                Sessionplayers.sendMessage(ChatColor.GOLD+"[Bedwars] "+ChatColor.GREEN+"Eisenspawner sind nun auf Level "+BedwarsWorldInitialer.brm[2].ironLevel);
+                                            }
+                                        }else{
+                                            player.sendMessage(ChatColor.RED+"Das kannst du dir nicht kaufen");
+                                        }
+                                    }else if(BedwarsWorldInitialer.brm[2].ironLevel==2){
+                                        if(removeDiamond(BedwarsShop.upgradeIronLevel2Cost, player)){
+                                            BedwarsWorldInitialer.brm[2].ironLevel++;
+                                            for(Player Sessionplayers : Bukkit.getWorld("GameServer/Bedwars/Server2/server/").getPlayers()){
+                                                Sessionplayers.sendMessage(ChatColor.GOLD+"[Bedwars] "+ChatColor.GREEN+"Eisenspawner sind nun auf Level "+BedwarsWorldInitialer.brm[2].ironLevel);
+                                            }
+                                        }else{
+                                            player.sendMessage(ChatColor.RED+"Das kannst du dir nicht kaufen");
+                                        }
+                                    }else{
+                                        player.sendMessage(ChatColor.RED+"Die Eisenspawner sind bereits auf dem maximales Level");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case GOLD_INGOT:
+                                    if(BedwarsWorldInitialer.brm[2].goldLevel==1){
+                                        if(removeGold(BedwarsShop.upgradeGoldLevel1Cost, player)){
+                                            BedwarsWorldInitialer.brm[2].goldLevel++;
+                                            for(Player Sessionplayers : Bukkit.getWorld("GameServer/Bedwars/Server2/server/").getPlayers()){
+                                                Sessionplayers.sendMessage(ChatColor.GOLD+"[Bedwars] "+ChatColor.GREEN+"Goldspawner sind nun auf Level "+BedwarsWorldInitialer.brm[2].goldLevel);
+                                            }
+                                        }else{
+                                            player.sendMessage(ChatColor.RED+"Das kannst du dir nicht kaufen");
+                                        }
+                                    }else if(BedwarsWorldInitialer.brm[2].goldLevel==2){
+                                        if(removeDiamond(BedwarsShop.upgradeGoldLevel2Cost, player)){
+                                            BedwarsWorldInitialer.brm[2].goldLevel++;
+                                            for(Player Sessionplayers : Bukkit.getWorld("GameServer/Bedwars/Server2/server/").getPlayers()){
+                                                Sessionplayers.sendMessage(ChatColor.GOLD+"[Bedwars] "+ChatColor.GREEN+"Goldspawner sind nun auf Level "+BedwarsWorldInitialer.brm[2].goldLevel);
+                                            }
+                                        }else{
+                                            player.sendMessage(ChatColor.RED+"Das kannst du dir nicht kaufen");
+                                        }
+                                    }else{
+                                        player.sendMessage(ChatColor.RED+"Die Goldspawner sind bereits auf dem maximales Level");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case DIAMOND:
+                                    if(BedwarsWorldInitialer.brm[2].diaLevel==1){
+                                        if(removeGold(BedwarsShop.upgradeDiaLevel1Cost, player)){
+                                            BedwarsWorldInitialer.brm[2].diaLevel++;
+                                            for(Player Sessionplayers : Bukkit.getWorld("GameServer/Bedwars/Server2/server/").getPlayers()){
+                                                Sessionplayers.sendMessage(ChatColor.GOLD+"[Bedwars] "+ChatColor.GREEN+"Diamantenspawner sind nun auf Level "+BedwarsWorldInitialer.brm[2].diaLevel);
+                                            }
+                                        }else{
+                                            player.sendMessage(ChatColor.RED+"Das kannst du dir nicht kaufen");
+                                        }
+                                    }else if(BedwarsWorldInitialer.brm[2].diaLevel==2){
+                                        if(removeDiamond(BedwarsShop.upgradeDiaLevel2Cost, player)){
+                                            BedwarsWorldInitialer.brm[2].diaLevel++;
+                                            for(Player Sessionplayers : Bukkit.getWorld("GameServer/Bedwars/Server2/server/").getPlayers()){
+                                                Sessionplayers.sendMessage(ChatColor.GOLD+"[Bedwars] "+ChatColor.GREEN+"Diamantenspawner sind nun auf Level "+BedwarsWorldInitialer.brm[2].diaLevel);
+                                            }
+                                        }else{
+                                            player.sendMessage(ChatColor.RED+"Das kannst du dir nicht kaufen");
+                                        }
+                                    }else{
+                                        player.sendMessage(ChatColor.RED+"Diamantenspawner sind bereits auf dem maximalen Level");
+                                    }
+                                    new BedwarsShop(player, 2);
+                                    break;
+                                case BARRIER:
+                                    player.closeInventory();
+                                    break;
+                            }
+                            player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 15, 2);
+                        }
+                    }else{
+                        event.setCancelled(true);
+                    }
+                }
+            }if(player.getWorld().getName().equalsIgnoreCase("GameServer/Bedwars/Server3/server/")){
+                if(event.getView().getTitle().equalsIgnoreCase(ChatColor.GOLD+"Bedwars-Shop")){
+                    if(!event.getClick().isShiftClick()) {
+                        if (event.getRawSlot() < 54) {
+                            event.setCancelled(true);
+                            switch (event.getCurrentItem().getType()) {
+                                default:
+                                    new BedwarsShop(player,3);
+                                    break;
+                                case STONE_SWORD:
+                                    if (removeIron(BedwarsShop.stoneSwordCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.STONE_SWORD));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player,3);
+                                    break;
+                                case IRON_SWORD:
+                                    if (removeGold(BedwarsShop.ironSwordCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.IRON_SWORD));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player,3);
+                                    break;
+                                case DIAMOND_SWORD:
+                                    if (removeDiamond(BedwarsShop.diamondSwordCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.DIAMOND_SWORD));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case STONE_PICKAXE:
+                                    if (removeIron(BedwarsShop.stonePickaxeCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.STONE_PICKAXE));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case IRON_PICKAXE:
+                                    if (removeGold(BedwarsShop.ironPickaxeCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.IRON_PICKAXE));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case DIAMOND_PICKAXE:
+                                    if (removeDiamond(BedwarsShop.diamondPickaxeCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.DIAMOND_PICKAXE));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case STONE_AXE:
+                                    if (removeIron(BedwarsShop.stoneAxeCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.STONE_AXE));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case IRON_AXE:
+                                    if (removeGold(BedwarsShop.ironAxeCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.IRON_AXE));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case DIAMOND_AXE:
+                                    if (removeDiamond(BedwarsShop.diamondAxeCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.DIAMOND_AXE));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case IRON_CHESTPLATE:
+                                    if (removeIron(BedwarsShop.ironChestplateCost, player)) {
+                                        player.getInventory().setItem(36, new ItemStack(Material.IRON_BOOTS));
+                                        player.getInventory().setItem(37, new ItemStack(Material.IRON_LEGGINGS));
+                                        player.getInventory().setItem(38, new ItemStack(Material.IRON_CHESTPLATE));
+                                        player.getInventory().setItem(39, new ItemStack(Material.IRON_HELMET));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case DIAMOND_CHESTPLATE:
+                                    if (removeGold(BedwarsShop.diamondChestplateCost, player)) {
+                                        player.getInventory().setItem(36, new ItemStack(Material.DIAMOND_BOOTS));
+                                        player.getInventory().setItem(37, new ItemStack(Material.DIAMOND_LEGGINGS));
+                                        player.getInventory().setItem(38, new ItemStack(Material.DIAMOND_CHESTPLATE));
+                                        player.getInventory().setItem(39, new ItemStack(Material.DIAMOND_HELMET));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case NETHERITE_CHESTPLATE:
+                                    if (removeDiamond(BedwarsShop.netherideChestplateCost, player)) {
+                                        player.getInventory().setItem(36, new ItemStack(Material.NETHERITE_BOOTS));
+                                        player.getInventory().setItem(37, new ItemStack(Material.NETHERITE_LEGGINGS));
+                                        player.getInventory().setItem(38, new ItemStack(Material.NETHERITE_CHESTPLATE));
+                                        player.getInventory().setItem(39, new ItemStack(Material.NETHERITE_HELMET));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case SPLASH_POTION:
+                                    if (event.getSlot()==27) {
+                                        if (removeGold(BedwarsShop.instantDamageCost, player)) {
+                                            Potion instantDamage = new Potion(PotionType.INSTANT_DAMAGE);
+                                            instantDamage.setSplash(true);
+                                            instantDamage.setLevel(2);
+                                            givePlayerItem(player, instantDamage.toItemStack(1));
+                                        } else {
+                                            player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                        }
+                                    } else if (event.getSlot()==28) {
+                                        if (removeGold(BedwarsShop.invisibleCost, player)) {
+                                            Potion instantDamage = new Potion(PotionType.INVISIBILITY);
+                                            instantDamage.setSplash(true);
+                                            givePlayerItem(player, instantDamage.toItemStack(1));
+                                        } else {
+                                            player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                        }
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case BOW:
+                                    if (removeGold(BedwarsShop.bowCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.BOW));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case SHIELD:
+                                    if (removeIron(BedwarsShop.shieldCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.SHIELD));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case RED_WOOL:
+                                    if (removeIron(BedwarsShop.woolCost, player)) {
+                                        ItemStack wool = new ItemStack(Material.RED_WOOL);
+                                        wool.setAmount(16);
+                                        givePlayerItem(player, wool);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case YELLOW_WOOL:
+                                    if (removeIron(BedwarsShop.woolCost, player)) {
+                                        ItemStack wool = new ItemStack(Material.YELLOW_WOOL);
+                                        wool.setAmount(16);
+                                        givePlayerItem(player, wool);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case GREEN_WOOL:
+                                    if (removeIron(BedwarsShop.woolCost, player)) {
+                                        ItemStack wool = new ItemStack(Material.GREEN_WOOL);
+                                        wool.setAmount(16);
+                                        givePlayerItem(player, wool);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case BLUE_WOOL:
+                                    if (removeIron(BedwarsShop.woolCost, player)) {
+                                        ItemStack wool = new ItemStack(Material.BLUE_WOOL);
+                                        wool.setAmount(16);
+                                        givePlayerItem(player, wool);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case STONE:
+                                    if (removeGold(BedwarsShop.stoneCost, player)) {
+                                        ItemStack stone = new ItemStack(Material.STONE);
+                                        stone.setAmount(16);
+                                        givePlayerItem(player, stone);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case BRICKS:
+                                    if (removeGold(BedwarsShop.bricksCost, player)) {
+                                        ItemStack bricks = new ItemStack(Material.BRICKS);
+                                        bricks.setAmount(16);
+                                        givePlayerItem(player, bricks);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case END_STONE:
+                                    if (removeDiamond(BedwarsShop.endstoneCost, player)) {
+                                        ItemStack endstone = new ItemStack(Material.END_STONE);
+                                        endstone.setAmount(16);
+                                        givePlayerItem(player, endstone);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case STICK:
+                                    if (removeGold(BedwarsShop.knockbackStickCost, player)) {
+                                        ItemStack stick = new ItemStack(Material.STICK);
+                                        ItemMeta stickMeta = stick.getItemMeta();
+                                        stickMeta.addEnchant(Enchantment.KNOCKBACK, 2, true);
+                                        stick.setItemMeta(stickMeta);
+                                        givePlayerItem(player, stick);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case ENDER_PEARL:
+                                    if (removeDiamond(BedwarsShop.enderperlCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.ENDER_PEARL));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case FISHING_ROD:
+                                    if (removeGold(BedwarsShop.fishingrotCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.FISHING_ROD));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case SHEARS:
+                                    if (removeIron(BedwarsShop.shearCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.SHEARS));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case ARROW:
+                                    if (removeGold(BedwarsShop.arrowCost, player)) {
+                                        ItemStack arrow = new ItemStack(Material.ARROW);
+                                        arrow.setAmount(8);
+                                        givePlayerItem(player, arrow);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case SNOWBALL:
+                                    if (removeIron(BedwarsShop.snowballCost, player)) {
+                                        ItemStack snowball = new ItemStack(Material.SNOWBALL);
+                                        snowball.setAmount(8);
+                                        givePlayerItem(player, snowball);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case COOKED_BEEF:
+                                    if (removeIron(BedwarsShop.steakCost, player)) {
+                                        ItemStack steak = new ItemStack(Material.COOKED_BEEF);
+                                        steak.setAmount(16);
+                                        givePlayerItem(player, steak);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case GOLDEN_APPLE:
+                                    if (removeDiamond(BedwarsShop.goldappleCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.GOLDEN_APPLE));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case LAVA_BUCKET:
+                                    if (removeGold(BedwarsShop.lavabukkitCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.LAVA_BUCKET));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case FLINT_AND_STEEL:
+                                    if (removeIron(BedwarsShop.flintandsteelCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.FLINT_AND_STEEL));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case WATER_BUCKET:
+                                    if (removeGold(BedwarsShop.waterbukkitCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.WATER_BUCKET));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case COBWEB:
+                                    if (removeIron(BedwarsShop.cobwebCost, player)) {
+                                        ItemStack cobweb = new ItemStack(Material.COBWEB);
+                                        cobweb.setAmount(5);
+                                        givePlayerItem(player, cobweb);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case TOTEM_OF_UNDYING:
+                                    if (removeDiamond(BedwarsShop.totemCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.TOTEM_OF_UNDYING));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case IRON_INGOT:
+                                    if(BedwarsWorldInitialer.brm[3].ironLevel==1){
+                                        if(removeGold(BedwarsShop.upgradeIronLevel1Cost, player)){
+                                            BedwarsWorldInitialer.brm[3].ironLevel++;
+                                            for(Player Sessionplayers : Bukkit.getWorld("GameServer/Bedwars/Server3/server/").getPlayers()){
+                                                Sessionplayers.sendMessage(ChatColor.GOLD+"[Bedwars] "+ChatColor.GREEN+"Eisenspawner sind nun auf Level "+BedwarsWorldInitialer.brm[3].ironLevel);
+                                            }
+                                        }else{
+                                            player.sendMessage(ChatColor.RED+"Das kannst du dir nicht kaufen");
+                                        }
+                                    }else if(BedwarsWorldInitialer.brm[3].ironLevel==2){
+                                        if(removeDiamond(BedwarsShop.upgradeIronLevel2Cost, player)){
+                                            BedwarsWorldInitialer.brm[3].ironLevel++;
+                                            for(Player Sessionplayers : Bukkit.getWorld("GameServer/Bedwars/Server3/server/").getPlayers()){
+                                                Sessionplayers.sendMessage(ChatColor.GOLD+"[Bedwars] "+ChatColor.GREEN+"Eisenspawner sind nun auf Level "+BedwarsWorldInitialer.brm[3].ironLevel);
+                                            }
+                                        }else{
+                                            player.sendMessage(ChatColor.RED+"Das kannst du dir nicht kaufen");
+                                        }
+                                    }else{
+                                        player.sendMessage(ChatColor.RED+"Die Eisenspawner sind bereits auf dem maximales Level");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case GOLD_INGOT:
+                                    if(BedwarsWorldInitialer.brm[3].goldLevel==1){
+                                        if(removeGold(BedwarsShop.upgradeGoldLevel1Cost, player)){
+                                            BedwarsWorldInitialer.brm[3].goldLevel++;
+                                            for(Player Sessionplayers : Bukkit.getWorld("GameServer/Bedwars/Server3/server/").getPlayers()){
+                                                Sessionplayers.sendMessage(ChatColor.GOLD+"[Bedwars] "+ChatColor.GREEN+"Goldspawner sind nun auf Level "+BedwarsWorldInitialer.brm[3].goldLevel);
+                                            }
+                                        }else{
+                                            player.sendMessage(ChatColor.RED+"Das kannst du dir nicht kaufen");
+                                        }
+                                    }else if(BedwarsWorldInitialer.brm[3].goldLevel==2){
+                                        if(removeDiamond(BedwarsShop.upgradeGoldLevel2Cost, player)){
+                                            BedwarsWorldInitialer.brm[3].goldLevel++;
+                                            for(Player Sessionplayers : Bukkit.getWorld("GameServer/Bedwars/Server3/server/").getPlayers()){
+                                                Sessionplayers.sendMessage(ChatColor.GOLD+"[Bedwars] "+ChatColor.GREEN+"Goldspawner sind nun auf Level "+BedwarsWorldInitialer.brm[3].goldLevel);
+                                            }
+                                        }else{
+                                            player.sendMessage(ChatColor.RED+"Das kannst du dir nicht kaufen");
+                                        }
+                                    }else{
+                                        player.sendMessage(ChatColor.RED+"Die Goldspawner sind bereits auf dem maximales Level");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case DIAMOND:
+                                    if(BedwarsWorldInitialer.brm[3].diaLevel==1){
+                                        if(removeGold(BedwarsShop.upgradeDiaLevel1Cost, player)){
+                                            BedwarsWorldInitialer.brm[3].diaLevel++;
+                                            for(Player Sessionplayers : Bukkit.getWorld("GameServer/Bedwars/Server3/server/").getPlayers()){
+                                                Sessionplayers.sendMessage(ChatColor.GOLD+"[Bedwars] "+ChatColor.GREEN+"Diamantenspawner sind nun auf Level "+BedwarsWorldInitialer.brm[3].diaLevel);
+                                            }
+                                        }else{
+                                            player.sendMessage(ChatColor.RED+"Das kannst du dir nicht kaufen");
+                                        }
+                                    }else if(BedwarsWorldInitialer.brm[3].diaLevel==2){
+                                        if(removeDiamond(BedwarsShop.upgradeDiaLevel2Cost, player)){
+                                            BedwarsWorldInitialer.brm[3].diaLevel++;
+                                            for(Player Sessionplayers : Bukkit.getWorld("GameServer/Bedwars/Server3/server/").getPlayers()){
+                                                Sessionplayers.sendMessage(ChatColor.GOLD+"[Bedwars] "+ChatColor.GREEN+"Diamantenspawner sind nun auf Level "+BedwarsWorldInitialer.brm[3].diaLevel);
+                                            }
+                                        }else{
+                                            player.sendMessage(ChatColor.RED+"Das kannst du dir nicht kaufen");
+                                        }
+                                    }else{
+                                        player.sendMessage(ChatColor.RED+"Diamantenspawner sind bereits auf dem maximalen Level");
+                                    }
+                                    new BedwarsShop(player, 3);
+                                    break;
+                                case BARRIER:
+                                    player.closeInventory();
+                                    break;
+                            }
+                            player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 15, 2);
+                        }
+                    }else{
+                        event.setCancelled(true);
+                    }
+                }
+            }if(player.getWorld().getName().equalsIgnoreCase("GameServer/Bedwars/Server4/server/")){
+                if(event.getView().getTitle().equalsIgnoreCase(ChatColor.GOLD+"Bedwars-Shop")){
+                    if(!event.getClick().isShiftClick()) {
+                        if (event.getRawSlot() < 54) {
+                            event.setCancelled(true);
+                            switch (event.getCurrentItem().getType()) {
+                                default:
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case STONE_SWORD:
+                                    if (removeIron(BedwarsShop.stoneSwordCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.STONE_SWORD));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case IRON_SWORD:
+                                    if (removeGold(BedwarsShop.ironSwordCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.IRON_SWORD));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case DIAMOND_SWORD:
+                                    if (removeDiamond(BedwarsShop.diamondSwordCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.DIAMOND_SWORD));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case STONE_PICKAXE:
+                                    if (removeIron(BedwarsShop.stonePickaxeCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.STONE_PICKAXE));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case IRON_PICKAXE:
+                                    if (removeGold(BedwarsShop.ironPickaxeCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.IRON_PICKAXE));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case DIAMOND_PICKAXE:
+                                    if (removeDiamond(BedwarsShop.diamondPickaxeCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.DIAMOND_PICKAXE));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case STONE_AXE:
+                                    if (removeIron(BedwarsShop.stoneAxeCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.STONE_AXE));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case IRON_AXE:
+                                    if (removeGold(BedwarsShop.ironAxeCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.IRON_AXE));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case DIAMOND_AXE:
+                                    if (removeDiamond(BedwarsShop.diamondAxeCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.DIAMOND_AXE));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case IRON_CHESTPLATE:
+                                    if (removeIron(BedwarsShop.ironChestplateCost, player)) {
+                                        player.getInventory().setItem(36, new ItemStack(Material.IRON_BOOTS));
+                                        player.getInventory().setItem(37, new ItemStack(Material.IRON_LEGGINGS));
+                                        player.getInventory().setItem(38, new ItemStack(Material.IRON_CHESTPLATE));
+                                        player.getInventory().setItem(39, new ItemStack(Material.IRON_HELMET));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case DIAMOND_CHESTPLATE:
+                                    if (removeGold(BedwarsShop.diamondChestplateCost, player)) {
+                                        player.getInventory().setItem(36, new ItemStack(Material.DIAMOND_BOOTS));
+                                        player.getInventory().setItem(37, new ItemStack(Material.DIAMOND_LEGGINGS));
+                                        player.getInventory().setItem(38, new ItemStack(Material.DIAMOND_CHESTPLATE));
+                                        player.getInventory().setItem(39, new ItemStack(Material.DIAMOND_HELMET));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case NETHERITE_CHESTPLATE:
+                                    if (removeDiamond(BedwarsShop.netherideChestplateCost, player)) {
+                                        player.getInventory().setItem(36, new ItemStack(Material.NETHERITE_BOOTS));
+                                        player.getInventory().setItem(37, new ItemStack(Material.NETHERITE_LEGGINGS));
+                                        player.getInventory().setItem(38, new ItemStack(Material.NETHERITE_CHESTPLATE));
+                                        player.getInventory().setItem(39, new ItemStack(Material.NETHERITE_HELMET));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case SPLASH_POTION:
+                                    if (event.getSlot()==27) {
+                                        if (removeGold(BedwarsShop.instantDamageCost, player)) {
+                                            Potion instantDamage = new Potion(PotionType.INSTANT_DAMAGE);
+                                            instantDamage.setSplash(true);
+                                            instantDamage.setLevel(2);
+                                            givePlayerItem(player, instantDamage.toItemStack(1));
+                                        } else {
+                                            player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                        }
+                                    } else if (event.getSlot()==28) {
+                                        if (removeGold(BedwarsShop.invisibleCost, player)) {
+                                            Potion instantDamage = new Potion(PotionType.INVISIBILITY);
+                                            instantDamage.setSplash(true);
+                                            givePlayerItem(player, instantDamage.toItemStack(1));
+                                        } else {
+                                            player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                        }
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case BOW:
+                                    if (removeGold(BedwarsShop.bowCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.BOW));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case SHIELD:
+                                    if (removeIron(BedwarsShop.shieldCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.SHIELD));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case RED_WOOL:
+                                    if (removeIron(BedwarsShop.woolCost, player)) {
+                                        ItemStack wool = new ItemStack(Material.RED_WOOL);
+                                        wool.setAmount(16);
+                                        givePlayerItem(player, wool);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case YELLOW_WOOL:
+                                    if (removeIron(BedwarsShop.woolCost, player)) {
+                                        ItemStack wool = new ItemStack(Material.YELLOW_WOOL);
+                                        wool.setAmount(16);
+                                        givePlayerItem(player, wool);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case GREEN_WOOL:
+                                    if (removeIron(BedwarsShop.woolCost, player)) {
+                                        ItemStack wool = new ItemStack(Material.GREEN_WOOL);
+                                        wool.setAmount(16);
+                                        givePlayerItem(player, wool);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case BLUE_WOOL:
+                                    if (removeIron(BedwarsShop.woolCost, player)) {
+                                        ItemStack wool = new ItemStack(Material.BLUE_WOOL);
+                                        wool.setAmount(16);
+                                        givePlayerItem(player, wool);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case STONE:
+                                    if (removeGold(BedwarsShop.stoneCost, player)) {
+                                        ItemStack stone = new ItemStack(Material.STONE);
+                                        stone.setAmount(16);
+                                        givePlayerItem(player, stone);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case BRICKS:
+                                    if (removeGold(BedwarsShop.bricksCost, player)) {
+                                        ItemStack bricks = new ItemStack(Material.BRICKS);
+                                        bricks.setAmount(16);
+                                        givePlayerItem(player, bricks);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case END_STONE:
+                                    if (removeDiamond(BedwarsShop.endstoneCost, player)) {
+                                        ItemStack endstone = new ItemStack(Material.END_STONE);
+                                        endstone.setAmount(16);
+                                        givePlayerItem(player, endstone);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case STICK:
+                                    if (removeGold(BedwarsShop.knockbackStickCost, player)) {
+                                        ItemStack stick = new ItemStack(Material.STICK);
+                                        ItemMeta stickMeta = stick.getItemMeta();
+                                        stickMeta.addEnchant(Enchantment.KNOCKBACK, 2, true);
+                                        stick.setItemMeta(stickMeta);
+                                        givePlayerItem(player, stick);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case ENDER_PEARL:
+                                    if (removeDiamond(BedwarsShop.enderperlCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.ENDER_PEARL));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case FISHING_ROD:
+                                    if (removeGold(BedwarsShop.fishingrotCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.FISHING_ROD));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case SHEARS:
+                                    if (removeIron(BedwarsShop.shearCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.SHEARS));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case ARROW:
+                                    if (removeGold(BedwarsShop.arrowCost, player)) {
+                                        ItemStack arrow = new ItemStack(Material.ARROW);
+                                        arrow.setAmount(8);
+                                        givePlayerItem(player, arrow);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case SNOWBALL:
+                                    if (removeIron(BedwarsShop.snowballCost, player)) {
+                                        ItemStack snowball = new ItemStack(Material.SNOWBALL);
+                                        snowball.setAmount(8);
+                                        givePlayerItem(player, snowball);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case COOKED_BEEF:
+                                    if (removeIron(BedwarsShop.steakCost, player)) {
+                                        ItemStack steak = new ItemStack(Material.COOKED_BEEF);
+                                        steak.setAmount(16);
+                                        givePlayerItem(player, steak);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case GOLDEN_APPLE:
+                                    if (removeDiamond(BedwarsShop.goldappleCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.GOLDEN_APPLE));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case LAVA_BUCKET:
+                                    if (removeGold(BedwarsShop.lavabukkitCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.LAVA_BUCKET));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case FLINT_AND_STEEL:
+                                    if (removeIron(BedwarsShop.flintandsteelCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.FLINT_AND_STEEL));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case WATER_BUCKET:
+                                    if (removeGold(BedwarsShop.waterbukkitCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.WATER_BUCKET));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case COBWEB:
+                                    if (removeIron(BedwarsShop.cobwebCost, player)) {
+                                        ItemStack cobweb = new ItemStack(Material.COBWEB);
+                                        cobweb.setAmount(5);
+                                        givePlayerItem(player, cobweb);
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case TOTEM_OF_UNDYING:
+                                    if (removeDiamond(BedwarsShop.totemCost, player)) {
+                                        givePlayerItem(player, new ItemStack(Material.TOTEM_OF_UNDYING));
+                                    } else {
+                                        player.sendMessage(ChatColor.RED + "Das kannst du dir nicht kaufen");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case IRON_INGOT:
+                                    if(BedwarsWorldInitialer.brm[4].ironLevel==1){
+                                        if(removeGold(BedwarsShop.upgradeIronLevel1Cost, player)){
+                                            BedwarsWorldInitialer.brm[4].ironLevel++;
+                                            for(Player Sessionplayers : Bukkit.getWorld("GameServer/Bedwars/Server4/server/").getPlayers()){
+                                                Sessionplayers.sendMessage(ChatColor.GOLD+"[Bedwars] "+ChatColor.GREEN+"Eisenspawner sind nun auf Level "+BedwarsWorldInitialer.brm[4].ironLevel);
+                                            }
+                                        }else{
+                                            player.sendMessage(ChatColor.RED+"Das kannst du dir nicht kaufen");
+                                        }
+                                    }else if(BedwarsWorldInitialer.brm[4].ironLevel==2){
+                                        if(removeDiamond(BedwarsShop.upgradeIronLevel2Cost, player)){
+                                            BedwarsWorldInitialer.brm[4].ironLevel++;
+                                            for(Player Sessionplayers : Bukkit.getWorld("GameServer/Bedwars/Server4/server/").getPlayers()){
+                                                Sessionplayers.sendMessage(ChatColor.GOLD+"[Bedwars] "+ChatColor.GREEN+"Eisenspawner sind nun auf Level "+BedwarsWorldInitialer.brm[4].ironLevel);
+                                            }
+                                        }else{
+                                            player.sendMessage(ChatColor.RED+"Das kannst du dir nicht kaufen");
+                                        }
+                                    }else{
+                                        player.sendMessage(ChatColor.RED+"Die Eisenspawner sind bereits auf dem maximales Level");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case GOLD_INGOT:
+                                    if(BedwarsWorldInitialer.brm[4].goldLevel==1){
+                                        if(removeGold(BedwarsShop.upgradeGoldLevel1Cost, player)){
+                                            BedwarsWorldInitialer.brm[4].goldLevel++;
+                                            for(Player Sessionplayers : Bukkit.getWorld("GameServer/Bedwars/Server4/server/").getPlayers()){
+                                                Sessionplayers.sendMessage(ChatColor.GOLD+"[Bedwars] "+ChatColor.GREEN+"Goldspawner sind nun auf Level "+BedwarsWorldInitialer.brm[4].goldLevel);
+                                            }
+                                        }else{
+                                            player.sendMessage(ChatColor.RED+"Das kannst du dir nicht kaufen");
+                                        }
+                                    }else if(BedwarsWorldInitialer.brm[4].goldLevel==2){
+                                        if(removeDiamond(BedwarsShop.upgradeGoldLevel2Cost, player)){
+                                            BedwarsWorldInitialer.brm[4].goldLevel++;
+                                            for(Player Sessionplayers : Bukkit.getWorld("GameServer/Bedwars/Server4/server/").getPlayers()){
+                                                Sessionplayers.sendMessage(ChatColor.GOLD+"[Bedwars] "+ChatColor.GREEN+"Goldspawner sind nun auf Level "+BedwarsWorldInitialer.brm[4].goldLevel);
+                                            }
+                                        }else{
+                                            player.sendMessage(ChatColor.RED+"Das kannst du dir nicht kaufen");
+                                        }
+                                    }else{
+                                        player.sendMessage(ChatColor.RED+"Die Goldspawner sind bereits auf dem maximales Level");
+                                    }
+                                    new BedwarsShop(player, 4);
+                                    break;
+                                case DIAMOND:
+                                    if(BedwarsWorldInitialer.brm[4].diaLevel==1){
+                                        if(removeGold(BedwarsShop.upgradeDiaLevel1Cost, player)){
+                                            BedwarsWorldInitialer.brm[4].diaLevel++;
+                                            for(Player Sessionplayers : Bukkit.getWorld("GameServer/Bedwars/Server4/server/").getPlayers()){
+                                                Sessionplayers.sendMessage(ChatColor.GOLD+"[Bedwars] "+ChatColor.GREEN+"Diamantenspawner sind nun auf Level "+BedwarsWorldInitialer.brm[4].diaLevel);
+                                            }
+                                        }else{
+                                            player.sendMessage(ChatColor.RED+"Das kannst du dir nicht kaufen");
+                                        }
+                                    }else if(BedwarsWorldInitialer.brm[4].diaLevel==2){
+                                        if(removeDiamond(BedwarsShop.upgradeDiaLevel2Cost, player)){
+                                            BedwarsWorldInitialer.brm[4].diaLevel++;
+                                            for(Player Sessionplayers : Bukkit.getWorld("GameServer/Bedwars/Server4/server/").getPlayers()){
+                                                Sessionplayers.sendMessage(ChatColor.GOLD+"[Bedwars] "+ChatColor.GREEN+"Diamantenspawner sind nun auf Level "+BedwarsWorldInitialer.brm[4].diaLevel);
+                                            }
+                                        }else{
+                                            player.sendMessage(ChatColor.RED+"Das kannst du dir nicht kaufen");
+                                        }
+                                    }else{
+                                        player.sendMessage(ChatColor.RED+"Diamantenspawner sind bereits auf dem maximalen Level");
+                                    }
+                                    new BedwarsShop(player, 4);
                                     break;
                                 case BARRIER:
                                     player.closeInventory();
@@ -384,9 +1717,21 @@ public class BedwarsListeners implements Listener {
     @EventHandler
     public void onInteractEntity(PlayerInteractEntityEvent event){
         Player player = event.getPlayer();
-        if(player.getWorld().getName().equalsIgnoreCase("GameServer/Bedwars/Server1/server/")||player.getWorld().getName().equalsIgnoreCase("GameServer/Bedwars/Server2/server/")||player.getWorld().getName().equalsIgnoreCase("GameServer/Bedwars/Server3/server/")||player.getWorld().getName().equalsIgnoreCase("GameServer/Bedwars/Server4/server/")){
+        if(player.getWorld().getName().equalsIgnoreCase("GameServer/Bedwars/Server1/server/")){
             if(event.getRightClicked() instanceof Villager){
-                new BedwarsShop(player);
+                new BedwarsShop(player, 1);
+            }
+        }else if(player.getWorld().getName().equalsIgnoreCase("GameServer/Bedwars/Server2/server/")){
+            if(event.getRightClicked() instanceof Villager){
+                new BedwarsShop(player, 2);
+            }
+        }else if(player.getWorld().getName().equalsIgnoreCase("GameServer/Bedwars/Server3/server/")){
+            if(event.getRightClicked() instanceof Villager){
+                new BedwarsShop(player, 3);
+            }
+        }else if(player.getWorld().getName().equalsIgnoreCase("GameServer/Bedwars/Server4/server/")){
+            if(event.getRightClicked() instanceof Villager){
+                new BedwarsShop(player, 4);
             }
         }
     }

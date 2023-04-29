@@ -10,6 +10,7 @@ import server.games.skywars.SkywarsAutoTNT;
 import server.games.skywars.SkywarsEntityDamageListener;
 import server.general.commands.InvseeCommand;
 import server.general.commands.LobbyCommand;
+import server.general.listeners.ChatListener;
 import server.general.listeners.PingListener;
 import server.general.commands.WarpCommand;
 import server.general.listeners.InvseeInventoryClickListener;
@@ -42,6 +43,7 @@ public final class Main extends JavaPlugin {
         pluginManager.registerEvents(new SkywarsAutoTNT(),this);
         pluginManager.registerEvents(new FoodLevelChanceListener(),this);
         pluginManager.registerEvents(new BedwarsListeners(),this);
+        pluginManager.registerEvents(new ChatListener(), this);
 
         getCommand("warp").setExecutor(new WarpCommand());
         getCommand("lobby").setExecutor(new LobbyCommand());

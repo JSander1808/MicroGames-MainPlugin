@@ -131,6 +131,8 @@ public class SkywarsWorldInitialer {
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,((MatchCooldown*20)+80),255));
             player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,((MatchCooldown*20)+80),255));
             getKitItems(player);
+            player.setHealth(20);
+            player.setFoodLevel(20);
         }
         MatchCooldown+=4;
         TaskID = Bukkit.getScheduler().scheduleAsyncRepeatingTask(Main.getPlugin(), () -> {
@@ -138,14 +140,12 @@ public class SkywarsWorldInitialer {
                 MatchCooldown--;
                 if(MatchCooldown<=5){
                     for(int i = 0;i<world.getPlayers().size();i++){
-                        world.getPlayers().get(i).sendMessage(ChatColor.GREEN+"Match started in: "+MatchCooldown);
+                        world.getPlayers().get(i).sendMessage(ChatColor.GOLD+"Match started in: "+ChatColor.GREEN+MatchCooldown);
                     }
                 }
             }else{
                 for(int i = 0;i<world.getPlayers().size();i++){
                     world.getPlayers().get(i).sendMessage(ChatColor.GREEN+"GO");
-                    world.getPlayers().get(i).setHealth(20);
-                    world.getPlayers().get(i).setFoodLevel(20);
                     world.getPlayers().get(i).playSound(world.getPlayers().get(i).getLocation(),Sound.ENTITY_EXPERIENCE_ORB_PICKUP,30,10);
                     new SkywarsScoreboardManager(world.getName(), players);
                 }
@@ -210,6 +210,8 @@ public class SkywarsWorldInitialer {
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,((MatchCooldown*20)+80),255));
             player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,((MatchCooldown*20)+80),255));
             getKitItems(player);
+            player.setHealth(20);
+            player.setFoodLevel(20);
         }
         MatchCooldown+=4;
         TaskID = Bukkit.getScheduler().scheduleAsyncRepeatingTask(Main.getPlugin(), () -> {
@@ -217,14 +219,12 @@ public class SkywarsWorldInitialer {
                 MatchCooldown--;
                 if(MatchCooldown<=5){
                     for(int i = 0;i<world.getPlayers().size();i++){
-                        world.getPlayers().get(i).sendMessage(ChatColor.GREEN+"Match started in: "+MatchCooldown);
+                        world.getPlayers().get(i).sendMessage(ChatColor.GOLD+"Match started in: "+ChatColor.GREEN+MatchCooldown);
                     }
                 }
             }else{
                 for(int i = 0;i<world.getPlayers().size();i++){
                     world.getPlayers().get(i).sendMessage(ChatColor.GREEN+"GO");
-                    world.getPlayers().get(i).setHealth(20);
-                    world.getPlayers().get(i).setFoodLevel(20);
                     world.getPlayers().get(i).playSound(world.getPlayers().get(i).getLocation(),Sound.ENTITY_EXPERIENCE_ORB_PICKUP,30,10);
                     new SkywarsScoreboardManager(world.getName(), players);
                 }
@@ -291,6 +291,8 @@ public class SkywarsWorldInitialer {
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,((MatchCooldown*20)+80),255));
             player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,((MatchCooldown*20)+80),255));
             getKitItems(player);
+            player.setHealth(20);
+            player.setFoodLevel(20);
         }
         MatchCooldown+=4;
         TaskID = Bukkit.getScheduler().scheduleAsyncRepeatingTask(Main.getPlugin(), () -> {
@@ -298,14 +300,12 @@ public class SkywarsWorldInitialer {
                 MatchCooldown--;
                 if(MatchCooldown<=5){
                     for(int i = 0;i<world.getPlayers().size();i++){
-                        world.getPlayers().get(i).sendMessage(ChatColor.GREEN+"Match started in: "+MatchCooldown);
+                        world.getPlayers().get(i).sendMessage(ChatColor.GOLD+"Match started in: "+ChatColor.GREEN+MatchCooldown);
                     }
                 }
             }else{
                 for(int i = 0;i<world.getPlayers().size();i++){
                     world.getPlayers().get(i).sendMessage(ChatColor.GREEN+"GO");
-                    world.getPlayers().get(i).setHealth(20);
-                    world.getPlayers().get(i).setFoodLevel(20);
                     world.getPlayers().get(i).playSound(world.getPlayers().get(i).getLocation(),Sound.ENTITY_EXPERIENCE_ORB_PICKUP,30,10);
                     new SkywarsScoreboardManager(world.getName(), players);
                 }
@@ -373,7 +373,7 @@ public class SkywarsWorldInitialer {
                 MatchCooldown--;
                 if(MatchCooldown<=5){
                     for(int i = 0;i<world.getPlayers().size();i++){
-                        world.getPlayers().get(i).sendMessage(ChatColor.GREEN+"Match started in: "+MatchCooldown);
+                        world.getPlayers().get(i).sendMessage(ChatColor.GOLD+"Match started in: "+ChatColor.GREEN+MatchCooldown);
                     }
                 }
             }else{
@@ -427,6 +427,8 @@ public class SkywarsWorldInitialer {
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,((MatchCooldown*20)+80),255));
             player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,((MatchCooldown*20)+80),255));
             getKitItems(player);
+            player.setHealth(20);
+            player.setFoodLevel(20);
         }
         MatchCooldown+=4;
         TaskID = Bukkit.getScheduler().scheduleAsyncRepeatingTask(Main.getPlugin(), () -> {
@@ -434,14 +436,12 @@ public class SkywarsWorldInitialer {
                 MatchCooldown--;
                 if(MatchCooldown<=5){
                     for(int i = 0;i<world.getPlayers().size();i++){
-                        world.getPlayers().get(i).sendMessage(ChatColor.GREEN+"Match started in: "+MatchCooldown);
+                        world.getPlayers().get(i).sendMessage(ChatColor.GOLD+"Match started in: "+ChatColor.GREEN+MatchCooldown);
                     }
                 }
             }else{
                 for(int i = 0;i<world.getPlayers().size();i++){
                     world.getPlayers().get(i).sendMessage(ChatColor.GREEN+"GO");
-                    world.getPlayers().get(i).setHealth(20);
-                    world.getPlayers().get(i).setFoodLevel(20);
                     world.getPlayers().get(i).playSound(world.getPlayers().get(i).getLocation(),Sound.ENTITY_EXPERIENCE_ORB_PICKUP,30,10);
                     new SkywarsScoreboardManager(world.getName(), players);
                 }

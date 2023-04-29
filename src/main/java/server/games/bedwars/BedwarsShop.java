@@ -14,6 +14,7 @@ import org.bukkit.potion.PotionType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class BedwarsShop {
@@ -45,6 +46,9 @@ public class BedwarsShop {
     public static int knockbackStickCost = 20;
     public static int fishingrotCost = 2;
     public static int lavabukkitCost = 7;
+    public static int upgradeIronLevel1Cost = 5;
+    public static int upgradeGoldLevel1Cost = 10;
+    public static int upgradeDiaLevel1Cost = 15;
     //---------------------------------------------------------------------------DIAMOND------------------------------------------------------------------------------------------------
     public static int diamondSwordCost = 5;
     public static int diamondPickaxeCost = 5;
@@ -54,9 +58,12 @@ public class BedwarsShop {
     public static int enderperlCost = 5;
     public static int goldappleCost = 10;
     public static int totemCost = 35;
+    public static int upgradeIronLevel2Cost = 5;
+    public static int upgradeGoldLevel2Cost = 7;
+    public static int upgradeDiaLevel2Cost = 13;
 
 
-    public BedwarsShop(Player player){
+    public BedwarsShop(Player player, int serverNumber){
         int iron = getIron(player);
         int gold = getGold(player);
         int diamond = getDiamond(player);
@@ -275,7 +282,6 @@ public class BedwarsShop {
         netherideChestplate.setItemMeta(netherideChestplateMeta);
 
         Potion instantDamagePotion = new Potion(PotionType.INSTANT_DAMAGE,1);
-        instantDamagePotion.setSplash(true);
         ItemStack instantDamage = instantDamagePotion.toItemStack(1);
         ItemMeta instantDamageMeta = instantDamage.getItemMeta();
         instantDamageMeta.setDisplayName(ChatColor.GOLD+"Sofortschaden Kaufen");
@@ -290,7 +296,6 @@ public class BedwarsShop {
         instantDamage.setItemMeta(instantDamageMeta);
 
         Potion invisiblePotion = new Potion(PotionType.INVISIBILITY,1);
-        invisiblePotion.setSplash(true);
         ItemStack invisible = invisiblePotion.toItemStack(1);
         ItemMeta invisibleMeta = invisible.getItemMeta();
         invisibleMeta.setDisplayName(ChatColor.GOLD+"Unsichtbarkeit Kaufen");
@@ -571,6 +576,86 @@ public class BedwarsShop {
         totemMeta.setLore(totemLore);
         totem.setItemMeta(totemMeta);
 
+        ItemStack upgradeIron = new ItemStack(Material.IRON_INGOT);
+        ItemMeta upgradeIronMeta = upgradeIron.getItemMeta();
+        ArrayList upgradeIronLore = new ArrayList();
+        if(BedwarsWorldInitialer.brm[serverNumber].ironLevel==1){
+            upgradeIronMeta.setDisplayName(ChatColor.GOLD+"Eisenspawner upgraden");
+            upgradeIronLore.add(ChatColor.BLUE+"Preis: "+ChatColor.GOLD+upgradeIronLevel1Cost+" Gold");
+            if(gold>=upgradeIronLevel1Cost){
+                upgradeIronLore.add(ChatColor.GREEN+"Klicke zum Kaufen");
+            }else{
+                upgradeIronLore.add(ChatColor.RED+"Nicht genügent Gold");
+            }
+        }else if(BedwarsWorldInitialer.brm[serverNumber].ironLevel==2){
+            upgradeIronMeta.setDisplayName(ChatColor.GOLD+"Eisenspawner upgraden");
+            upgradeIronLore.add(ChatColor.BLUE+"Preis: "+ChatColor.GOLD+upgradeIronLevel2Cost+" Diamanten");
+            if(diamond>=upgradeIronLevel2Cost){
+                upgradeIronLore.add(ChatColor.GREEN+"Klicke zum Kaufen");
+            }else{
+                upgradeIronLore.add(ChatColor.RED+"Nicht genügent Diamanten");
+            }
+        }else{
+            upgradeIronMeta.setDisplayName(ChatColor.GOLD+"Eisenspawner upgraden");
+            upgradeIronLore.add(ChatColor.RED+"Maximales Level erreicht");
+        }
+        upgradeIronMeta.setLore(upgradeIronLore);
+        upgradeIron.setItemMeta(upgradeIronMeta);
+
+        ItemStack upgradeGold = new ItemStack(Material.GOLD_INGOT);
+        ItemMeta upgradeGoldMeta = upgradeGold.getItemMeta();
+        ArrayList upgradeGoldLore = new ArrayList();
+        if(BedwarsWorldInitialer.brm[serverNumber].goldLevel==1){
+            upgradeGoldMeta.setDisplayName(ChatColor.GOLD+"Goldspawner upgraden");
+            upgradeGoldLore.add(ChatColor.BLUE+"Preis: "+ChatColor.GOLD+upgradeGoldLevel1Cost+" Gold");
+            if(gold>=upgradeGoldLevel1Cost){
+                upgradeGoldLore.add(ChatColor.GREEN+"Klicke zum Kaufen");
+            }else{
+                upgradeGoldLore.add(ChatColor.RED+"Nicht genügent Gold");
+            }
+        }else if(BedwarsWorldInitialer.brm[serverNumber].goldLevel==2){
+            upgradeGoldMeta.setDisplayName(ChatColor.GOLD+"Goldspawner upgraden");
+            upgradeGoldLore.add(ChatColor.BLUE+"Preis: "+ChatColor.GOLD+upgradeGoldLevel2Cost+" Diamanten");
+            if(diamond>=upgradeGoldLevel2Cost){
+                upgradeGoldLore.add(ChatColor.GREEN+"Klicke zum Kaufen");
+            }else{
+                upgradeGoldLore.add(ChatColor.RED+"Nicht genügent Gold");
+            }
+        }else{
+            upgradeGoldMeta.setDisplayName(ChatColor.GOLD+"Goldspawner upgraden");
+            upgradeGoldLore.add(ChatColor.RED+"Maximales Level erreicht");
+        }
+        upgradeGoldMeta.setLore(upgradeGoldLore);
+        upgradeGold.setItemMeta(upgradeGoldMeta);
+
+        ItemStack upgradeDia = new ItemStack(Material.DIAMOND);
+        ItemMeta upgradeDiaMeta = upgradeDia.getItemMeta();
+        ArrayList upgradeDiaLore = new ArrayList();
+        if(BedwarsWorldInitialer.brm[serverNumber].diaLevel==1){
+            upgradeDiaMeta.setDisplayName(ChatColor.GOLD+"Diamantenspawner upgraden");
+            upgradeDiaLore.add(ChatColor.BLUE+"Preis: "+ChatColor.GOLD+upgradeDiaLevel1Cost+" Gold");
+            if(gold>=upgradeDiaLevel1Cost){
+                upgradeDiaLore.add(ChatColor.GREEN+"Klicke zum Kaufen");
+            }else{
+                upgradeDiaLore.add(ChatColor.RED+"Nicht genügent Gold");
+            }
+        }else if(BedwarsWorldInitialer.brm[serverNumber].diaLevel==2){
+            upgradeDiaMeta.setDisplayName(ChatColor.GOLD+"Diamantenspawner upgraden");
+            upgradeDiaLore.add(ChatColor.BLUE+"Preis: "+ChatColor.GOLD+upgradeDiaLevel2Cost+" Diamanten");
+            if(diamond>=upgradeDiaLevel2Cost){
+                upgradeDiaLore.add(ChatColor.GREEN+"Klicke zum Kaufen");
+            }else{
+                upgradeDiaLore.add(ChatColor.RED+"Nicht genügent Gold");
+            }
+        }else{
+            upgradeDiaMeta.setDisplayName(ChatColor.GOLD+"Diamantenspawner upgraden");
+            upgradeDiaLore.add(ChatColor.RED+"Maximales Level erreicht");
+        }
+        upgradeDiaMeta.setLore(upgradeDiaLore);
+        upgradeDia.setItemMeta(upgradeDiaMeta);
+
+
+
         ItemStack close = new ItemStack(Material.BARRIER);
         ItemMeta closeMeta = close.getItemMeta();
         closeMeta.setDisplayName(ChatColor.RED+"Schließen");
@@ -615,6 +700,9 @@ public class BedwarsShop {
         inv.setItem(34,waterbukkit);
         inv.setItem(35,cobweb);
         inv.setItem(40,totem);
+        inv.setItem(45,upgradeIron);
+        inv.setItem(46,upgradeGold);
+        inv.setItem(47,upgradeDia);
         inv.setItem(53,close);
         player.openInventory(inv);
     }

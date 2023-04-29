@@ -22,7 +22,13 @@ public class WarpCommand implements CommandExecutor {
             if(player.isOp()){
                 if(args.length==2){
                     if(args[0].equalsIgnoreCase("unload")){
-                        Bukkit.unloadWorld(args[1],true);
+                        File file = new File("warp/"+args[1]);
+                        if(file.exists()){
+                            Bukkit.unloadWorld(args[1],true);
+                            player.sendMessage(ChatColor.GRAY+args[1]+ChatColor.GOLD+" succesful unloaded.");
+                        }else{
+                            player.sendMessage(ChatColor.RED+"The world don´t exists.");
+                        }
                     }else{
                         player.sendMessage(ChatColor.RED+"/warp unload <worldpath>");
                     }
@@ -32,7 +38,7 @@ public class WarpCommand implements CommandExecutor {
                         File path = new File("warp\\");
                         File[] warps =path.listFiles();
                         for(int i = 0;i<warps.length;i++){
-                            player.sendMessage(ChatColor.GREEN+""+warps[i]);
+                            player.sendMessage(ChatColor.GREEN+""+warps[i].getName());
                         }
                     }else if(file.isDirectory()){
                         World world = new WorldCreator("warp/"+args[0]).createWorld();

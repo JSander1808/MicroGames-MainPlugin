@@ -225,6 +225,9 @@ public class InventoryClickListener implements Listener {
                     player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP,40,2);
                     event.setCancelled(true);
                 }
+                if(event.getView().getTitle().equalsIgnoreCase(ChatColor.GOLD+"Standart-Lootbox")){
+                    event.setCancelled(true);
+                }
             }
         }
     }

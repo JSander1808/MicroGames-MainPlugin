@@ -15,7 +15,8 @@ import java.util.ArrayList;
 
 public class Lootbox {
 
-    private ArmorStand armorStand;
+    private ArmorStand armorStand1;
+    private ArmorStand armorStand2;
     private Location location;
     public int TaskID;
     public int temp;
@@ -23,12 +24,23 @@ public class Lootbox {
 
     public Lootbox(Location location){
         this.location=location;
-        armorStand = (ArmorStand) Bukkit.getWorld(location.getWorld().getUID()).spawnEntity(location, EntityType.ARMOR_STAND);
-        armorStand.setCustomNameVisible(true);
-        armorStand.setVisible(false);
-        armorStand.setGravity(false);
-        armorStand.setCanPickupItems(false);
-        armorStand.setCustomName(ChatColor.GOLD+"LootBoxen Öffnen");
+        armorStand1 = (ArmorStand) Bukkit.getWorld(location.getWorld().getUID()).spawnEntity(location, EntityType.ARMOR_STAND);
+        armorStand1.setCustomNameVisible(true);
+        armorStand1.setVisible(false);
+        armorStand1.setGravity(false);
+        armorStand1.setCanPickupItems(false);
+        armorStand1.setCustomName(ChatColor.GOLD+"LootBoxen Öffnen");
+
+        Config serverConfig = new Config("serverstats/shop/lootbox.conf");
+        if(!serverConfig.get("sale").equalsIgnoreCase("0")){
+            Location saleLocation = new Location(location.getWorld(), location.getX(),location.getY()-0.25,location.getZ());
+            armorStand2 = (ArmorStand) Bukkit.getWorld(location.getWorld().getUID()).spawnEntity(saleLocation, EntityType.ARMOR_STAND);
+            armorStand2.setCustomNameVisible(true);
+            armorStand2.setVisible(false);
+            armorStand2.setGravity(false);
+            armorStand2.setCanPickupItems(false);
+            armorStand2.setCustomName(ChatColor.GOLD+serverConfig.get("sale")+"% "+ChatColor.GREEN+"Rabatt");
+        }
     }
 
     public void openLootBox(Player player){
@@ -74,7 +86,7 @@ public class Lootbox {
             int lootboxCost = Integer.valueOf(serverConfig.get("lootboxCost"));
             int sale = Integer.valueOf(serverConfig.get("sale"));
             int saledCost = lootboxCost-((lootboxCost*sale)/100);
-            buyLootboxLore.add(ChatColor.BLUE+"Lootbox kaufen für: "+ChatColor.RED+ChatColor.STRIKETHROUGH+serverConfig.get("lootboxCost")+ChatColor.RESET+ChatColor.GRAY+" -> "+ChatColor.GOLD+saledCost+" Coins");
+            buyLootboxLore.add(ChatColor.BLUE+"Lootbox kaufen für: "+ChatColor.RED+ChatColor.STRIKETHROUGH+serverConfig.get("lootboxCost")+ChatColor.RESET+ChatColor.GRAY+" -> "+ChatColor.GREEN+saledCost+ChatColor.GOLD+" Coins");
             buyLootboxLore.add(ChatColor.GREEN+"Rabatt: "+ChatColor.GOLD+sale+"%");
             buyLootboxMeta.setLore(buyLootboxLore);
             buyLootbox.setItemMeta(buyLootboxMeta);
@@ -88,6 +100,7 @@ public class Lootbox {
     }
 
     public void remove(){
-        armorStand.remove();
+        armorStand1.remove();
+        armorStand2.remove();
     }
 }
